@@ -11,7 +11,7 @@
     "start-dev": "webpack -w & nodemon server",
     "start:dev:logger": "LOGGING=true npm run start:dev",
     "start:dev:seed": "SEED=true npm run start:dev",
-    "start-server": "set JWT=secret_key nodemon server -e html,js,scss --ignore public --ignore client",
+    "start-server": "JWT=secret_key nodemon server -e html,js,scss --ignore public --ignore client",
     "test": "NODE_ENV=test set JWT=a_secret mocha \"./server/**/*.spec.js\" \"./client/**/*.spec.js\" -compilers js:babel-register",
     "test:dev": "npm run test -- --watch"
   },
@@ -38,7 +38,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0",
+    "react-router-dom": "^4.2.2",
     "sequelize": "^6.21.3"
   },
   "devDependencies": {

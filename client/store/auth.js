@@ -27,10 +27,10 @@ export const authenicate = (username, password, method) => async dispatch => {
     const res = await axios.post(`/auth/${method}`, {username, password})
     window.localStorage.setItem(TOKEN, res.data.token)
     dispatch(me())
-    } catch (authError) {
+  } catch (authError) {
       return dispatch(setAuth({error: authError}))
-    }
   }
+}
 
 
 export const logout = () => {
