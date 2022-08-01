@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Defines the character set -->
+<!-- "as some browsers restart the parsing of an HTML document if the declared charset is different from what they had anticipated" -->
+<!-- https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5/Introduction_to_HTML5 -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <!-- Responsive design? Check. This tag will make mobile browsers scale to device width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boilermaker App!</title>
+  <link rel="stylesheet" type="text/css" href="./style.css" />
+  <!-- our js bundle will be in 'bundle.js'-->
+  <!-- the 'defer' attribute will ensure that it is run only after the DOM finishes loading -->
+  <script src="/bundle.js" defer></script>
+</head>
+<body>
+  <!-- We will render our React app into a div with an id of 'app' -->
+  <!-- We can grab it off the DOM by saing document.getElementById('app'); -->
+  <div id="app"></div>
+</body>
+</html>
