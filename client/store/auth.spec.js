@@ -1,3 +1,5 @@
+/* global describe beforeEach afterEach it */
+
 import {expect} from 'chai'
 import {me, logout} from './auth'
 import axios from 'axios'

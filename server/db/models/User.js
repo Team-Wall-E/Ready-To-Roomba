@@ -4,8 +4,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt');
 const axios = require('axios');
 
-const SALT_ROUNDS = 5;
-
+const SALT_ROUNDS = 10;
 
 const User = db.define('user', {
   username: {
@@ -14,35 +13,35 @@ const User = db.define('user', {
     allowNull: false
   },
   password: {
-    type: Sequelize.STRING
-  },
-  githubId: {
-    type: Sequelize.INTEGER
+    type: Sequelize.STRING,
   }
 })
 
 module.exports = User
 
-
-// instance methods
-User.prototype.correctPassword = function(pwd) {
-  // we need to compare the plain version to an encrypted version of password
-  return bcrypt.compare(pwd, this.password)
+/**
+ * instanceMethods
+ */
+User.prototype.correctPassword = function(candidatePwd) {
+  //we need to compare the plain version to an encrypted version of the password
+  return bcrypt.compare(candidatePwd, this.password);
 }
 
 User.prototype.generateToken = function() {
-  return jwt.sign({id: this.id, username: this.username}, process.env.JWT)
+  return jwt.sign({id: this.id}, process.env.JWT)
 }
 
-// class methods
-User.authenicate = async function({ username, password }) {
-  const user = await this.findOne({where: { username }})
-  if (!user || !(await user.correctPassword(password))) {
-    const error = Error('Incorrect username/password');
-    error.status = 401;
-    throw error;
-  }
-  return user.generateToken()
+/**
+ * classMethods
+ */
+User.authenticate = async function({ username, password }){
+    const user = await this.findOne({where: { username }})
+    if (!user || !(await user.correctPassword(password))) {
+      const error = Error('Incorrect username/password');
+      error.status = 401;
+      throw error;
+    }
+    return user.generateToken();
 };
 
 User.findByToken = async function(token) {
@@ -53,18 +52,20 @@ User.findByToken = async function(token) {
       throw 'nooo'
     }
     return user
-  } catch (err) {
+  } catch (ex) {
     const error = Error('bad token')
     error.status = 401
     throw error
   }
 }
 
-// hooks
-const hashPassword = async (user) => {
-  // in case the pwd has been changed, we want to encrypt it w/ bcrypt
+/**
+ * hooks
+ */
+const hashPassword = async(user) => {
+  //in case the password has been changed, we want to encrypt it with bcrypt
   if (user.changed('password')) {
-    user.password = await bcrypt.hash(user.password, SALT_ROUNDS)
+    user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
 }
 

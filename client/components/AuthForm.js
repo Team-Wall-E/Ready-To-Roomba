@@ -1,7 +1,10 @@
 import React from 'react'
 import {connect} from 'react-redux'
-import authenticate from '../store/auth'
+import {authenticate} from '../store'
 
+/**
+ * COMPONENT
+ */
 const AuthForm = props => {
   const {name, displayName, handleSubmit, error} = props
 
@@ -15,7 +18,7 @@ const AuthForm = props => {
           <input name="username" type="text" />
         </div>
         <div>
-          <label htmlFor="password" >
+          <label htmlFor="password">
             <small>Password</small>
           </label>
           <input name="password" type="password" />
@@ -36,7 +39,6 @@ const AuthForm = props => {
  *   function, and share the same Component. This is a good example of how we
  *   can stay DRY with interfaces that are very similar to each other!
  */
-
 const mapLogin = state => {
   return {
     name: 'login',

@@ -3,12 +3,9 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logout} from '../store'
 
-/**
- * COMPONENT
- */
 const Navbar = ({handleClick, isLoggedIn}) => (
   <div>
-    <h1>Welcome</h1>
+    <h1>Welcome!</h1>
     <nav>
       {isLoggedIn ? (
         <div>
@@ -25,15 +22,14 @@ const Navbar = ({handleClick, isLoggedIn}) => (
           <Link to="/signup">Sign Up</Link>
         </div>
       )}
-      </nav>
-      <hr />
-    </div>
+    </nav>
+    <hr />
+  </div>
 )
 
 /**
  * CONTAINER
  */
-
 const mapState = state => {
   return {
     isLoggedIn: !!state.auth.id
@@ -47,4 +43,5 @@ const mapDispatch = dispatch => {
     }
   }
 }
+
 export default connect(mapState, mapDispatch)(Navbar)

@@ -4,10 +4,8 @@ import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
-
 export const Home = props => {
   const {username} = props
-  console.log(props)
 
   return (
     <div>
@@ -19,7 +17,6 @@ export const Home = props => {
 /**
  * CONTAINER
  */
-
 const mapState = state => {
   return {
     username: state.auth.username

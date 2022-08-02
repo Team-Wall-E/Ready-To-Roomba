@@ -6,9 +6,9 @@ import auth from './auth'
 
 const reducer = combineReducers({ auth })
 const middleware = composeWithDevTools(
-  applyMiddleware(thunkMiddleware, createLogger({collapse: true}))
+  applyMiddleware(thunkMiddleware, createLogger({collapsed: true}))
 )
 const store = createStore(reducer, middleware)
 
-export default store;
-export * from './auth' // ?
+export default store
+export * from './auth'
