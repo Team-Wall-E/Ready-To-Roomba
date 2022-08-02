@@ -1,0 +1,38 @@
+const Sequelize = require('sequelize')
+const db = require('../db')
+
+const Products = db.define('product', {
+  title: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
+  price: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+    validate: {
+        min: 0.01,
+    }
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+        min: 0,
+        msg: "Out of stuck",
+    }
+  },
+  imageUrl: {
+    type: Sequelize.TEXT,
+    defaultValue: 
+        'https://media3.giphy.com/media/3zhxq2ttgN6rEw8SDx/giphy.gif?cid=790b7611ea6df710f452e7cf3a46888cb9c7adeafc93b815&rid=giphy.gif&ct=g',
+  },
+  category: { //not sure
+    type: Sequelize.ENUM(''), // brand types
+  }
+});
+
+module.exports = Products;

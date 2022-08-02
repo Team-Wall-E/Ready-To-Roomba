@@ -7,15 +7,28 @@ const axios = require('axios');
 const SALT_ROUNDS = 10;
 
 const User = db.define('user', {
-  username: {
+  username: { // not sure
     type: Sequelize.STRING,
     unique: true,
     allowNull: false
   },
+  isAdmin: { 
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    unique: true,
+    validate: {
+      notEmpty: true,
+      isEmail: true,
+    }
+  },
   password: {
     type: Sequelize.STRING,
   }
-})
+});
 
 module.exports = User
 
@@ -25,11 +38,11 @@ module.exports = User
 User.prototype.correctPassword = function(candidatePwd) {
   //we need to compare the plain version to an encrypted version of the password
   return bcrypt.compare(candidatePwd, this.password);
-}
+};
 
 User.prototype.generateToken = function() {
   return jwt.sign({id: this.id}, process.env.JWT)
-}
+};
 
 /**
  * classMethods
@@ -57,7 +70,7 @@ User.findByToken = async function(token) {
     error.status = 401
     throw error
   }
-}
+};
 
 /**
  * hooks
@@ -67,8 +80,8 @@ const hashPassword = async(user) => {
   if (user.changed('password')) {
     user.password = await bcrypt.hash(user.password, SALT_ROUNDS);
   }
-}
+};
 
-User.beforeCreate(hashPassword)
-User.beforeUpdate(hashPassword)
-User.beforeBulkCreate(users => Promise.all(users.map(hashPassword)))
+User.beforeCreate(hashPassword);
+User.beforeUpdate(hashPassword);
+User.beforeBulkCreate(users => Promise.all(users.map(hashPassword)));
