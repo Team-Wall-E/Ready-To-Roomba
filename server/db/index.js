@@ -2,29 +2,38 @@
 
 const db = require('./db');
 
-const {User, Products, Orders, Reviews} = require('./models');
+const User = require('./models/User');
+const Product = require('./models/Product');
+const Order = require('./models/Order');
+const Review = require('./models/Review');
+
 
 
 //associations could go here!
-Products.belongsTo(User);
-User.hasMany(Products);
+// Products.belongsTo(User);
+// User.hasMany(Products);
 
-Products.belongsTo(Orders); // unsure
-Orders.hasMany(Products);
+// Products.manyToMany(Orders); // unsure
+// Orders.hasMany(Products);
 
-Orders.belongsTo(User);
-User.hasMany(Orders);
+Order.belongsTo(User);
+User.hasMany(Order);
 
-Reviews.belongsTo(Products);
-Reviews.belongsTo(User);
-User.hasMany(Reviews);
+Order.belongsToMany(Product, { through: OrderProducts });
+Product.belongsToMany(Order, { through: OrderProducts });
+
+Review.belongsTo(Product);
+Product.hasMany(Review);
+
+Review.belongsTo(User);
+User.hasMany(Review);
 
 module.exports = {
   db,
   models: {
     User,
-    Products, 
-    Orders,
-    Reviews
+    Product, 
+    Order,
+    Review
   },
 }

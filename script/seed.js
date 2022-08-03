@@ -1,6 +1,5 @@
 'use strict'
 
-const { green, red } = require("chalk");
 const {db, models: {User, Products, Orders, Reviews} } = require('../server/db');
 const { faker } = require('@faker-js/faker');
 
@@ -102,7 +101,7 @@ const orders = [{
   isAuthenticated: false,
   productId: 1,
   items: [],
-  price: 500,
+  orderTotal: 500,
   quantity: 3,
   status: 'processing',
 }, {
@@ -141,8 +140,9 @@ const reviews = [{
 
 // pagination -- FAKER
 function createRandomUser() {
+  let name = faker.name.firstName() + faker.name.lastName();
   return {
-    fullName: faker.name.fullName(),
+    fullName: name,
     isAdmin: false,
     email: faker.internet.email(),
     password: faker.random.alpha(8),
@@ -174,7 +174,7 @@ function createRandomOrder() {
     isAuthenticated: false,
     productId: Math.ceil(Math.random() * 100),
     items: [],
-    price: faker.commerce.price(200, 2000),
+    orderTotal: faker.commerce.price(200, 2000),
     quantity: Math.ceil(Math.random() * 20),
     status: 'processing',
   }
@@ -210,9 +210,9 @@ const seed = async () => {
       return Reviews.create(review);
     }));
 
-    console.log(green('Seeding success!'));
+    console.log('Seeding success!');
   } catch (err) {
-    console.log(red(err));
+    console.log(err);
   }
 };
 
@@ -226,16 +226,16 @@ const seed = async () => {
 // }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
-module.exports = seed
+module.exports = seed;
 
 if (require.main === module) {
   seed()
     .then(() => {
-      console.log(green("Seeding success!"));
+      console.log("Seeding success!");
       db.close();
     })
     .catch(err => {
-      console.error(red("Oh noes! Something went wrong!"));
+      console.error("Oh noes! Something went wrong!");
       console.error(err);
       db.close();
     });

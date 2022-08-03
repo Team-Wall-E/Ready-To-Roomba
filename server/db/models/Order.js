@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Orders = db.define('order', {
+const Order = db.define('order', {
   isAuthenticated: { // not sure
     type: Sequelize.BOOLEAN,
     defaultValue: false,
@@ -15,7 +15,7 @@ const Orders = db.define('order', {
     type: Sequelize.ARRAY(Sequelize.JSON), // not sure if needed
     allowNull: false,
   },
-  price: {
+  orderTotal: {
     type: Sequelize.DECIMAL(10, 2),
   },
   quantity: {
@@ -25,7 +25,17 @@ const Orders = db.define('order', {
     type: Sequelize.ENUM('processing', 'completed'), // incomplete
     defaultValue: 'processing',
     allowNull: false,
+  },
+  subTotal: {
+    type: Sequelize.VIRTUAL,
+    get: function () {
+      if (this.items && this.items.length) {
+        return this.items.map(item => item.quantity * item.price).reduce((a,b) => a + b, 0);
+      } else {
+        return 0;
+      }
+    }
   }
 });
 
-module.exports = Orders;
+module.exports = Order;
