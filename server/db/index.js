@@ -6,6 +6,7 @@ const User = require('./models/User');
 const Product = require('./models/Product');
 const Order = require('./models/Order');
 const Review = require('./models/Review');
+const LineItem = require('./models/LineItem');
 
 
 
@@ -19,8 +20,11 @@ const Review = require('./models/Review');
 Order.belongsTo(User);
 User.hasMany(Order);
 
-Order.belongsToMany(Product, { through: OrderProducts });
-Product.belongsToMany(Order, { through: OrderProducts });
+LineItem.belongsTo(Order);
+LineItem.belongsTo(Product);
+
+Order.belongsToMany(Product, { through: LineItem, foreignKey: 'orderId' });
+Product.belongsToMany(Order, { through: LineItem, foreignKey: 'productId' });
 
 Review.belongsTo(Product);
 Product.hasMany(Review);
