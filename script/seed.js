@@ -23,7 +23,7 @@ const users = [{
   username: "valerie",
   isAdmin: true,
   email:" valerie2022@readytoroomba.com",
-  password: "caffein4life",
+  password: "caffeine4life",
 }];
 
 const products =[{
@@ -122,25 +122,24 @@ const orders = [{
 }];
 
 const reviews = [{
-  title: "Nuts",
-  customerReview: "Sucks so much, thunks too hard. Did not survive deez nuts.",
+  title: "Nuts!",
+  customerReview: "Sucks so much, sucks too hard. Dust did not survive.",
   starRating: "⭐⭐⭐⭐⭐",
 }, {
   title: "Not so nuts",
-  customerReview: "SO MUCH FUN, thunks too easy. Definitely  survived deez nuts.",
-  starRating: "⭐⭐⭐⭐⭐",
+  customerReview: "SO MUCH FUN, sucks less hard. Some dust definitely survived.",
+  starRating: "⭐⭐⭐⭐",
 }, {
   title: "Huh",
-  customerReview: "Master of deez nuts, whattttttttttt. ",
+  customerReview: "Master of dust suckage, whattttttttttt. ",
   starRating: "⭐⭐",
 }, {
   title: "Yeeeee",
-  customerReview: "I have a roommate named Donna who is always dressed as a banana, I'm considered af",
+  customerReview: "I have a roommate named Donna who is always dressed as a banana. She said she likes it more than me.",
   starRating: "⭐",
 }];
 
 // pagination -- FAKER
-
 function createRandomUser() {
   return {
     fullName: faker.name.fullName(),
@@ -179,7 +178,7 @@ function createRandomOrder() {
     quantity: Math.ceil(Math.random() * 20),
     status: 'processing',
   }
-}
+};
 
 Array.from({ length: 100 }).forEach(() => users.push(createRandomUser()));
 Array.from({ length: 100 }).forEach(() => products.push(createRandomProduct()));
@@ -215,7 +214,7 @@ const seed = async () => {
   } catch (err) {
     console.log(red(err));
   }
-}
+};
 
 /*
   Execute the `seed` function, IF we ran this module directly (`node seed`).
