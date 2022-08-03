@@ -1,31 +1,36 @@
 'use strict'
 
 const {db} = require('../server/db');
-const {User, Product, Order, Review} = require('../server/db/models');
+// const {User, Product, Order, Review} = require('../server/db/models');
+const User = require('../server/db/User');
+const Product = require('../server/db/Product');
+const Order = require('../server/db/Order');
+const Review = require('../server/db/Review');
+const LineItem = require('../server/db/LineItem');
 const { faker } = require('@faker-js/faker');
 
 const users = [{
   fullName: "donnabanana",
   isAdmin: true,
-  email:" donnaAYO@readytoroomba.com",
+  email: "donnaAYO@readytoroomba.com",
   password: "boberty",
   imageUrl: 'https://c.tenor.com/_GLDs33hTqQAAAAC/utya-duck.gif',
 }, {
   fullName: "lisarules",
   isAdmin: true,
-  email:" pisalisa@readytoroomba.com",
+  email: "pisalisa@readytoroomba.com",
   password: "pisalisa",
   imageUrl: 'https://i.pinimg.com/originals/15/6d/67/156d67035ed705631771dde7e0b1358a.gif',
 }, {
   fullName: "selina",
   isAdmin: true,
-  email:" qqselina@readytoroomba.com",
+  email: "qqselina@readytoroomba.com",
   password: "selinaistired",
   imageUrl: 'https://cdn.osxdaily.com/wp-content/uploads/2013/07/dancing-banana.gif',
 }, {
   fullName: "valerie",
   isAdmin: true,
-  email:" valerie2022@readytoroomba.com",
+  email: "valerie2022@readytoroomba.com",
   password: "caffeine4life",
   imageUrl: 'https://thumbs.gfycat.com/AngelicIncredibleJaguar-max-1mb.gif',
 }];
