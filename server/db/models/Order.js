@@ -6,10 +6,10 @@ const Order = db.define('order', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-  productId: { // not sure
-    type: Sequelize.INTEGER,
-    unique: true
-  },
+  // productId: { // not sure
+  //   type: Sequelize.INTEGER,
+  //   unique: true
+  // },
   // item1: {Product: {Product}, quantity: , }
   items: {
     type: Sequelize.ARRAY(Sequelize.JSON), // not sure if needed
