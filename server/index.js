@@ -7,14 +7,16 @@ const init = async () => {
   try {
     if (process.env.SEED === 'true') {
       await seed();
-    } else await db.sync()
+    } else await db.sync();
 
     // start listening (and create a 'server' object representing our server)
-    app.listen(PORT, () => console.log(`
+    app.listen(PORT, () =>
+      console.log(`
     Mixing it up on port ${PORT}
-    http://localhost:${PORT}`))
+    http://localhost:${PORT}`)
+    );
   } catch (ex) {
-    console.log(ex)
+    console.log(ex);
   }
 };
 
