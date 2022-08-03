@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
-const Reviews = db.define('review', {
+const Review = db.define('review', {
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -27,4 +27,4 @@ const Reviews = db.define('review', {
   }
 });
 
-module.exports = Reviews;
+module.exports = Review;
