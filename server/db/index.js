@@ -2,12 +2,12 @@
 
 const db = require('./db');
 
-// const { User, Product, Order, Review, LineItem } = require('./models');
-const User = require('./User');
-const Product = require('./Product');
-const Order = require('./Order');
-const Review = require('./Review');
-const LineItem = require('./LineItem');
+const { User, Product, Order, Review, LineItem } = require('./models');
+// const User = require('./models/User');
+// const Product = require('./models/Product');
+// const Order = require('./models/Order');
+// const Review = require('./models/Review');
+// const LineItem = require('./models/LineItem');
 
 
 Order.belongsTo(User); //as: 'userId' 
@@ -27,9 +27,10 @@ User.hasMany(Review);
 
 module.exports = {
   db,
-  User,
-  Product, 
-  Order,
-  Review,
-  LineItem
+  models: {
+    User,
+    Product, 
+    Order,
+    Review
+  },
 };
