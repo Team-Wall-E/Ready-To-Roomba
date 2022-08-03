@@ -10,8 +10,8 @@ User.hasMany(Order);
 // LineItem.belongsTo(Order);
 // LineItem.belongsTo(Product);
 
-Order.belongsToMany(Product, { through: LineItem }); // foreignKey: 'orderId'
-Product.belongsToMany(Order, { through: LineItem }); // foreignKey: 'productId'
+Order.belongsToMany(Product, { through: LineItem }); 
+Product.belongsToMany(Order, { through: LineItem });
 
 Review.belongsTo(Product); 
 Review.belongsTo(User);
