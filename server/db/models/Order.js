@@ -2,31 +2,24 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Order = db.define('order', {
-  isAuthenticated: { // not sure
-    type: Sequelize.BOOLEAN,
-    defaultValue: false,
-  },
-  // productId: { // not sure
-  //   type: Sequelize.INTEGER,
-  //   unique: true
-  // },
-  // item1: {Product: {Product}, quantity: , }
-  items: {
-    type: Sequelize.ARRAY(Sequelize.JSON), // not sure if needed
-    allowNull: false,
-  },
-  orderTotal: {
-    type: Sequelize.DECIMAL(10, 2),
-  },
-  quantity: {
-    type: Sequelize.INTEGER,
-  },
   status: {
     type: Sequelize.ENUM('processing', 'completed'), // incomplete
     defaultValue: 'processing',
     allowNull: false,
   },
-  subTotal: {
+  isAuthenticated: { // not sure
+    type: Sequelize.BOOLEAN,
+    defaultValue: false,
+  },
+  // item1: {Product: {Product}, quantity: , }
+  items: {
+    type: Sequelize.ARRAY(Sequelize.JSON), // not sure if needed
+    allowNull: false,
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+  },
+  orderTotal: {
     type: Sequelize.VIRTUAL,
     get: function () {
       if (this.items && this.items.length) {

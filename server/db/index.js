@@ -2,34 +2,21 @@
 
 const db = require('./db');
 
-const User = require('./models/User');
-const Product = require('./models/Product');
-const Order = require('./models/Order');
-const Review = require('./models/Review');
-const LineItem = require('./models/LineItem');
+const { User, Product, Order, Review, LineItem } = require('./models');
 
-
-
-//associations could go here!
-// Products.belongsTo(User);
-// User.hasMany(Products);
-
-// Products.manyToMany(Orders); // unsure
-// Orders.hasMany(Products);
-
-Order.belongsTo(User);
+Order.belongsTo(User); 
 User.hasMany(Order);
 
-LineItem.belongsTo(Order);
-LineItem.belongsTo(Product);
+// LineItem.belongsTo(Order);
+// LineItem.belongsTo(Product);
 
-Order.belongsToMany(Product, { through: LineItem, foreignKey: 'orderId' });
-Product.belongsToMany(Order, { through: LineItem, foreignKey: 'productId' });
+Order.belongsToMany(Product, { through: LineItem }); // foreignKey: 'orderId'
+Product.belongsToMany(Order, { through: LineItem }); // foreignKey: 'productId'
 
-Review.belongsTo(Product);
+Review.belongsTo(Product); 
+Review.belongsTo(User);
 Product.hasMany(Review);
 
-Review.belongsTo(User);
 User.hasMany(Review);
 
 module.exports = {
@@ -40,4 +27,4 @@ module.exports = {
     Order,
     Review
   },
-}
+};
