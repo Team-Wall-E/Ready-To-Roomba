@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const Product = require('../db/models/products');
+const Product = require('../db/models/Product');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -7,15 +7,6 @@ router.get('/', async (req, res, next) => {
     res.json(products);
   } catch (error) {
     next(error);
-  }
-});
-
-router.get('/:id', async (req, res, next) => {
-  try {
-    const product = await Product.findByPk(req.params.id);
-    res.json(product);
-  } catch (err) {
-    next(err);
   }
 });
 
@@ -28,20 +19,29 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.delete('/:id', async (req, res, next) => {
+router.get('/:id', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id);
-    await product.destroy();
-    res.send(product);
+    const product = await Product.findByPk(+req.params.id);
+    res.json(product);
   } catch (err) {
     next(err);
   }
-})
+});
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(req.params.id);
+    const product = await Product.findByPk(+req.params.id);
     res.send(await product.update(req.body));
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete('/:id', async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(+req.params.id);
+    await product.destroy();
+    res.send(product);
   } catch (err) {
     next(err);
   }
