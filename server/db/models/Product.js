@@ -22,7 +22,6 @@ const Product = db.define('product', {
     allowNull: false,
     validate: {
         min: 0,
-        msg: "Out of stuck",
     }
   },
   imageUrl: {
