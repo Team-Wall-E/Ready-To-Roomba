@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 const Products = db.define('product', {
-  title: {
+  productName: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -30,8 +30,9 @@ const Products = db.define('product', {
     defaultValue: 
         'https://media3.giphy.com/media/3zhxq2ttgN6rEw8SDx/giphy.gif?cid=790b7611ea6df710f452e7cf3a46888cb9c7adeafc93b815&rid=giphy.gif&ct=g',
   },
-  category: { //not sure
-    type: Sequelize.ENUM(''), // brand types
+  brand: {
+    type: Sequelize.STRING,
+    allowNull: false,
   }
 });
 
