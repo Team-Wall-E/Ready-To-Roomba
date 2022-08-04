@@ -4,10 +4,7 @@ const {db} = require('../server/db');
 const {User, Product, Order, Review} = require('../server/db/models');
 const { faker } = require('@faker-js/faker');
 
-import { users } from './users';
-import { products } from './products';
-import { orders } from './orders';
-import { reviews } from './reviews';
+const { users, products, orders, reviews } = require('../script');
 
 
 // pagination -- FAKER

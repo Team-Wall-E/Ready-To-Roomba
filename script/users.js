@@ -1,4 +1,4 @@
-export const users = [
+const users = [
   {
     fullName: "donnabanana",
     isAdmin: true,
@@ -30,3 +30,5 @@ export const users = [
     imageUrl: "https://thumbs.gfycat.com/AngelicIncredibleJaguar-max-1mb.gif",
   },
 ];
+
+module.exports = users;

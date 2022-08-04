@@ -1,4 +1,4 @@
-export const reviews = [
+const reviews = [
   {
     title: "Nuts!",
     customerReview: "Sucks so much, sucks too hard. Dust did not survive.",
@@ -22,3 +22,5 @@ export const reviews = [
     starRating: "⭐",
   },
 ];
+
+module.exports = reviews;
