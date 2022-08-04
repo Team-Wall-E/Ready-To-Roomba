@@ -18,12 +18,6 @@ const Review = db.define('review', {
   },
   starRating: { // not sure
     type: Sequelize.STRING,
-    validate: {
-        len: {
-            args: [0, 5],
-            msg: "Rate our product from 0 - 5",
-        }
-    }
   }
 });
 
