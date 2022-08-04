@@ -1,4 +1,4 @@
-export const products = [
+const products = [
   {
     productName: "iRobot Roomba s9",
     brand: "iRobot",
@@ -93,3 +93,5 @@ export const products = [
     imageUrl: "https://i.ebayimg.com/images/g/wHgAAOSw4vBhoDS2/s-l500.png",
   },
 ];
+
+module.exports = products;

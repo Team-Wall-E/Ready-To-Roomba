@@ -1,4 +1,4 @@
-export const orders = [
+const orders = [
   {
     isAuthenticated: false,
     items: [],
@@ -21,3 +21,5 @@ export const orders = [
     status: "completed",
   },
 ];
+
+module.exports = orders;
