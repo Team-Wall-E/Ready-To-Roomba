@@ -17,7 +17,32 @@ export class AllProducts extends React.Component {
     this.setState({ loading: false });
   }
 
+  //FILTERING
+
+  // sortProducts = (type) => {
+  //   const types = {
+  //    brand: 'brand'
+  //   };
+  //   const sortProperty = types[type];
+  //   const { products } = this.props;
+
+  //   if (sortProperty === 'brand') {
+  //     this.setState({
+  //       ...products.sort((a, b) => {
+  //         return a.brand > b.brand ? 1 : b.brand > a.brand ? -1 : 0;
+  //       }),
+  //     });
+  //   } else {
+  //     this.setState({
+  //       ...products.sort((a, b) => b[sortProperty] - a[sortProperty]),
+  //     });
+  //   }
+  // };
+  
+
+
   render() {
+    console.log(this.props.products)
     const loading = (
       <div className="spinner-border text-secondary" role="status">
         <span className="visually-hidden">Loading...</span>
