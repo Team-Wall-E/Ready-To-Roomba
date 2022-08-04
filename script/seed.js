@@ -4,8 +4,8 @@ const {db} = require('../server/db');
 const {User, Product, Order, Review} = require('../server/db/models');
 const { faker } = require('@faker-js/faker');
 
-const { users, products, orders, reviews } = require('../script');
 
+const { users, products, orders, reviews } = require('../script');
 
 // pagination -- FAKER
 function createRandomUser() {
