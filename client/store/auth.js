@@ -1,17 +1,17 @@
-import axios from 'axios'
-import history from '../history'
+import axios from 'axios';
+import history from '../history';
 
-const TOKEN = 'token'
+const TOKEN = 'token';
 
 /**
  * ACTION TYPES
  */
-const SET_AUTH = 'SET_AUTH'
+const SET_AUTH = 'SET_AUTH';
 
 /**
  * ACTION CREATORS
  */
-const setAuth = auth => ({type: SET_AUTH, auth})
+const setAuth = auth => ({type: SET_AUTH, auth});
 
 /**
  * THUNK CREATORS
@@ -26,7 +26,7 @@ export const me = () => async dispatch => {
     })
     return dispatch(setAuth(res.data))
   }
-}
+};
 
 export const authenticate = (username, password, method) => async dispatch => {
   try {
@@ -36,7 +36,7 @@ export const authenticate = (username, password, method) => async dispatch => {
   } catch (authError) {
     return dispatch(setAuth({error: authError}))
   }
-}
+};
 
 export const logout = () => {
   window.localStorage.removeItem(TOKEN)
@@ -45,7 +45,7 @@ export const logout = () => {
     type: SET_AUTH,
     auth: {}
   }
-}
+};
 
 /**
  * REDUCER
@@ -57,4 +57,4 @@ export default function(state = {}, action) {
     default:
       return state
   }
-}
+};
