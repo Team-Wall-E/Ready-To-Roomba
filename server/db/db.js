@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const pkg = require('../../package.json');
+// const chalk = require('chalk');
 
 // const dbName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '');
 
@@ -26,13 +27,14 @@ const pkg = require('../../package.json');
 // );
 
 const dbName = process.env.NODE_ENV === 'test' ? `${pkg.name}-test` : pkg.name;
-console.log(chalk.yellow(`Opening database connection to ${dbName}`));
+console.log(`Opening database connection to ${dbName}`);
 
 const db = new Sequelize(
   process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`,
   {
     logging: false,
     dialectOptions: {
+      //ssl: process.env.DATABASE_URL ? true : false
       ssl: {
         require: true,
         rejectUnauthorized: false,
