@@ -31,6 +31,7 @@
   "homepage": "https://github.com/Donna-Sayos/Boiler-maker#readme",
   "dependencies": {
     "axios": "^0.27.2",
+    "bcrypt": "^5.0.0",
     "chalk": "^5.0.1",
     "express": "^4.16.4",
     "history": "^4.9.0",
@@ -46,7 +47,6 @@
     "@faker-js/faker": "^7.3.0",
     "axios-mock-adapter": "^1.16.0",
     "babel-loader": "^8.2.2",
-    "bcrypt": "^5.0.0",
     "chai": "^4.2.0",
     "compression": "^1.7.3",
     "enzyme": "^3.9.0",
