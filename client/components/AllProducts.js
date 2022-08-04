@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProducts, deleteProductThunk } from '../store/products';
+import SearchBar from './SearchBar'
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -71,6 +72,15 @@ export class AllProducts extends React.Component {
 
     return (
       <div className="all-products w-100">
+        <div>
+        <div>
+          <SearchBar
+            placeholder={'Enter product name...'}
+            products = {products}
+          />
+        </div>
+        </div>
+       
         <section className="py-5 text-center container">
           <div className="row py-lg-5">
             <div className="col-lg-6 col-md-8 mx-auto">
