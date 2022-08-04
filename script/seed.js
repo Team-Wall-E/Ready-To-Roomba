@@ -1,18 +1,20 @@
 'use strict'
 
 const {db} = require('../server/db');
-const {User, Product, Order, Review} = require('../server/db/models');
+const {User, Product, Order, Review, LineItem} = require('../server/db/models');
 const { faker } = require('@faker-js/faker');
 
 
-const { users, products, orders, reviews } = require('../script');
+const { users, products, orders, reviews, lineItems } = require('../script');
 
 // pagination -- FAKER
+
+let booleanArr = ['true', 'false'];
 function createRandomUser() {
   let name = faker.name.firstName() + ' ' + faker.name.lastName();
   return {
     fullName: name,
-    isAdmin: false,
+    isAdmin: booleanArr[Math.floor(Math.random() * booleanArr.length)],
     email: faker.internet.email(),
     password: faker.random.alpha(8),
     imageUrl: faker.image.cats(500, 500, Math.ceil(Math.random() * 100)),
@@ -30,28 +32,37 @@ function createRandomProduct() {
   }
 };
 
+let rates = ['⭐', '⭐⭐', '⭐⭐⭐', '⭐⭐⭐⭐', '⭐⭐⭐⭐⭐'];
 function createRandomReview() {
   return {
     title: faker.word.verb(5),
     customerReview: faker.random.words(10),
-    starRating: faker.internet.emoji({ types: ['star'] }),
+    starRating: rates[Math.floor(Math.random() * rates.length)],
   }
 };
 
+let statusList = ['processing', 'completed'];
 function createRandomOrder() {
   return {
-    isAuthenticated: false,
+    isAuthenticated: booleanArr[Math.floor(Math.random() * booleanArr.length)],
     items: [],
-    orderTotal: faker.commerce.price(200, 2000),
+    orderTotal: null,
     quantity: Math.ceil(Math.random() * 20),
-    status: 'processing',
+    status: statusList[Math.floor(Math.random() * statusList.length)],
   }
 };
+
+// function createLineItem(){
+//   return {
+//     orderQuantity: Math.floor(Math.random() * 100),
+//   }
+// };
 
 Array.from({ length: 100 }).forEach(() => users.push(createRandomUser()));
 Array.from({ length: 100 }).forEach(() => products.push(createRandomProduct()));
 Array.from({ length: 100 }).forEach(() => reviews.push(createRandomReview()));
 Array.from({ length: 100 }).forEach(() => orders.push(createRandomOrder()));
+// Array.from({ length: 100 }).forEach(() => lineItems.push(createLineItem()));
 
 /*
  We've separated the `seed` function from the `runSeed` function.
@@ -59,26 +70,60 @@ Array.from({ length: 100 }).forEach(() => orders.push(createRandomOrder()));
  The `seed` function is concerned only with modifying the database.
 */
 const seed = async () => {
+  let createdUsers, createdProducts, createdReviews, createdOrders
   try {
     await db.sync({ force: true });
 
-    await Promise.all(users.map(user => {
-      return User.create(user);
-    }));
+    // await Promise.all(users.map(user => {
+    //   return User.create(user);
+    // }));
 
-    await Promise.all(products.map(product => {
-      return Product.create(product);
-    }));
+    return Promise.all(products.map(product => Product.create(product)))
+    .then(result => {
+      createdProducts = result
 
-    await Promise.all(orders.map(order => {
-      return Order.create(order);
-    }));
+      // create the users
+      return Promise.all(users.map(user => User.create(user)))
+    })
+    .then(result => {
+      createdUsers = result
 
-    await Promise.all(reviews.map(review => {
-      return Review.create(review);
-    }));
+      //create the reviews
+      for (let i = 0; i < reviews.length; i++){
+        reviews[i].userId = createdUsers[i].id
+        reviews[i].productId = createdProducts[i].id
+      }
+      return Promise.all(reviews.map(review => Review.create(review)))
+    })
+    .then(result => {
+      createdReviews = result
 
-    console.log('Seeding success!');
+      //create the orders
+      for (let i = 0; i < orders.length; i++){
+        orders[i].userId = createdUsers[i].id
+        orders[i].items = [{ product: createdProducts[i], price: createdProducts[i].price, quantity: createdProducts[i].quantity }]
+      }
+      return Promise.all(orders.map(order => Order.create(order)))
+    })
+    .then(result => {
+      createdOrders = result
+      let a, b
+      for(let id of createdOrders) a = createdOrders[id]
+      for(let id of createdProducts) b = createdProducts[id]
+
+      // create lineItems
+      return Promise.all(lineItems.map(item => LineItem.create({ ...item, orderId: createdOrders.a, productId: createdProducts.b })))
+    });
+
+    // await Promise.all(orders.map(order => {
+    //   return Order.create(order);
+    // }));
+
+    // await Promise.all(reviews.map(review => {
+    //   return Review.create(review);
+    // }));
+
+    // console.log('Seeding success!');
   } catch (err) {
     console.log(err);
   }
@@ -89,9 +134,6 @@ const seed = async () => {
   `Async` functions always return a promise, so we can use `catch` to handle
   any errors that might occur inside of `seed`.
 */
-// if (module === require.main) {
-//   runSeed()
-// }
 
 // we export the seed function for testing purposes (see `./seed.spec.js`)
 module.exports = seed;
