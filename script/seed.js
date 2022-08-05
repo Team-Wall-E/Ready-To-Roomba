@@ -16,9 +16,9 @@ const { users, products, orders, reviews, lineItems } = require("../script");
 
 let booleanArr = ["true", "false"];
 function createRandomUser() {
-  let name = faker.name.firstName() + " " + faker.name.lastName();
   return {
-    fullName: name,
+    firstName: faker.name.firstName(),
+    lastName: faker.name.lastName(),
     isAdmin: booleanArr[Math.floor(Math.random() * booleanArr.length)],
     email: faker.internet.email(),
     password: faker.random.alpha(8),
@@ -90,7 +90,7 @@ const seed = async () => {
       })
       .then((result) => {
         createdUsers = result;
-
+        
         //create the reviews
         for (let i = 0; i < reviews.length; i++) {
           reviews[i].userId = createdUsers[i].id;
@@ -100,7 +100,7 @@ const seed = async () => {
       })
       .then((result) => {
         createdReviews = result;
-
+        
         //create the orders
         for (let i = 0; i < orders.length; i++) {
           orders[i].userId = createdUsers[i].id;
