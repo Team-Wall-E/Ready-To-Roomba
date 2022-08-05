@@ -1,13 +1,14 @@
-const Sequelize = require('sequelize')
-const db = require('../db')
+const Sequelize = require("sequelize");
+const db = require("../db");
 
-const Order = db.define('order', {
+const Order = db.define("order", {
   status: {
-    type: Sequelize.ENUM('processing', 'completed'), // incomplete
-    defaultValue: 'processing',
+    type: Sequelize.ENUM("processing", "completed"), // incomplete
+    defaultValue: "processing",
     allowNull: false,
   },
-  isAuthenticated: { // not sure
+  isAuthenticated: {
+    // not sure
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
@@ -16,11 +17,11 @@ const Order = db.define('order', {
     type: Sequelize.ARRAY(Sequelize.JSON), // not sure if needed
     allowNull: false,
   },
-  quantity: {
-    type: Sequelize.INTEGER,
-  },
+  // quantity: {
+  //   type: Sequelize.INTEGER,
+  // },
   orderTotal: {
-    type: Sequelize.VIRTUAL,
+    type: Sequelize.DECIMAL,
     allowNull: true,
     // get: function () {
     //   if (this.items && this.items.length) {
@@ -29,7 +30,7 @@ const Order = db.define('order', {
     //     return 0;
     //   }
     // }
-  }
+  },
 });
 
 module.exports = Order;
