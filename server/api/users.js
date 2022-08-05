@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { models: { User, Order, LineItem }} = require('../db')
 const { isLoggedIn, isAdmin } = require('./protection')
 
-router.get('/', isAdmin, async (req, res, next) => {
+router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
       // explicitly select only the id and username fields - even though
@@ -25,8 +25,8 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
-  try {
+router.get('/:id', isLoggedIn, async (req, res, next) => {
+  try { // add conditional; second conditional req.user.isAdmin
     const user = await User.findByPk(+req.params.id);
     res.json(user);
   } catch (err) {
@@ -34,8 +34,8 @@ router.get('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
-  try {
+router.put('/:id', isLoggedIn, async (req, res, next) => {
+  try { // conditional req.user.id || req.user.isAdmin
     const user = await User.findByPk(+req.params.id);
     res.send(await user.update(req.body));
   } catch (err) {
