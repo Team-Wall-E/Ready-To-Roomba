@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
-import { fetchProducts } from '../store/products'
+import { fetchProducts } from '../store/products';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -18,7 +17,9 @@ function SearchBar(props, { placeholder }) {
     const searchWord = e.target.value;
     setWordEntered(searchWord);
     const newFilter = props.products.filter((product) => {
-      return product.productName.toLowerCase().includes(searchWord.toLowerCase());
+      return product.productName
+        .toLowerCase()
+        .includes(searchWord.toLowerCase());
     });
 
     if (searchWord === '') {
@@ -44,11 +45,9 @@ function SearchBar(props, { placeholder }) {
         />
         <div className="searchIcon">
           {filteredData.length === 0 ? (
-          `'hello daddies' - donna`
+            `'hello daddies' - donna`
           ) : (
-            <button onClick={clearInput}> 
-            Clear
-            </button>
+            <button onClick={clearInput}>Clear</button>
           )}
         </div>
 
