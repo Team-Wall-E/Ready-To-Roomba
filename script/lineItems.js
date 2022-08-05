@@ -1,7 +1,7 @@
 const lineItems = [
   {
-    orderQuantity: 2
-  }
+    orderQuantity: null,
+  },
 ];
 
 module.exports = lineItems;
