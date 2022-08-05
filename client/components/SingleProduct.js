@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
 import { deleteProductThunk } from '../store/products';
-// import UpdateProduct from './UpdateProduct';
-// import ProductNotFound from './ProductNotFound';
+// TODO: import UpdateProduct from './UpdateProduct';
+// TODO: import ProductNotFound from './ProductNotFound';
 
 class Product extends React.Component {
   componentDidMount() {
@@ -23,28 +23,21 @@ class Product extends React.Component {
 
     if (product) {
       return (
-        <section key={product.id} className="single-page">
-          <div className="row featurette" key={product.id}>
-            <div className="col-md-7 order-md-2">
-              <h2 className="featurette-heading fw-normal lh-1">
-                {product.productName}
-              </h2>
+        <section key={product.id}>
+          <div key={product.id}>
+            <div>
+              <h2>{product.productName}</h2>
               <address>{product.price}</address>
 
-              <p className="lead">{product.description}</p>
+              <p>{product.description}</p>
             </div>
-            <div className="col-md-5 order-md-1">
-              <img
-                src={product.imageUrl}
-                alt="image of product"
-                className="bd-placeholder-img-lg featurette-image img-fluid mx-auto"
-              />
+            <div>
+              <img src={product.imageUrl} alt="image of product" />
 
-              <div className="accordion accordion-flush" id="accordionFlush">
-                <div className="accordion-item">
-                  <h2 className="accordion-header" id="flush-headingOne">
+              <div id="accordionFlush">
+                <div>
+                  <h2 id="flush-headingOne">
                     <button
-                      className="accordion-button collapsed"
                       type="button"
                       data-bs-toggle="collapse"
                       data-bs-target="#flush-collapseOne"
@@ -56,13 +49,12 @@ class Product extends React.Component {
                   </h2>
                   <div
                     id="flush-collapseOne"
-                    className="accordion-collapse collapse"
                     aria-labelledby="flush-headingOne"
                     data-bs-parent="#accordionFlush"
                   >
-                    <div className="accordion-body">
-                      {/* Can be placeholder for product update form */}
-                      {/* <UpdateProduct /> */}
+                    <div>
+                      {/* TODO: Can be placeholder for product update form */}
+                      {/* TODO: <UpdateProduct /> */}
                     </div>
                   </div>
                 </div>
@@ -72,8 +64,8 @@ class Product extends React.Component {
         </section>
       );
     } else {
-      // Placeholder for 404 product not found page
-      //   return <ProductNotFound />;
+      // TODO: Placeholder for 404 product not found page
+      // TODO:  return <ProductNotFound />;
     }
   }
 }
