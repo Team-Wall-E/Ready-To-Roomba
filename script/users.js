@@ -1,10 +1,10 @@
 const users = [
   {
-    firstName: "DonnaCabona",
-    lastName: "Banana",
+    firstName: "donna",
+    lastName: "ayo",
     isAdmin: true,
-    email: "donnaAYO@readytoroomba.com",
-    password: "boberty",
+    email: "d@g.com",
+    password: "123",
     imageUrl: "https://c.tenor.com/_GLDs33hTqQAAAAC/utya-duck.gif",
   },
   {

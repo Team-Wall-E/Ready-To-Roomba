@@ -33,19 +33,16 @@ class OrderHistory extends React.Component {
     }
 };
 
-const mapState = ({ orders }) => {
-    orders
-};
-
-const mapDispatch = (dispatch, ownProps) => {
+const mapState = (state) => {
     return {
-        loadUserOrdersThunk: function() {
-            const userId = ownProps.userId
-            console.log(userId)
-            const thunk = loadUserOrdersThunk(userId)
-            dispatch(thunk)
-        }
+        order: state.order
     }
 };
 
-export default connect(mapState, mapDispatch)(OrderHistory);
+const mapDispatch = (dispatch) => {
+    return {
+        thunk: (id) => dispatch(loadUserOrdersThunk(id))
+    }
+};
+
+export default connect(mapState, mapDispatch)(OrderHistory)
