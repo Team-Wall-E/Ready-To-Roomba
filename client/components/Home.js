@@ -9,7 +9,7 @@ export const Home = (props) => {
 
   return (
     <div>
-      <h3>Welcome, {firstName} {lastName}</h3>
+      <h3>Welcome {firstName} {lastName}</h3>
     </div>
   );
 };
