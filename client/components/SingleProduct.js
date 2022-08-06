@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
 import { deleteProductThunk } from '../store/products';
 import { createOrderThunk } from '../store/orders';
+import { createLineItemThunk } from '../store/lineItem';
+import { updateLineItemThunk } from '../store/singleLineItem';
 // TODO: import UpdateProduct from './UpdateProduct';
 // TODO: import ProductNotFound from './ProductNotFound';
 
@@ -19,19 +20,26 @@ class Product extends React.Component {
     }
   }
 
-  // Add to cart
-  // if !order, create order, create line item
-  // if order, create line item
-  // if order && product already in line item, add to qty
-  //get order
   handleClick = (product) => {
     const order = this.props.order;
     if (!order) {
       const newOrder = createOrder();
       createLineItem(product, newOrder);
     } else {
-      // if order, create line item
-      // if order && product already in line item, add to qty
+      const lineItem = order.getLineItems.find(
+        (lineItem) => lineItem.productId === product.id
+      );
+      if (lineItem) {
+        this.props.updateLineItem({
+          ...this.props.lineItems,
+          orderQuantity: this.props.lineItem.orderQuantity + 1,
+        });
+      } else {
+        lineItem.create({
+          productId: product.id,
+          orderId: order.id,
+        });
+      }
     }
   };
 
@@ -87,8 +95,10 @@ class Product extends React.Component {
   }
 }
 
-const mapState = ({ product }) => ({
+const mapState = ({ product, order, lineItems }) => ({
   product,
+  order,
+  lineItems,
 });
 
 const mapDispatch = (dispatch) => ({
