@@ -1,8 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
 import { deleteProductThunk } from '../store/products';
+import { createOrderThunk } from '../store/orders';
+import { createLineItemThunk } from '../store/lineItems';
+import { updateLineItemThunk } from '../store/singleLineItem';
+// import { db } from '../../server/db'
+// import { getLineItems } from '../../server/db/models/Order';
 // TODO: import UpdateProduct from './UpdateProduct';
 // TODO: import ProductNotFound from './ProductNotFound';
 
@@ -18,8 +22,33 @@ class Product extends React.Component {
     }
   }
 
+  // TODO: Sorry, unable to properly import order.getLineItems
+  handleClick = (product) => {
+    // const order = this.props.order;
+    // if (!order) {
+    //   const newOrder = createOrder();
+    //   createLineItem(product, newOrder);
+    // } else {
+    //   const lineItem = order
+    //     .getLineItems()
+    //     .find((lineItem) => lineItem.productId === product.id);
+    //   if (lineItem) {
+    //     this.props.updateLineItem({
+    //       ...this.props.lineItems,
+    //       orderQuantity: this.props.lineItem.orderQuantity + 1,
+    //     });
+    //   } else {
+    //     lineItem.create({
+    //       productId: product.id,
+    //       orderId: order.id,
+    //     });
+    //   }
+    // }
+  };
+
   render() {
     const { product } = this.props;
+    const { handleClick } = this;
 
     if (product) {
       return (
@@ -33,7 +62,7 @@ class Product extends React.Component {
             </div>
             <div>
               <img src={product.imageUrl} alt="image of product" />
-
+              <button onClick={handleClick(product)}>Add to Cart</button>
               <div id="accordionFlush">
                 <div>
                   <h2 id="flush-headingOne">
@@ -70,13 +99,19 @@ class Product extends React.Component {
   }
 }
 
-const mapState = ({ product }) => ({
+const mapState = ({ product, order, lineItems }) => ({
   product,
+  order,
+  lineItems,
 });
 
 const mapDispatch = (dispatch) => ({
   getProduct: (id) => dispatch(fetchProduct(id)),
   deleteProduct: (product) => dispatch(deleteProductThunk(product, history)),
+  createOrder: () => dispatch(createOrderThunk()),
+  createLineItem: (order, product) =>
+    dispatch(createLineItemThunk(order, product)),
+  updateLineItem: (lineItem) => dispatch(updateLineItemThunk(lineItem)),
 });
 
 export default connect(mapState, mapDispatch)(Product);

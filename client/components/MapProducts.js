@@ -12,7 +12,6 @@ export default function MapProducts(props) {
             <h4>
               <Link to={`/products/${product.id}`}>{product.productName}</Link>
             </h4>
-
             <address>{product.price}</address>
             <p>{product.description}</p>
           </div>

@@ -1,10 +1,11 @@
-const Sequelize = require("sequelize");
-const db = require("../db");
+const Sequelize = require('sequelize');
+const db = require('../db');
+const LineItem = require('./LineItem');
 
-const Order = db.define("order", {
+const Order = db.define('order', {
   status: {
-    type: Sequelize.ENUM("processing", "completed"), // incomplete
-    defaultValue: "processing",
+    type: Sequelize.ENUM('processing', 'completed'), // incomplete
+    defaultValue: 'processing',
     allowNull: false,
   },
   isAuthenticated: {
@@ -32,5 +33,14 @@ const Order = db.define("order", {
     // }
   },
 });
+
+Order.prototype.getLineItems = async function () {
+  const lineItems = await LineItem.findAll({
+    where: {
+      orderId: this.id,
+    },
+  });
+  return lineItems;
+};
 
 module.exports = Order;
