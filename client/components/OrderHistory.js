@@ -35,7 +35,7 @@ class OrderHistory extends React.Component {
 
 const mapState = (state) => {
     return {
-        order: state.order
+        orders: state.order
     }
 };
 
