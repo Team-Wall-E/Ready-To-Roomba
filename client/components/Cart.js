@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-// import { fetchProducts } from '../store/products';
-// import SearchBar from './SearchBar';
-import MapProducts from './MapProducts';
+import { fetchLineItems } from '../store/lineItems';
+import { fetchOrder } from '../store/singleOrder';
 
 export class Cart extends React.Component {
   constructor(props) {
@@ -25,26 +24,14 @@ export class Cart extends React.Component {
       </div>
     );
 
-    const { products } = this.props;
+    const { lineItems } = this.props;
 
     return (
       <div>
-        <div>
-          <div>
-            <SearchBar
-              placeholder={'Enter product name...'}
-              products={products}
-            />
-          </div>
-        </div>
-
         <section>
           <div>
             <div>
-              <h1>{this.state.loading && loading}All Products</h1>
-              <p>
-                <Link to="/products/create">Create a new product</Link>
-              </p>
+              <h1>{this.state.loading && loading}Cart</h1>
             </div>
           </div>
         </section>
@@ -65,12 +52,14 @@ export class Cart extends React.Component {
   }
 }
 
-const mapState = ({ products }) => ({
-  products,
+const mapState = ({ order, lineItems }) => ({
+  order,
+  lineItems,
 });
 
 const mapDispatch = (dispatch) => ({
-  getProducts: () => dispatch(fetchProducts()),
+  getLineItems: () => dispatch(fetchLineItems()),
+  getOrder: () => dispatch(fetchOrder()),
 });
 
-export default connect(mapState, mapDispatch)(AllProducts);
+export default connect(mapState, mapDispatch)(Cart);

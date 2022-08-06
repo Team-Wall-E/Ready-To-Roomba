@@ -10,6 +10,10 @@ const reducer = combineReducers({
   auth,
   products: productsReducer,
   product: productReducer,
+  orders: ordersReducer,
+  order: orderReducer,
+  lineItem: lineItemReducer,
+  lineItems: lineItemsReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
