@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const { models: { User, Order, LineItem }} = require('../db')
+const { models: { User, Order, LineItem, Product }} = require('../db')
 const { isLoggedIn, isAdmin } = require('./protection')
 
 router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
@@ -33,6 +33,21 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
+router.get('/:id/orderHistory', async (req, res, next) => {
+  try {
+    const orders = await Order.findAll({
+      where: {
+        userId: +req.params.id,
+        status: 'completed'
+      },
+      include: [Product]
+    })
+    res.status(200).json(orders)
+  } catch (e) {
+    next(e)
+  }
+})
 
 router.put('/:id', isLoggedIn, async (req, res, next) => {
   try { // conditional req.user.id || req.user.isAdmin
