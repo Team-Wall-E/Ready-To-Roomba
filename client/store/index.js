@@ -5,6 +5,10 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import auth from './auth';
 import productsReducer from './products';
 import productReducer from './singleProduct';
+import ordersReducer from './orders';
+import orderReducer from './singleOrder';
+import lineItemReducer from './singleLineItem';
+import lineItemsReducer from './lineItems';
 
 const reducer = combineReducers({
   auth,
