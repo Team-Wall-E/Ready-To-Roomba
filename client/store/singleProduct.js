@@ -26,10 +26,10 @@ export const fetchProduct = (id) => {
   };
 };
 
-export const updateProductThunk = (product) => {
+export const updateProductThunk = (id, product) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/api/products/${product.id}`, product);
+      const response = await axios.put(`/api/products/${id}`, product);
       dispatch(updateProduct(response.data));
     } catch (err) {
       console.log(err.response);

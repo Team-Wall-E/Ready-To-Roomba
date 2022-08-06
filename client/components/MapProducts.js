@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 export default function MapProducts(props) {
-  console.log(props.products);
   return props.products.map((product) => {
     return (
       <div key={product.id}>
