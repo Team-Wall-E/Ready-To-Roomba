@@ -19,6 +19,7 @@ export const fetchProduct = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`/api/products/${id}`);
+         //TODO: insert authentication for userid...
       dispatch(setProduct(response.data));
     } catch (err) {
       console.log(err.response);
@@ -30,6 +31,7 @@ export const updateProductThunk = (product) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(`/api/products/${product.id}`, product);
+         //TODO: insert authentication for userid...
       dispatch(updateProduct(response.data));
     } catch (err) {
       console.log(err.response);

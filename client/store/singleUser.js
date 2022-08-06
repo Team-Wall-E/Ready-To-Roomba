@@ -19,7 +19,7 @@ export const fetchUser = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(`/api/users/${id}`);
-      //TODO : insert authentication for userid...
+      //TODO: insert authentication for userid...
       dispatch(setUser(response.data));
     } catch (err) {
       console.log(err.response);
@@ -31,7 +31,7 @@ export const updateUserThunk = (user) => {
   return async (dispatch) => {
     try {
       const response = await axios.put(`/api/users/${user.id}`, user);
-      //TODO : insert authentication for userid...
+      //TODO: insert authentication for userid...
       dispatch(updateUser(response.data));
     } catch (err) {
       console.log(err.response);
