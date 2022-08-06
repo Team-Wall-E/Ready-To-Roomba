@@ -38,10 +38,28 @@ export class Cart extends React.Component {
         <div>
           <div>
             <div>
-              {products ? (
-                <MapProducts products={products} />
+              {lineItems ? (
+                lineItems.map((lineItem) => {
+                  const product = lineItem.getProducts();
+                  return (
+                    <div key={product.id}>
+                      <div>
+                        <img src={product.imageUrl} alt="image of product" />
+                        <div>
+                          <h4>
+                            <Link to={`/products/${product.id}`}>
+                              {product.productName}
+                            </Link>
+                          </h4>
+                          <address>{product.price}</address>
+                          <p>{product.description}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })
               ) : (
-                <h3>No Products</h3>
+                <h3>Cart is Empty</h3>
               )}
             </div>
           </div>

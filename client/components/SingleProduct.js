@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
 import { deleteProductThunk } from '../store/products';
+import { createOrderThunk } from '../store/orders';
 // TODO: import UpdateProduct from './UpdateProduct';
 // TODO: import ProductNotFound from './ProductNotFound';
 
@@ -17,6 +18,22 @@ class Product extends React.Component {
       this.props.getProduct(this.props.product.id);
     }
   }
+
+  // Add to cart
+  // if !order, create order, create line item
+  // if order, create line item
+  // if order && product already in line item, add to qty
+  //get order
+  handleClick = (product) => {
+    const order = this.props.order;
+    if (!order) {
+      const newOrder = createOrder();
+      createLineItem(product, newOrder);
+    } else {
+      // if order, create line item
+      // if order && product already in line item, add to qty
+    }
+  };
 
   render() {
     const { product } = this.props;
@@ -33,7 +50,7 @@ class Product extends React.Component {
             </div>
             <div>
               <img src={product.imageUrl} alt="image of product" />
-
+              <button onClick={handleClick(product)}>Add to Cart</button>
               <div id="accordionFlush">
                 <div>
                   <h2 id="flush-headingOne">
@@ -77,6 +94,10 @@ const mapState = ({ product }) => ({
 const mapDispatch = (dispatch) => ({
   getProduct: (id) => dispatch(fetchProduct(id)),
   deleteProduct: (product) => dispatch(deleteProductThunk(product, history)),
+  createOrder: () => dispatch(createOrderThunk()),
+  createLineItem: (order, product) =>
+    dispatch(createLineItemThunk(order, product)),
+  updateLineItem: (lineItem) => dispatch(updateLineItemThunk(lineItem)),
 });
 
 export default connect(mapState, mapDispatch)(Product);
