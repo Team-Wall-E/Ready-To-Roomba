@@ -32,8 +32,8 @@ const User = db.define("user", {
     type: Sequelize.STRING,
   },
   imageUrl: {
-    type: Sequelize.STRING,
-    defaultValue: "",
+    type: Sequelize.TEXT,
+    defaultValue: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ec/092-robot-face-1.svg/1024px-092-robot-face-1.svg.png",
   },
 });
 
