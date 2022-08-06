@@ -3,7 +3,7 @@ import axios from 'axios';
 export const SET_PRODUCT = 'SET_PRODUCT';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
-const setProduct = (product) => ({
+export const setProduct = (product) => ({
   type: SET_PRODUCT,
   product,
 });
@@ -27,10 +27,10 @@ export const fetchProduct = (id) => {
   };
 };
 
-export const updateProductThunk = (product) => {
+export const updateProductThunk = (id, product) => {
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/api/products/${product.id}`, product);
+      const response = await axios.put(`/api/products/${id}`, product);
          //TODO: insert authentication for userid...
       dispatch(updateProduct(response.data));
     } catch (err) {

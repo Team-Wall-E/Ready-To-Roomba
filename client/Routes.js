@@ -6,6 +6,7 @@ import Home from "./components/Home";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import WelcomeUser from "./components/WelcomeUser";
+import NotFoundPage from "./components/NotFoundPage";
 import { me } from "./store";
 
 /**
@@ -18,11 +19,11 @@ class Routes extends Component {
 
    render() {
       const { isLoggedIn } = this.props;
-/*
+      /*
 redirect user component via id from thunk fetchUser(id)
 grab id from param or from where?
 */
-console.log(this.props)
+      console.log(this.props);
       return (
          <div>
             {isLoggedIn ? (
@@ -30,8 +31,8 @@ console.log(this.props)
                   <Route path="/" component={Home} />
                   <Redirect to="/users/:id" component={WelcomeUser} />
                   <Route exact path="/products" component={AllProducts} />
-                 
                   <Route exact path="/products/:id" component={SingleProduct} />
+                  <Route component={NotFoundPage} />
                </Switch>
             ) : (
                <Switch>
@@ -39,6 +40,7 @@ console.log(this.props)
                   <Route path="/signup" component={Signup} />
                   <Route exact path="/products" component={AllProducts} />
                   <Route exact path="/products/:id" component={SingleProduct} />
+                  <Route component={NotFoundPage} />
                </Switch>
             )}
          </div>
