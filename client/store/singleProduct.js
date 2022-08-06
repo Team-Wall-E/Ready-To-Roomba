@@ -3,7 +3,7 @@ import axios from 'axios';
 export const SET_PRODUCT = 'SET_PRODUCT';
 const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
 
-const setProduct = (product) => ({
+export const setProduct = (product) => ({
   type: SET_PRODUCT,
   product,
 });
