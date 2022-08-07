@@ -1,8 +1,8 @@
 //this is the access point for all things database related!
 
-const db = require("./db");
+const db = require('./db');
 
-const { User, Product, Order, Review, LineItem } = require("./models");
+const { User, Product, Order, Review, LineItem } = require('./models');
 
 Order.belongsTo(User);
 User.hasMany(Order);

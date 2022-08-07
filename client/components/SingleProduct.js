@@ -8,7 +8,8 @@ import { fetchProduct } from '../store/singleProduct';
 // import { setOrder } from '../store/singleOrder';
 import UpdateProduct from './UpdateProduct';
 import NotFoundPage from './NotFoundPage';
-import { addToCart } from '../store/cart';
+// import { addToCart } from '../store/cart';
+import { addToOrder } from '../store/singleOrder';
 
 class Product extends React.Component {
   componentDidMount() {
@@ -54,7 +55,7 @@ class Product extends React.Component {
               <img src={product.imageUrl} alt="image of product" />
               <button
                 onClick={() => {
-                  this.props.addToCart(product.id);
+                  this.props.addToOrder(product.id);
                 }}
               >
                 Add to Cart
@@ -90,7 +91,7 @@ const mapState = ({ product, order, lineItems }) => ({
 const mapDispatch = (dispatch) => ({
   getProduct: (id) => dispatch(fetchProduct(id)),
   addToCart: (id) => {
-    dispatch(addToCart(id));
+    dispatch(addToOrder(id));
   },
   //   deleteProduct: (product) => dispatch(deleteProductThunk(product, history)),
   //   createOrder: (order) => dispatch(createOrderThunk(order)),
