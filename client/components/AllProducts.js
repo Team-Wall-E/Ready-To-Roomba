@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { fetchProducts } from '../store/products';
 import SearchBar from './SearchBar';
 import MapProducts from './MapProducts';
+import CreateProduct from "./CreateProduct";
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -59,6 +60,10 @@ export class AllProducts extends React.Component {
             </div>
           </div>
         </div>
+        <div>
+               <h2>Add New Product:</h2>
+               <CreateProduct products={products} />
+            </div>
         <a href="#" id="toTopBtn" />
       </div>
     );

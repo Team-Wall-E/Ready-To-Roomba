@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const Order = require('../db/models/Order');
 
+//TODO: order auth ; unsure how to approach and grab users
+//possible import Users
 router.get('/', async (req, res, next) => {
   try {
     const orders = await Order.findAll();
