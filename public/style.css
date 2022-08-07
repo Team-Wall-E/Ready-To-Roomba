@@ -20,6 +20,60 @@ form div {
   display: inline-block;
 }
 
+/*navbar*/
+.logo {
+  padding-left: 1.5em;
+}
+
+.nav-link {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85em;
+}
+
 .black-bg {
   background-color: black !important;
+}
+
+a.btn.btn-light {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85em;
+  border-radius: 0;
+}
+
+nav .text-end {
+  margin-right: 1em;
+}
+
+/* auth form */
+
+.form-signin input {
+  border-radius: 0;
+  padding: 0.8em 1em;
+  border: solid 2px #666;
+}
+
+.form-signin input:focus {
+  border: solid 2px #000;
+}
+
+form .form-button {
+  margin: 1em;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85em;
+  border-radius: 0;
+  padding: 0.8em 1em;
+}
+
+/* headers */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Josefin Sans', sans-serif;
 }

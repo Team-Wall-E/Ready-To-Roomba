@@ -11,7 +11,7 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     <Image
       src="logo.png"
       href="/home"
-      className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none"
+      className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none logo"
     ></Image>
     {/* middle links */}
     <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">

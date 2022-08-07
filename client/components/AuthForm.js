@@ -11,34 +11,41 @@ const AuthForm = (props) => {
   const { name, displayName, handleSubmit, error } = props;
   // TODO: add ternary to not show first and last name on login form
   return (
-    <Form className="form-signin w-100 m-auto needs-validation">
-      <Form.Group className="mb-3" controlId="formFirstName">
-        <Form.Label>First Name</Form.Label>
-        <Form.Control name="firstName" type="text" placeholder="First Name" />
-      </Form.Group>
+    <div className="d-flex flex-column w-50 m-auto mt-5 text-center form">
+      <h2>Sign Up</h2>
+      <Form className="form-signin d-flex flex-column needs-validation">
+        <Form.Group className="mb-3" controlId="formFirstName">
+          {/* <Form.Label>First Name</Form.Label> */}
+          <Form.Control name="firstName" type="text" placeholder="First Name" />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formLastName">
-        <Form.Label>Last Name</Form.Label>
-        <Form.Control name="lastName" type="text" placeholder="Last Name" />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formLastName">
+          {/* <Form.Label>Last Name</Form.Label> */}
+          <Form.Control name="lastName" type="text" placeholder="Last Name" />
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" required />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          {/* <Form.Label>Email address</Form.Label> */}
+          <Form.Control type="email" placeholder="Enter email" required />
+          <Form.Text className="text-muted">
+            We'll never share your email with anyone else.
+          </Form.Text>
+        </Form.Group>
 
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" placeholder="Password" required />
-      </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicPassword">
+          {/* <Form.Label>Password</Form.Label> */}
+          <Form.Control type="password" placeholder="Password" required />
+        </Form.Group>
 
-      <Button variant="dark" type="submit">
-        Submit
-      </Button>
-    </Form>
+        <Button
+          variant="dark"
+          type="submit"
+          className="form-button w-auto m-auto"
+        >
+          Submit
+        </Button>
+      </Form>
+    </div>
   );
 };
 
