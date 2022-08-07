@@ -77,3 +77,46 @@ h5,
 h6 {
   font-family: 'Josefin Sans', sans-serif;
 }
+
+/* Cards */
+.card {
+  padding: 5px;
+}
+
+.card,
+.card-img,
+.card-img-top {
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+h4.card-title a {
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1em;
+  text-decoration: none;
+  color: #0e121b;
+}
+
+h4.card-title a:hover {
+  color: #41547d;
+}
+
+.card-body {
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-img-top {
+  height: 279.55px;
+  object-fit: cover;
+}
