@@ -1,3 +1,5 @@
+const User = require("../db/models/User")
+
 // To make sure a user is logged in
 async function isLoggedIn(req, res, next) {
   try {

@@ -10,10 +10,10 @@ User.hasMany(Order);
 Order.belongsToMany(Product, { through: LineItem });
 Product.belongsToMany(Order, { through: LineItem });
 
-Review.belongsTo(Product); // creates productId column in Product table
-Review.belongsTo(User); // creates a userId column in Review table
+Review.belongsTo(Product); // creates productId column in Review table
 Product.hasMany(Review);
 
+Review.belongsTo(User); // creates a userId column in Review table
 User.hasMany(Review);
 
 module.exports = {
