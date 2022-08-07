@@ -4,6 +4,7 @@ import {
    fetchProduct,
    setProduct,
 } from "../store/singleProduct";
+import { deleteProductThunk } from "../store/products";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -44,6 +45,7 @@ class UpdateProduct extends Component {
    render() {
       const { productName, brand, description, price } = this.state;
       const { handleSubmit, handleChange } = this;
+      console.log("props", this.props);
 
       return (
          <div>
@@ -82,7 +84,7 @@ class UpdateProduct extends Component {
                />{" "}
                <br />
                <button type="submit">Submit</button>
-               <Link to="/">
+               <Link to="/products">
                   <button type="button">Cancel</button>
                </Link>
             </form>
@@ -93,6 +95,7 @@ class UpdateProduct extends Component {
 
 const mapDispatch = (dispatch) => {
    return {
+      
       updateProduct: (id, product) => dispatch(updateProductThunk(id, product)),
       fetchProduct: (id) => dispatch(fetchProduct(id)),
       clearProduct: () => dispatch(setProduct({})),

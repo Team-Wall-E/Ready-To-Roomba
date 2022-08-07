@@ -47,7 +47,9 @@ class Product extends React.Component {
    };
 
    render() {
-      const { product } = this.props;
+      const { product, deleteProduct } = this.props;
+      const { id } = product;
+      console.log("product", product);
       const { handleClick } = this;
 
       if (product) {
@@ -66,7 +68,14 @@ class Product extends React.Component {
                      <div id="accordionFlush">
                         <div>
                            <h2 id="flush-headingOne">
-                              <button type="button">Edit product</button>
+                              <button
+                                 type="button"
+                                 onClick={() =>
+                                    deleteProduct(id)
+                                 }
+                              >
+                                 Delete
+                              </button>
                            </h2>
                            <div>
                               <div>
@@ -85,7 +94,7 @@ class Product extends React.Component {
    }
 }
 
-const mapState = ({ product, order, lineItems }) => ({
+const mapState = ({ product, order, lineItems, history }) => ({
    product,
    order,
    lineItems,
@@ -93,7 +102,7 @@ const mapState = ({ product, order, lineItems }) => ({
 
 const mapDispatch = (dispatch) => ({
    getProduct: (id) => dispatch(fetchProduct(id)),
-   deleteProduct: (product) => dispatch(deleteProductThunk(product, history)),
+   deleteProduct: (id) => dispatch(deleteProductThunk(id)),
    createOrder: () => dispatch(createOrderThunk()),
    createLineItem: (order, product) =>
       dispatch(createLineItemThunk(order, product)),

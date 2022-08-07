@@ -48,6 +48,7 @@ User.prototype.correctPassword = function (candidatePwd) {
 };
 
 User.prototype.generateToken = function () {
+  //parameter is id or username? diff according to google but ok w boiler
   return jwt.sign({ id: this.id }, process.env.JWT);
 };
 
@@ -64,7 +65,10 @@ User.authenticate = async function ({ email, password }) {
   return user.generateToken();
 };
 
+
 User.findByToken = async function (token) {
+  //does two things - verify token & get user Id and send
+  //401 = unauthorized
   try {
     const { id } = await jwt.verify(token, process.env.JWT);
     const user = User.findByPk(id);
