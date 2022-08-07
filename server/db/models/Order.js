@@ -15,8 +15,8 @@ const Order = db.define('order', {
   },
   // item1: {Product: {Product}, quantity: , }
   items: {
-    type: Sequelize.ARRAY(Sequelize.JSON), // not sure if needed
-    allowNull: false,
+    type: Sequelize.ARRAY(Sequelize.JSON), // TODO: not sure if needed
+    // allowNull: false,
   },
   // quantity: {
   //   type: Sequelize.INTEGER,

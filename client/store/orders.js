@@ -28,12 +28,12 @@ export const fetchOrders = () => async (dispatch) => {
   dispatch(setOrders(ordersResponse.data));
 };
 
-export const createOrderThunk = (order, history) => {
+export const createOrderThunk = (order) => {
   return async (dispatch) => {
     try {
       const response = await axios.post(`/api/orders`, order);
       dispatch(createOrder(response.data));
-      history.push('/orders');
+      // history.push('/orders');
     } catch (err) {
       console.log(err.response);
     }

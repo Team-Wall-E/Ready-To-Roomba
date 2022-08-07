@@ -1,96 +1,101 @@
 import axios from 'axios';
 
-// ACTION TYPES
-const SET_CART = 'SET_CART';
-const UPDATE_CART = 'UPDATE_CART';
+export const ADD_TO_CART = 'ADD_TO_CART';
+export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
+export const UPDATE_CART = 'UPDATE_CART';
+export const INC_QUANTITY = 'INC_QUANTITY';
+export const DEC_QUANTITY = 'DEC_QUANTITY';
+// export const EMPTY_CART = 'EMPTY_CART';
 
-// ACTION CREATORS
-const setCart = (cart) => {
+export const addToCart = (id) => {
   return {
-    type: SET_CART,
-    cart,
+    type: ADD_TO_CART,
+    id,
   };
 };
 
-const _updateCart = (updatedCart) => {
+export const removeFromCart = (id) => {
+  return {
+    type: REMOVE_FROM_CART,
+    id,
+  };
+};
+
+export const updateCart = (id) => {
   return {
     type: UPDATE_CART,
-    updatedCart,
+    id,
   };
 };
 
-// THUNKS
-export const fetchCart = () => {
-  const token = window.localStorage.getItem('token');
-  return async (dispatch) => {
-    try {
-      const { data: cart } = await axios.get('/api/cart', {
-        headers: {
-          authorization: token,
-        },
-      });
-      dispatch(setCart(cart));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-
-export const updateCart = (productId, quantity) => {
-  const cartUpdate = { productId, quantity };
-  const token = window.localStorage.getItem('token');
-  return async (dispatch) => {
-    try {
-      const { data: updatedCart } = await axios.post('/api/cart', cartUpdate, {
-        headers: {
-          authorization: token,
-        },
-      });
-      dispatch(_updateCart(updatedCart));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-
-export const removeProductFromCart = (productId) => {
-  const token = window.localStorage.getItem('token');
-  return async (dispatch) => {
-    try {
-      const { data: updatedCart } = await axios.delete(
-        `/api/cart/${productId}`,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-      dispatch(_updateCart(updatedCart));
-    } catch (error) {
-      console.error(error);
-    }
-  };
-};
-
-// export const checkoutCart = () => {
-//   const token = window.localStorage.getItem('token');
-//   return async (dispatch) => {
-//     await axios.get('/api/cart/checkout', {
-//       headers: {
-//         authorization: token,
-//       },
-//     });
+// export const increaseQuantity = (id) => {
+//   return {
+//     type: INC_QUANTITY,
+//     id,
 //   };
 // };
 
-//REDUCER
-export default (state = {}, action) => {
+// export const decreaseQuantity = (id) => {
+//   return {
+//     type: DEC_QUANTITY,
+//     id,
+//   };
+// };
+
+export default function cartReducer(lineItems = [], action) {
   switch (action.type) {
-    case SET_CART:
-      return action.cart;
+    case ADD_TO_CART:
+      let doesItemExist = false;
+
+      const addLineItems = lineItems.map((lineItem) => {
+        if (lineItem.productId === action.id) {
+          lineItem.quantity += 1;
+          doesItemExist = true;
+        }
+        return lineItem;
+      });
+
+      if (doesItemExist) {
+        return addLineItems;
+      }
+
+      return [...lineItems, { ...action.payload, quantity: 1 }];
+
+    case REMOVE_FROM_CART:
+      const removeLineItems = lineItems.filter((lineItem) => {
+        if (lineItem.id === action.id) {
+          return false;
+        }
+        return true;
+      });
+      return removeLineItems;
+
+    // TODO: Might be buggy
     case UPDATE_CART:
-      return action.updatedCart;
+      const prevCart = Object.keys(action.payload).map((key, index) => {
+        return action.payload[key];
+      });
+
+      doesItemExist = false;
+
+      const updatedLineItems = lineItems.map((lineItem) => {
+        const itemFound = prevCart.find(
+          (element) => element.id === lineItem.id
+        );
+        if (itemFound) {
+          lineItem.orderQuantity = itemFound.orderQuantity;
+          doesItemExist = true;
+        }
+        return lineItem;
+      });
+
+      if (doesItemExist) {
+        return updatedLineItems;
+      }
+
+      return lineItems;
+
     default:
-      return state;
+      return lineItems;
   }
-};
+}

@@ -3,7 +3,7 @@ import axios from 'axios';
 export const SET_ORDER = 'SET_ORDER';
 const UPDATE_ORDER = 'UPDATE_ORDER';
 
-const setOrder = (order) => ({
+export const setOrder = (order) => ({
   type: SET_ORDER,
   order,
 });

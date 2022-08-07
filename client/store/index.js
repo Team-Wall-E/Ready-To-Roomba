@@ -9,6 +9,7 @@ import ordersReducer from './orders';
 import orderReducer from './singleOrder';
 import lineItemReducer from './singleLineItem';
 import lineItemsReducer from './lineItems';
+import cartReducer from './cart';
 
 const reducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   order: orderReducer,
   lineItem: lineItemReducer,
   lineItems: lineItemsReducer,
+  cart: cartReducer,
 });
 const middleware = composeWithDevTools(
   applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))

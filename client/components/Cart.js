@@ -4,80 +4,41 @@ import { Link } from 'react-router-dom';
 import { fetchLineItems } from '../store/lineItems';
 import { fetchOrder } from '../store/singleOrder';
 
-export class Cart extends React.Component {
+class Cart extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: true,
-    };
+
+    const cartForm = {};
+    this.props.cart.map(
+      (lineItem, index) =>
+        (cartForm[lineItem.productId] = {
+          Id: lineItem.productId,
+          Quantity: lineItem.orderQuantity,
+        })
+    );
+    this.state = { cartForm };
   }
 
-  componentDidMount() {
-    this.props.getProducts();
-    this.setState({ loading: false });
-  }
+  // handleChangeCartQuantity = (e, linelineItemId) => {
+  //   const cartForm = Object.assign({}, this.state.cartForm);
+  //   cartForm[lineItem.productId].quantity = parseInt(e.target.value);
+  //   this.setState(cartForm);
+  // };
 
   render() {
-    const loading = (
-      <div className="spinner-border text-secondary" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    );
-
-    const { lineItems } = this.props;
-
+    console.log('LINE ITEMS:', this.props.lineItems);
     return (
       <div>
-        <section>
-          <div>
-            <div>
-              <h1>{this.state.loading && loading}Cart</h1>
-            </div>
-          </div>
-        </section>
-        <div>
-          <div>
-            <div>
-              {lineItems ? (
-                lineItems.map((lineItem) => {
-                  const product = lineItem.getProducts();
-                  return (
-                    <div key={product.id}>
-                      <div>
-                        <img src={product.imageUrl} alt="image of product" />
-                        <div>
-                          <h4>
-                            <Link to={`/products/${product.id}`}>
-                              {product.productName}
-                            </Link>
-                          </h4>
-                          <address>{product.price}</address>
-                          <p>{product.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                <h3>Cart is Empty</h3>
-              )}
-            </div>
-          </div>
-        </div>
-        <a href="#" id="toTopBtn" />
+        <h3>Welcome to your cart</h3>
       </div>
     );
   }
 }
 
-const mapState = ({ order, lineItems }) => ({
-  order,
-  lineItems,
-});
+const mapStateToProps = (state) => {
+  return {
+    lineItems: state.lineItems,
+  };
+};
 
-const mapDispatch = (dispatch) => ({
-  getLineItems: () => dispatch(fetchLineItems()),
-  getOrder: () => dispatch(fetchOrder()),
-});
-
-export default connect(mapState, mapDispatch)(Cart);
+export default connect(mapStateToProps)(Cart);
