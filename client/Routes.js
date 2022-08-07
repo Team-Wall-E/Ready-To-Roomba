@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
+import Cart from './components/Cart';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import { me } from './store';

@@ -45,21 +45,27 @@ export const updateCart = (id) => {
 export default function cartReducer(lineItems = [], action) {
   switch (action.type) {
     case ADD_TO_CART:
-      let doesItemExist = false;
+      console.log('LINE ITEMS:', lineItems);
+      console.log('ACTION:', action.id);
+      // if item exists add to quantity
+      // else add to list
 
-      const addLineItems = lineItems.map((lineItem) => {
-        if (lineItem.productId === action.id) {
-          lineItem.quantity += 1;
-          doesItemExist = true;
-        }
-        return lineItem;
-      });
+      let itemExists = lineItems.find((item) => item.id === action.id);
 
-      if (doesItemExist) {
-        return addLineItems;
+      if (itemExists) {
+        console.log('ITEM EXISTS:', lineItems);
+        return {
+          ...lineItems,
+          lineItems: lineItems.map((lineItem) =>
+            lineItem.productId === action.id
+              ? { ...lineItem, orderQuantity: lineItem.orderQuantity++ }
+              : lineItem
+          ),
+        };
+      } else {
+        console.log('NEW ITEM:', lineItems);
+        return [...lineItems, action.id];
       }
-
-      return [...lineItems, { ...action.payload, quantity: 1 }];
 
     case REMOVE_FROM_CART:
       const removeLineItems = lineItems.filter((lineItem) => {
