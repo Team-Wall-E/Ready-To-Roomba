@@ -7,7 +7,9 @@ import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import OrderHistory from './components/OrderHistory';
 import ProductReviews from './components/ProductReviews';
+import CreateReview from './components/CreateReview';
 import UpdateProduct from './components/UpdateProduct';
+import Cart from './components/Cart';
 import { me } from './store';
 
 /**
@@ -44,10 +46,12 @@ class Routes extends Component {
           <Route path="/signup" component={Signup} />
           <Route path="/home" component={Home} />
           <Redirect from="/login" to="/home" />
+          <Route path="/cart" component={Cart} />
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:id" component={SingleProduct} />
           <Route exact path="/products/:id/update" component={UpdateProduct} />
           <Route exact path="/products/:id/reviews" component={ProductReviews}/>
+          <Route exact path="/products/:id/add" component={CreateReview}/>
 
           {isLoggedIn && (
             // These are the routes available for the users LOGGED IN
