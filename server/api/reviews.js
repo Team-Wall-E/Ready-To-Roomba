@@ -1,8 +1,9 @@
-const router = require("express").Router();
-const Review = require("../db/models/Review");
-const User = require("../db/models/User");
-const { isLoggedIn } = require("./protection");
+const router = require('express').Router();
+const Review = require('../db/models/Review');
+const User = require('../db/models/User');
+const { isLoggedIn } = require('./protection');
 
+// TODO:
 // router.get("/", async (req, res, next) => {
 //   try {
 //     const reviews = await Review.findAll();
@@ -22,7 +23,7 @@ const { isLoggedIn } = require("./protection");
 //   }
 // });
 
-router.post("/", isLoggedIn, async (req, res, next) => {
+router.post('/', isLoggedIn, async (req, res, next) => {
   try {
     const { userId, productId, title, customerReview, starRating } = req.body;
     const leUser = await User.findByPk(userId);
@@ -39,7 +40,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.put("/:id", async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = +req.params;
@@ -53,7 +54,7 @@ router.put("/:id", async (req, res, next) => {
   }
 });
 
-router.delete("/:id", async (req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     const { id } = +req.params;
     const deletedReview = await Review.findByPk(id);

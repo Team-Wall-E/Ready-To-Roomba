@@ -13,24 +13,13 @@ const Order = db.define('order', {
     type: Sequelize.BOOLEAN,
     defaultValue: false,
   },
-  // item1: {Product: {Product}, quantity: , }
   items: {
     type: Sequelize.ARRAY(Sequelize.JSON), // not sure if needed
     allowNull: false,
   },
-  // quantity: {
-  //   type: Sequelize.INTEGER,
-  // },
   orderTotal: {
     type: Sequelize.DECIMAL,
     allowNull: true,
-    // get: function () {
-    //   if (this.items && this.items.length) {
-    //     return this.items.map(item => item.quantity * item.price).reduce((a,b) => a + b, 0);
-    //   } else {
-    //     return 0;
-    //   }
-    // }
   },
 });
 
