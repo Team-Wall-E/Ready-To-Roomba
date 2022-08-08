@@ -42,10 +42,10 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
       {isLoggedIn ? (
         <div>
           <a href="/orderhistory">
-            <FontAwesomeIcon icon={faUser} className="fa-lg" />
+            <FontAwesomeIcon icon={faUser} />
           </a>
           <a href="/cart">
-            <FontAwesomeIcon icon={faCartShopping} className="fa-lg" />
+            <FontAwesomeIcon icon={faCartShopping} />
           </a>
         </div>
       ) : (

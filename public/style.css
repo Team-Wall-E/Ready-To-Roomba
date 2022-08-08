@@ -90,7 +90,8 @@ h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.card-title.h5 {
   font-family: 'Josefin Sans', sans-serif;
 }
 
@@ -118,21 +119,17 @@ button.btn.btn-link:hover {
   border: none !important;
 }
 
-h4.card-title a {
-  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
-  font-weight: 800;
-  font-size: 28px;
-  line-height: 1em;
-  text-decoration: none;
-  color: #0e121b;
+a {
+  color: black !important;
+  text-decoration: none !important;
 }
 
-h4.card-title a:hover {
+h5.card-title a:hover {
   color: #41547d;
 }
 
 .card-body {
-  height: 90px;
+  height: 106px;
   display: flex;
   flex-direction: column;
 }
@@ -146,5 +143,44 @@ h4.card-title a:hover {
 
 .card-img-top {
   height: 279.55px;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+p.card-text {
+  color: #666;
+  letter-spacing: 0.1em;
+  font-size: 15px;
+}
+
+/* Search */
+.searchIcon {
+  padding: 7px 10px;
+}
+
+.search input {
+  border-radius: 0;
+  padding: 0.4em 0.5em;
+  border: solid 2px #666;
+  width: 222px;
+}
+
+select.custom-select.text-end {
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 15px;
+}
+
+input::placeholder {
+  color: #333;
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+}
+
+label {
+  padding-right: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 15px;
 }
