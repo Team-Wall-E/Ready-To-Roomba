@@ -26,6 +26,11 @@ nav a.logo {
   margin: 0;
 }
 
+nav a.logo img {
+  height: 4rem;
+  width: 100%;
+}
+
 .nav-link {
   text-transform: uppercase;
   letter-spacing: 3px;

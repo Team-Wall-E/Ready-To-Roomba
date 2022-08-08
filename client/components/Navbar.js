@@ -16,9 +16,21 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     {/* logo */}
     <a href="/home" className="logo">
       <Image
-        src="logo.png"
-        className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none"
+        class="imgur-embed-pub"
+        lang="en"
+        data-id="c3KHuMF"
+        data-context="false"
+        src="https://i.imgur.com/c3KHuMF.png"
+        className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none imgur-embed-pub"
       ></Image>
+      {/* <blockquote
+        class="imgur-embed-pub"
+        lang="en"
+        data-id="c3KHuMF"
+        data-context="false"
+      >
+        <a href="//imgur.com/c3KHuMF"></a>
+      </blockquote> */}
     </a>
     {/* middle links */}
     <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
