@@ -5,6 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
+import Brands from './components/Brands';
 import { me } from './store';
 
 /**
@@ -43,6 +44,8 @@ class Routes extends Component {
           <Redirect from="/login" to="/home" />
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:id" component={SingleProduct} />
+          <Route exact path="/brands" component={Brands} />
+          <Route exact path="/brands/:id" component={SingleProduct} />
 
           {isLoggedIn && (
             // These are the routes available for the users LOGGED IN
@@ -51,6 +54,8 @@ class Routes extends Component {
               <Redirect to="/home" />
               <Route exact path="/products" component={AllProducts} />
               <Route exact path="/products/:id" component={SingleProduct} />
+              <Route exact path="/brands" component={Brands} />
+              <Route exact path="/brands/:id" component={SingleProduct} />
             </Switch>
           )}
         </Switch>
