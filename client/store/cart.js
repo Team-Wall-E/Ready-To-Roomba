@@ -1,8 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 // ACTION TYPES
-const SET_CART = "SET_CART";
-const UPDATE_CART = "UPDATE_CART";
+const SET_CART = 'SET_CART';
+const UPDATE_CART = 'UPDATE_CART';
 
 // ACTION CREATORS
 const setCart = (cart) => {
@@ -20,23 +20,23 @@ const _updateCart = (updatedCart) => {
 };
 
 // THUNKS
-const TOKEN = "token";
+const TOKEN = 'token';
 export const fetchCart = () => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      
-      if(token) {
-        const { data: cart } = await axios.get("/api/cart", {
+
+      if (token) {
+        const { data: cart } = await axios.get('/api/cart', {
           headers: {
             authorization: token,
           },
         });
-        console.log("🍇", cart);
+        console.log('🍇', cart);
         dispatch(setCart(cart));
       } else {
-        const { data: cart } = await axios.get("/api/cart");
-        console.log("🥬", cart);
+        const { data: cart } = await axios.get('/api/cart');
+        console.log('🥬', cart);
         dispatch(setCart(cart));
       }
     } catch (error) {
@@ -49,10 +49,10 @@ export const addToCartThunk = (product) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      
-      if(token) {
+
+      if (token) {
         const { data: addToCart } = await axios.post(
-          "/api/cart/addToCart",
+          '/api/cart/addToCart',
           product,
           {
             headers: {
@@ -60,14 +60,14 @@ export const addToCartThunk = (product) => {
             },
           }
         );
-        console.log("🍋", addToCart);
+        console.log('🍋', addToCart);
         dispatch(setCart(addToCart));
       } else {
         const { data: addToCart } = await axios.post(
-          "/api/cart/addToCart",
+          '/api/cart/addToCart',
           product
         );
-        console.log("🧅", addToCart);
+        console.log('🧅', addToCart);
         dispatch(setCart(addToCart));
       }
     } catch (error) {
@@ -76,6 +76,7 @@ export const addToCartThunk = (product) => {
   };
 };
 
+// TODO:
 // export const updateCart = (productId, quantity) => {
 //   const cartUpdate = { productId, quantity };
 //   const token = window.localStorage.getItem('token');
@@ -98,7 +99,7 @@ export const removeProductFromCartThunk = (product) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       const { data: removedFromCart } = await axios.post(
-        "/api/cart/removeFromCart",
+        '/api/cart/removeFromCart',
         product,
         {
           headers: {
@@ -106,7 +107,7 @@ export const removeProductFromCartThunk = (product) => {
           },
         }
       );
-      console.log("🍅", removedFromCart);
+      console.log('🍅', removedFromCart);
       dispatch(setCart(removedFromCart));
     } catch (error) {
       console.error(error);
@@ -114,6 +115,7 @@ export const removeProductFromCartThunk = (product) => {
   };
 };
 
+// TODO:
 // export const checkoutCart = () => {
 //   const token = window.localStorage.getItem('token');
 //   return async (dispatch) => {

@@ -13,8 +13,8 @@ import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
 import NotFoundPage from './components/NotFoundPage';
 import { me } from './store';
-import { fetchProducts } from "./store/products";
-import { fetchCart } from "./store/cart";
+import { fetchProducts } from './store/products';
+import { fetchCart } from './store/cart';
 
 /**
  * COMPONENT
@@ -49,23 +49,12 @@ class Routes extends Component {
           <Route path='/products/:id/update' component={UpdateProduct} />
           <Route path='/products/:id/reviews' component={ProductReviews} />
           <Route path='/products/:id/add' component={CreateReview} />
+          {isLoggedIn && (
+            <Route exact path='/orderhistory' component={OrderHistory} />
+          )}
           <Route component={NotFoundPage} />
           <Redirect from='/login' to='/home' />
-
-          {isLoggedIn && (
-            // These are the routes available for the users LOGGED IN
-            <Switch>
-              <Route path='/home' component={Home} />
-              <Route exact path='/products' component={AllProducts} />
-              <Route path='/products/:id' component={SingleProduct} />
-              <Route exact path='/brands' component={Brands} />
-              <Route path='/brands/:id' component={SingleProduct} />
-              <Route exact path='/orderhistory' component={OrderHistory} />
-              <Route path='/products/:id/reviews' component={ProductReviews} />
-              <Route component={NotFoundPage} />
-              <Redirect to='/home' />
-            </Switch>
-          )}
+          <Redirect to='/home' />
         </Switch>
       </div>
     );

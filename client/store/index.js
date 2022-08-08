@@ -10,6 +10,7 @@ import orderReducer from './singleOrder';
 import reviewsReducer from './reviews';
 import cartReducer from "./cart";
 
+
 const reducer = combineReducers({
   auth,
   products: productsReducer,

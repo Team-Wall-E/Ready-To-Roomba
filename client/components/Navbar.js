@@ -10,7 +10,7 @@ import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 const Navbar = ({ handleClick, isLoggedIn }) => (
   <nav className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 black-bg'>
     {/* logo */}
-    <a href='/home' className='logo'>
+    <Link to='/home' className='logo'>
       <Image
         lang='en'
         data-id='c3KHuMF'
@@ -18,42 +18,45 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         src='https://i.imgur.com/c3KHuMF.png'
         className='d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none imgur-embed-pub'
       ></Image>
-    </a>
+    </Link>
     {/* middle links */}
     <ul className='nav col-12 col-md-auto mb-2 justify-content-center mb-md-0'>
       <li>
-        <a href='/home' className='nav-link px-2 link-secondary'>
+        <Link to='/home' className='nav-link px-2 link-secondary'>
           Home
-        </a>
+        </Link>
       </li>
       <li>
-        <a href='/products' className='nav-link px-2 link-light'>
+        <Link to='/home' className='nav-link px-2 link-light'>
           Products
-        </a>
+        </Link>
       </li>
     </ul>
     {/* far right icons/buttons */}
 
     <div className='text-end'>
+      {!isLoggedIn ? (
         <div>
-          <a href='/cart'>
+          <Link to='/cart'>
             <FontAwesomeIcon icon={faCartShopping} />
-          </a>
-          <a href='/login'>
-            <FontAwesomeIcon className='logged-in' icon={faUser} />
-          </a>
-          <a href='/signup'>
-            <FontAwesomeIcon className='logged-out' icon={faUser} />
-          </a>
+          </Link>
+          <Button variant='light' href='/login'>
+            Login
+          </Button>
+          <Button variant='light' href='/signup'>
+            Signup
+          </Button>
         </div>
-        {isLoggedIn &&  (
+      ) : (
         <div>
-          <a href='/logout'>
-            <FontAwesomeIcon className='logged-out' icon={faUser} />
-          </a>
-          {/* <a href='/orderhistory'>
-            <FontAwesomeIcon className='logged-in' icon={faUser} />
-          </a> */}
+          <Link to='/cart'>
+            <FontAwesomeIcon icon={faCartShopping} />
+          </Link>
+          <div>
+            <Button variant='light' href='/logout' onClick={() => logout()}>
+              Logout
+            </Button>
+          </div>
         </div>
       )}
     </div>

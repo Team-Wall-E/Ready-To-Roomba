@@ -9,14 +9,14 @@ export default function MapProducts(props) {
       <Col key={product.id}>
         <Card>
           <Card.Img
-            variant="top"
-            className="card-img-top"
+            variant='top'
+            className='card-img-top'
             src={product.imageUrl}
-            alt="image of product"
+            alt='image of product'
           />
           <Card.Body>
             <Card.Title>
-              <a href={`/products/${product.id}`}>{product.productName}</a>
+              <Link to={`/products/${product.id}`}>{product.productName}</Link>
             </Card.Title>
             <Card.Text>{product.price}</Card.Text>
           </Card.Body>
