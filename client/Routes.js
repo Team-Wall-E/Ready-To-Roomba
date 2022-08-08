@@ -11,6 +11,7 @@ import ProductReviews from './components/ProductReviews';
 import CreateReview from './components/CreateReview';
 import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
+import NotFoundPage from './components/NotFoundPage';
 import { me } from './store';
 
 /**
@@ -31,35 +32,29 @@ class Routes extends Component {
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/home' component={AllProducts} />
-          <Redirect from='/login' to='/home' />
           <Route path='/cart' component={Cart} />
           <Route exact path='/products' component={AllProducts} />
-          <Route exact path='/products/:id' component={SingleProduct} />
+          <Route path='/products/:id' component={SingleProduct} />
           <Route exact path='/brands' component={Brands} />
-          <Route exact path='/brands/:id' component={SingleProduct} />
-          <Route exact path='/products/:id/update' component={UpdateProduct} />
-          <Route
-            exact
-            path='/products/:id/reviews'
-            component={ProductReviews}
-          />
-          <Route exact path='/products/:id/add' component={CreateReview} />
+          <Route path='/brands/:id' component={SingleProduct} />
+          <Route path='/products/:id/update' component={UpdateProduct} />
+          <Route path='/products/:id/reviews' component={ProductReviews} />
+          <Route path='/products/:id/add' component={CreateReview} />
+          <Route component={NotFoundPage} />
+          <Redirect from='/login' to='/home' />
 
           {isLoggedIn && (
             // These are the routes available for the users LOGGED IN
             <Switch>
               <Route path='/home' component={Home} />
-              <Redirect to='/home' />
               <Route exact path='/products' component={AllProducts} />
-              <Route exact path='/products/:id' component={SingleProduct} />
+              <Route path='/products/:id' component={SingleProduct} />
               <Route exact path='/brands' component={Brands} />
-              <Route exact path='/brands/:id' component={SingleProduct} />
+              <Route path='/brands/:id' component={SingleProduct} />
               <Route exact path='/orderhistory' component={OrderHistory} />
-              <Route
-                exact
-                path='/products/:id/reviews'
-                component={ProductReviews}
-              />
+              <Route path='/products/:id/reviews' component={ProductReviews} />
+              <Route component={NotFoundPage} />
+              <Redirect to='/home' />
             </Switch>
           )}
         </Switch>
