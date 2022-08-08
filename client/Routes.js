@@ -45,7 +45,7 @@ class Routes extends Component {
           {/* This is the ROUTES for ALL visitors */}
           <Route path="/login" component={Login} />
           <Route path="/signup" component={Signup} />
-          <Route path="/home" component={Home} />
+          <Route path="/home" component={AllProducts} />
           <Redirect from="/login" to="/home" />
           <Route path="/cart" component={Cart} />
           <Route exact path="/products" component={AllProducts} />
@@ -66,7 +66,11 @@ class Routes extends Component {
               <Route exact path="/brands" component={Brands} />
               <Route exact path="/brands/:id" component={SingleProduct} />
               <Route exact path="/orderhistory" component={OrderHistory} />
-              <Route exact path="/products/:id/reviews" component={ProductReviews}/>
+              <Route
+                exact
+                path="/products/:id/reviews"
+                component={ProductReviews}
+              />
             </Switch>
           )}
         </Switch>
