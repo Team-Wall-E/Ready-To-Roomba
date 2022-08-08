@@ -61,9 +61,8 @@ function SearchBar(props, { placeholder }) {
           <div className="dataResults">
             {filteredData.slice(0, 10).map((product) => {
               return (
-                <div>
+                <div key={product.id}>
                   <Link
-                    key={product.id}
                     className="dataItem"
                     to={`/products/${product.id}`}
                     target="blank"

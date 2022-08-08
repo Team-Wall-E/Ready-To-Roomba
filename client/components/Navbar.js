@@ -35,24 +35,25 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     {/* far right icons/buttons */}
 
     <div className='text-end'>
-      {isLoggedIn ? (
         <div>
-          <a href='/orderhistory'>
+          <a href='/cart'>
+            <FontAwesomeIcon icon={faCartShopping} />
+          </a>
+          <a href='/login'>
             <FontAwesomeIcon className='logged-in' icon={faUser} />
           </a>
-          <a href='/cart'>
-            <FontAwesomeIcon icon={faCartShopping} />
-          </a>
-        </div>
-      ) : (
-        <div>
-          <a href='/login'>
+          <a href='/signup'>
             <FontAwesomeIcon className='logged-out' icon={faUser} />
           </a>
-
-          <a href='/cart'>
-            <FontAwesomeIcon icon={faCartShopping} />
+        </div>
+        {isLoggedIn &&  (
+        <div>
+          <a href='/logout'>
+            <FontAwesomeIcon className='logged-out' icon={faUser} />
           </a>
+          {/* <a href='/orderhistory'>
+            <FontAwesomeIcon className='logged-in' icon={faUser} />
+          </a> */}
         </div>
       )}
     </div>
