@@ -1,78 +1,45 @@
-const router = require('express').Router();
-const { isLoggedIn } = require('./protection');
-const {
-  models: { Order, Product, LineItem },
-} = require('../db');
+const router = require("express").Router();
+const { isLoggedIn, isAdmin } = require("./protection");
+const User = require("../db/models/User");
 module.exports = router;
 
-router.get('/', isLoggedIn, async (req, res, next) => {
+router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
-    const [cart, created] = await Order.findOrCreate({
-      where: {
-        userId: req.user.id,
-        status: false,
-      },
-      include: [Product],
-    });
-    res.send(cart);
+    const user = await User.findByToken(req.headers.authorization);
+    res.send(await user.getCart());
   } catch (error) {
     next(error);
   }
 });
 
-router.post('/', isLoggedIn, async (req, res, next) => {
+router.post("/addToCart", isLoggedIn, async (req, res, next) => {
   try {
-    const cart = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        status: false,
-      },
-      include: [Product],
-    });
-    await cart.addProduct(req.body.productId);
-    await LineItem.increment(
-      {
-        orderQuantity: req.body.orderQuantity,
-      },
-      {
-        where: {
-          productId: req.body.productId,
-        },
-      }
-    );
-    res.send(await cart.reload());
+    const user = await User.findByToken(req.headers.authorization);
+    const guest = await User.findByToken(!req.headers.authorization);
+    
+    if(user) {
+        res.send(await user.addToCart(req.body));
+    } else if(guest) {
+        res.send(await guest.addToCart(req.body));
+    }
   } catch (error) {
     next(error);
   }
 });
 
-router.delete('/:productId', isLoggedIn, async (req, res, next) => {
+router.post("/removeFromCart", isLoggedIn, async (req, res, next) => {
   try {
-    const cart = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        status: false,
-      },
-      include: [Product],
-    });
-    await cart.removeProduct(req.params.productId);
-    res.send(await cart.reload());
+    const user = await User.findByToken(req.headers.authorization);
+    res.send(await user.removeFromCart(req.body));
   } catch (error) {
     next(error);
   }
 });
 
-router.get('/checkout', isLoggedIn, async (req, res, next) => {
+router.post("/createOrder", isLoggedIn, async (req, res, next) => {
   try {
-    const cart = await Order.findOne({
-      where: {
-        userId: req.user.id,
-        status: false,
-      },
-      include: [Product],
-    });
-    cart.status = true;
-    res.send(await cart.save());
+    const user = await User.findByToken(req.headers.authorization);
+    res.send(await user.createOrder());
   } catch (error) {
     next(error);
   }

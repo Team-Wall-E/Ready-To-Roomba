@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProduct } from "../store/singleProduct";
 import { deleteProductThunk } from "../store/products";
-import { createOrderThunk } from "../store/orders";
-import { createLineItemThunk } from "../store/lineItems";
-import { updateLineItemThunk } from "../store/singleLineItem";
+import { addToCartThunk } from "../store/cart";
+// import { createOrderThunk } from "../store/orders";
+// import { createLineItemThunk } from "../store/lineItems";
+// import { updateLineItemThunk } from "../store/singleLineItem";
 // import { db } from '../../server/db'
 // import { getLineItems } from '../../server/db/models/Order';
 import UpdateProduct from "./UpdateProduct";
@@ -49,7 +50,7 @@ class Product extends React.Component {
    };
 
    render() {
-      const { product } = this.props;
+      const { product, addToCart } = this.props;
       const { handleClick } = this;
 
       if (product) {
@@ -64,7 +65,7 @@ class Product extends React.Component {
                   </div>
                   <div>
                      <img src={product.imageUrl} alt="image of product" />
-                     <button onClick={handleClick(product)}>Add to Cart</button>
+                     <button onClick={ () => addToCart(product)}>Add to Cart</button>
                      <div id="accordionFlush">
                         <div>
                            <h2 id="flush-headingOne">
@@ -92,19 +93,18 @@ class Product extends React.Component {
    }
 }
 
-const mapState = ({ product, order, lineItems }) => ({
-   product,
-   order,
-   lineItems,
+const mapState = ({ product }) => ({
+   product
 });
 
 const mapDispatch = (dispatch) => ({
    getProduct: (id) => dispatch(fetchProduct(id)),
    deleteProduct: (product) => dispatch(deleteProductThunk(product, history)),
-   createOrder: () => dispatch(createOrderThunk()),
-   createLineItem: (order, product) =>
-      dispatch(createLineItemThunk(order, product)),
-   updateLineItem: (lineItem) => dispatch(updateLineItemThunk(lineItem)),
+   addToCart: (product) => dispatch(addToCartThunk(product)),
+   // createOrder: () => dispatch(createOrderThunk()),
+   // createLineItem: (order, product) =>
+   //    dispatch(createLineItemThunk(order, product)),
+   // updateLineItem: (lineItem) => dispatch(updateLineItemThunk(lineItem)),
 });
 
 export default connect(mapState, mapDispatch)(Product);

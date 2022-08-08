@@ -1,83 +1,60 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { fetchLineItems } from '../store/lineItems';
-import { fetchOrder } from '../store/singleOrder';
+import React from "react";
+import { connect } from "react-redux";
+import { fetchCart, removeProductFromCartThunk,  } from "../store/cart";
 
-export class Cart extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loading: true,
-    };
-  }
+//#where does cart come from? single product
+//means props.cart & .removeFromCart
 
-  componentDidMount() {
-    this.props.getProducts();
-    this.setState({ loading: false });
-  }
+export const Cart = ({ cart, removeFromCart }) => {
+   const lineItems = cart.lineItem || [];
+   console.log('🫐', lineItems);
+   // console.log('🍅', lineItems);
+   // const product  = location.state || {}
 
-  render() {
-    const loading = (
-      <div className="spinner-border text-secondary" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-    );
+   //#Hook = use location and handing props down from SingleProduuct
+   // const location = useLocation();
+   // const state = location.state
+  
 
-    const { lineItems } = this.props;
-
-    return (
+   // console.log('props', this.props)
+   // console.log('state', this.state)
+   // console.log("linkProd", state);
+ 
+   return ( 
       <div>
-        <section>
-          <div>
-            <div>
-              <h1>{this.state.loading && loading}Cart</h1>
-            </div>
-          </div>
-        </section>
-        <div>
-          <div>
-            <div>
-              {lineItems ? (
-                lineItems.map((lineItem) => {
-                  const product = lineItem.getProducts();
-                  return (
-                    <div key={product.id}>
-                      <div>
-                        <img src={product.imageUrl} alt="image of product" />
-                        <div>
-                          <h4>
-                            <Link to={`/products/${product.id}`}>
-                              {product.productName}
-                            </Link>
-                          </h4>
-                          <address>{product.price}</address>
-                          <p>{product.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })
-              ) : (
-                <h3>Cart is Empty</h3>
-              )}
-            </div>
-          </div>
-        </div>
-        <a href="#" id="toTopBtn" />
+         {/* PROF */}
+         <ul>
+            {lineItems.map((lineItem) => {
+               return (
+                  <li key={lineItem.id}>
+                     {lineItem.product.productName}({lineItem.orderQuantity})
+                     <button onClick={removeFromCart(lineItem.product)}>
+                        x
+                     </button>
+                  </li>
+               );
+            })}
+         </ul>
       </div>
-    );
-  }
-}
+   );
 
-const mapState = ({ order, lineItems }) => ({
-  order,
-  lineItems,
+};
+
+const mapState = (state) => ({
+   cart: state.cart
+   //#try no line items unless prof says so
+   // lineItems:  state.lineItems,
 });
 
 const mapDispatch = (dispatch) => ({
-  getLineItems: () => dispatch(fetchLineItems()),
-  getOrder: () => dispatch(fetchOrder()),
+   // getCart: () => dispatch(fetchCart()),
+   
+   removeFromCart: (product) => dispatch(removeProductFromCartThunk(product)),
+
+   /* unnecssary because of User.getCart() prototype
+- getlineItems: () => dispatch(fetchlineItems()),
+- getOrder: () => dispatch(fetchOrder()),
+  */
 });
 
 export default connect(mapState, mapDispatch)(Cart);
