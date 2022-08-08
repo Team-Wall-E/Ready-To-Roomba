@@ -5,8 +5,7 @@ import { fetchProducts } from '../store/products';
 import SearchBar from './SearchBar';
 import MapProducts from './MapProducts';
 import Row from 'react-bootstrap/Row';
-import CreateProduct from "./CreateProduct";
-
+import CreateProduct from './CreateProduct';
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -69,22 +68,8 @@ export class AllProducts extends React.Component {
           )}
         </Row>
 
-        <div>
-          <div>
-            <div>
-              {products ? (
-                <MapProducts products={products} />
-              ) : (
-                <h3>No Products</h3>
-              )}
-            </div>
-          </div>
-        </div>
-        <div>
-               <h2>Add New Product:</h2>
-               <CreateProduct products={products} />
-            </div>
-        <a href="#" id="toTopBtn" />
+        <h2>Add New Product:</h2>
+        <CreateProduct products={products} />
       </div>
     );
   }

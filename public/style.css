@@ -21,8 +21,14 @@ form div {
 }
 
 /*navbar*/
-.logo {
-  padding-left: 1.5em;
+
+nav a.logo {
+  margin: 0;
+}
+
+nav a.logo img {
+  height: 4rem;
+  width: 100%;
 }
 
 .nav-link {
@@ -44,6 +50,16 @@ a.btn.btn-light {
 
 nav .text-end {
   margin-right: 1em;
+}
+
+.fa-user,
+.fa-cart-shopping {
+  color: white;
+}
+
+.fa-user:hover,
+.fa-cart-shopping:hover {
+  color: #999;
 }
 
 /* auth form */
@@ -76,6 +92,18 @@ h4,
 h5,
 h6 {
   font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Links */
+button.btn.btn-link {
+  color: black;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+button.btn.btn-link:hover {
+  color: #999;
 }
 
 /* Cards */

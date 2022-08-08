@@ -30,6 +30,9 @@
   "homepage": "https://github.com/Donna-Sayos/Boiler-maker#readme",
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
+    "@fortawesome/fontawesome-svg-core": "^6.1.2",
+    "@fortawesome/free-solid-svg-icons": "^6.1.2",
+    "@fortawesome/react-fontawesome": "^0.2.0",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.0",
     "bootstrap": "^5.2.0",
