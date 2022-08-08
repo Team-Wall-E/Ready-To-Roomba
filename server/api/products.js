@@ -1,8 +1,10 @@
-const router = require("express").Router();
+
+const router = require('express').Router();
 const {
-   models: { User, Product },
+   models: { User, Product, Review },
 } = require("../db");
 const { isLoggedIn, isAdmin } = require("./protection");
+
 
 /* Reminder: 
 isAdmin depends on isLoggedin
@@ -32,13 +34,17 @@ router.post("/", isLoggedIn, isAdmin, async (req, res, next) => {
    }
 });
 
-router.get("/:id", async (req, res, next) => {
-   try {
-      const product = await Product.findByPk(+req.params.id);
-      res.json(product);
-   } catch (err) {
-      next(err);
-   }
+router.get('/:id', async (req, res, next) => {
+  try {
+    const product = await Product.findByPk(+req.params.id, {
+      include: {
+        model: Review
+      }
+    });
+    res.json(product);
+  } catch (err) {
+    next(err);
+  }
 });
 
 //admin only
