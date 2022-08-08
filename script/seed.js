@@ -94,6 +94,7 @@ const seed = async () => {
         //create the reviews
         for (let i = 0; i < reviews.length; i++) {
           reviews[i].userId = createdUsers[i].id;
+          reviews[i].owner = createdUsers[i].firstName + ' ' + createdUsers[i].lastName
           reviews[i].productId = createdProducts[i].id;
         }
         return Promise.all(reviews.map((review) => Review.create(review)));

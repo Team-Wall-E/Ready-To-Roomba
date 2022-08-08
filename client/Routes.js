@@ -8,7 +8,9 @@ import SingleProduct from './components/SingleProduct';
 import Brands from './components/Brands';
 import OrderHistory from './components/OrderHistory';
 import ProductReviews from './components/ProductReviews';
+import CreateReview from './components/CreateReview';
 import UpdateProduct from './components/UpdateProduct';
+import Cart from './components/Cart';
 import { me } from './store';
 
 /**
@@ -24,51 +26,38 @@ class Routes extends Component {
 
     return (
       <div>
-        {/* {isLoggedIn ? (
-          <Switch>
-            <Route path="/" component={Home} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-            <Redirect to="/home" />
-          </Switch>
-        ) : (
-          <Switch>
-            <Route path="/login" component={Login} />
-            <Route path="/signup" component={Signup} />
-            <Route exact path="/products" component={AllProducts} />
-            <Route exact path="/products/:id" component={SingleProduct} />
-          </Switch>
-        )} */}
         <Switch>
           {/* This is the ROUTES for ALL visitors */}
-          <Route path="/login" component={Login} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/home" component={AllProducts} />
-          <Redirect from="/login" to="/home" />
-          <Route exact path="/products" component={AllProducts} />
-          <Route exact path="/products/:id" component={SingleProduct} />
-          <Route exact path="/brands" component={Brands} />
-          <Route exact path="/brands/:id" component={SingleProduct} />
-          <Route exact path="/products/:id/update" component={UpdateProduct} />
+          <Route path='/login' component={Login} />
+          <Route path='/signup' component={Signup} />
+          <Route path='/home' component={AllProducts} />
+          <Redirect from='/login' to='/home' />
+          <Route path='/cart' component={Cart} />
+          <Route exact path='/products' component={AllProducts} />
+          <Route exact path='/products/:id' component={SingleProduct} />
+          <Route exact path='/brands' component={Brands} />
+          <Route exact path='/brands/:id' component={SingleProduct} />
+          <Route exact path='/products/:id/update' component={UpdateProduct} />
           <Route
             exact
-            path="/products/:id/reviews"
+            path='/products/:id/reviews'
             component={ProductReviews}
           />
+          <Route exact path='/products/:id/add' component={CreateReview} />
 
           {isLoggedIn && (
             // These are the routes available for the users LOGGED IN
             <Switch>
-              <Route path="/home" component={Home} />
-              <Redirect to="/home" />
-              <Route exact path="/products" component={AllProducts} />
-              <Route exact path="/products/:id" component={SingleProduct} />
-              <Route exact path="/brands" component={Brands} />
-              <Route exact path="/brands/:id" component={SingleProduct} />
-              <Route exact path="/orderhistory" component={OrderHistory} />
+              <Route path='/home' component={Home} />
+              <Redirect to='/home' />
+              <Route exact path='/products' component={AllProducts} />
+              <Route exact path='/products/:id' component={SingleProduct} />
+              <Route exact path='/brands' component={Brands} />
+              <Route exact path='/brands/:id' component={SingleProduct} />
+              <Route exact path='/orderhistory' component={OrderHistory} />
               <Route
                 exact
-                path="/products/:id/reviews"
+                path='/products/:id/reviews'
                 component={ProductReviews}
               />
             </Switch>
