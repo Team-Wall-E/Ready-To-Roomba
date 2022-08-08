@@ -1,21 +1,150 @@
 body {
-    font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 label {
-    display: block;
+  display: block;
 }
 
 nav a {
-    display: inline-block;
-    margin: 1em;
+  display: inline-block;
+  margin: 1em;
 }
 
 form div {
-    margin: 1em;
-    display: inline-block;
+  margin: 1em;
+  display: inline-block;
+}
+
+/*navbar*/
+
+nav a.logo {
+  margin: 0;
+}
+
+nav a.logo img {
+  height: 4rem;
+  width: 100%;
+}
+
+.nav-link {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85em;
+}
+
+.black-bg {
+  background-color: black !important;
+}
+
+a.btn.btn-light {
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85em;
+  border-radius: 0;
+}
+
+nav .text-end {
+  margin-right: 1em;
+}
+
+.fa-user,
+.fa-cart-shopping {
+  color: white;
+}
+
+.fa-user:hover,
+.fa-cart-shopping:hover {
+  color: #999;
+}
+
+/* auth form */
+
+.form-signin input {
+  border-radius: 0;
+  padding: 0.8em 1em;
+  border: solid 2px #666;
+}
+
+.form-signin input:focus {
+  border: solid 2px #000;
+}
+
+form .form-button {
+  margin: 1em;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: 0.85em;
+  border-radius: 0;
+  padding: 0.8em 1em;
+}
+
+/* headers */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+/* Links */
+button.btn.btn-link {
+  color: black;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  padding: 1rem;
+}
+
+button.btn.btn-link:hover {
+  color: #999;
+}
+
+/* Cards */
+.card {
+  padding: 5px;
+}
+
+.card,
+.card-img,
+.card-img-top {
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+h4.card-title a {
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 1em;
+  text-decoration: none;
+  color: #0e121b;
+}
+
+h4.card-title a:hover {
+  color: #41547d;
+}
+
+.card-body {
+  height: 90px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-text {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-img-top {
+  height: 279.55px;
+  object-fit: cover;
 }
