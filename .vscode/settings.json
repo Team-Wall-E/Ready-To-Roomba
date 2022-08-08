@@ -1,5 +1,7 @@
 {
-    "workbench.colorCustomizations": {
-      "editorWarning.foreground": "#ec0"
-    }
+  "workbench.colorCustomizations": {
+    "editorWarning.foreground": "#ec0"
+  },
+  "prettier.jsxSingleQuote": true,
+  "prettier.singleQuote": true
 }

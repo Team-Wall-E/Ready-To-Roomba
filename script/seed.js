@@ -26,10 +26,11 @@ function createRandomUser() {
   };
 }
 
+let brandNames = ["iRobot", "Tesvor", "Samsung", "Eufy", "Roborock", "iLife"];
 function createRandomProduct() {
   return {
     productName: faker.commerce.productName(),
-    brand: faker.word.adjective(),
+    brand: brandNames[Math.floor(Math.random() * brandNames.length)],
     description: faker.commerce.productDescription(),
     price: faker.commerce.price(200, 2000),
     inventoryQty: Math.ceil(Math.random() * 20),

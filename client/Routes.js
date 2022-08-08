@@ -20,6 +20,13 @@ import { me } from './store';
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
+    this.props.fetchProducts();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.isLoggedIn && this.props.isLoggedIn) {
+      this.props.fetchCart();
+    }
   }
 
   render() {
@@ -76,6 +83,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchCart: () => dispatch(fetchCart()),
+    fetchProducts: () => dispatch(fetchProducts()),
     loadInitialData() {
       dispatch(me());
     },

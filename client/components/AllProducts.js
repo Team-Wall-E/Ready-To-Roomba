@@ -29,10 +29,10 @@ export class AllProducts extends React.Component {
     const { products } = this.props;
 
     return (
-      <div className='all-products w-100'>
-        <div className='position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light hero-image'>
-          <div className='p-lg-5 mx-auto my-5'>
-            <h1 className='display-4 fw-normal text-light'>
+      <div className="all-products w-100">
+        <div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light hero-image">
+          <div className="p-lg-5 mx-auto my-5">
+            <h1 className="display-4 fw-normal text-light">
               {this.state.loading && loading}Shop
             </h1>
           </div>

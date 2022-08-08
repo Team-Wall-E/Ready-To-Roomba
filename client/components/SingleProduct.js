@@ -3,11 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { fetchProduct } from "../store/singleProduct";
 import { deleteProductThunk } from "../store/products";
-import { createOrderThunk } from "../store/orders";
-import { createLineItemThunk } from "../store/lineItems";
-import { updateLineItemThunk } from "../store/singleLineItem";
-// import { db } from '../../server/db'
-// import { getLineItems } from '../../server/db/models/Order';
+import { addToCartThunk } from "../store/cart";
 import UpdateProduct from "./UpdateProduct";
 import NotFoundPage from "./NotFoundPage";
 import ProductReviews from "./ProductReviews";
@@ -24,33 +20,9 @@ class Product extends React.Component {
       }
    }
 
-   // TODO: Sorry, unable to properly import order.getLineItems
-   handleClick = (product) => {
-      // const order = this.props.order;
-      // if (!order) {
-      //   const newOrder = createOrder();
-      //   createLineItem(product, newOrder);
-      // } else {
-      //   const lineItem = order
-      //     .getLineItems()
-      //     .find((lineItem) => lineItem.productId === product.id);
-      //   if (lineItem) {
-      //     this.props.updateLineItem({
-      //       ...this.props.lineItems,
-      //       orderQuantity: this.props.lineItem.orderQuantity + 1,
-      //     });
-      //   } else {
-      //     lineItem.create({
-      //       productId: product.id,
-      //       orderId: order.id,
-      //     });
-      //   }
-      // }
-   };
-
    render() {
-      const { product } = this.props;
-      const { handleClick } = this;
+      const { product, addToCart } = this.props;
+      console.log('🫖', product);
 
       if (product) {
          return (
@@ -64,19 +36,20 @@ class Product extends React.Component {
                   </div>
                   <div>
                      <img src={product.imageUrl} alt="image of product" />
-                     <button onClick={handleClick(product)}>Add to Cart</button>
+                     <button onClick={ () => addToCart(product)}>Add to Cart</button>
                      <div id="accordionFlush">
                         <div>
+                           <div>
+                              <div>
+                                 <UpdateProduct id={product.id} />
+                              </div>
+                           </div>
+                           <br />
                            <h2 id="flush-headingOne">
                               <Link to={`/products/${product.id}/add`}>
                                  <button type="button">Add Review</button>
                               </Link>
                            </h2>
-                           {/* <div>
-                              <div>
-                                 <UpdateProduct id={product.id} />
-                              </div>
-                           </div> */}
                         </div>
                      </div>
                   </div>
@@ -92,19 +65,14 @@ class Product extends React.Component {
    }
 }
 
-const mapState = ({ product, order, lineItems }) => ({
-   product,
-   order,
-   lineItems,
+const mapState = ({ product }) => ({
+   product
 });
 
 const mapDispatch = (dispatch) => ({
    getProduct: (id) => dispatch(fetchProduct(id)),
    deleteProduct: (product) => dispatch(deleteProductThunk(product, history)),
-   createOrder: () => dispatch(createOrderThunk()),
-   createLineItem: (order, product) =>
-      dispatch(createLineItemThunk(order, product)),
-   updateLineItem: (lineItem) => dispatch(updateLineItemThunk(lineItem)),
+   addToCart: (product) => dispatch(addToCartThunk(product)),
 });
 
 export default connect(mapState, mapDispatch)(Product);
