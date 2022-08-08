@@ -57,6 +57,14 @@ nav .text-end {
   color: white;
 }
 
+.logged-in {
+  color: green;
+}
+
+.logged-out {
+  color: red;
+}
+
 .fa-user:hover,
 .fa-cart-shopping:hover {
   color: #999;
