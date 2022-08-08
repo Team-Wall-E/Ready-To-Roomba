@@ -9,6 +9,9 @@ const LineItem = db.define("lineItem", {
   orderQuantity: {
     type: Sequelize.INTEGER,
     allowNull: true,
+    validate: {
+      min: 0
+    }
   },
 });
 
