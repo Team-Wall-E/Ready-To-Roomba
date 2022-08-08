@@ -6,6 +6,8 @@ import Home from './components/Home';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import OrderHistory from './components/OrderHistory';
+import ProductReviews from './components/ProductReviews';
+import UpdateProduct from './components/UpdateProduct';
 import { me } from './store';
 
 /**
@@ -44,6 +46,8 @@ class Routes extends Component {
           <Redirect from="/login" to="/home" />
           <Route exact path="/products" component={AllProducts} />
           <Route exact path="/products/:id" component={SingleProduct} />
+          <Route exact path="/products/:id/update" component={UpdateProduct} />
+          <Route exact path="/products/:id/reviews" component={ProductReviews}/>
 
           {isLoggedIn && (
             // These are the routes available for the users LOGGED IN
@@ -53,6 +57,7 @@ class Routes extends Component {
               <Route exact path="/products" component={AllProducts} />
               <Route exact path="/products/:id" component={SingleProduct} />
               <Route exact path="/orderhistory" component={OrderHistory} />
+              <Route exact path="/products/:id/reviews" component={ProductReviews}/>
             </Switch>
           )}
         </Switch>
