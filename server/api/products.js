@@ -69,7 +69,8 @@ router.delete("/:id", isLoggedIn, isAdmin, async (req, res, next) => {
       if (req.user.isAdmin) {
          let paramsId = +req.params.id;
          let productToDestroy = await Product.findByPk(paramsId);
-         res.send(productToDestroy);
+         await productToDestroy.destroy()
+         res.status(204).json(productToDestroy);
       } else {
          res.sendStatus(403).json(err);
       }

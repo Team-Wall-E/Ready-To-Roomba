@@ -127,6 +127,7 @@ const seed = async () => {
           lineItems[k].orderId = createdOrders[k].id;
           lineItems[k].productId = createdProducts[k].id;
           lineItems[k].orderQuantity = createdProducts[k].inventoryQty;
+          lineItems[k].price = createdProducts[k].inventoryQty * createdProducts[k].price
         }
         return Promise.all(lineItems.map((item) => LineItem.create(item)));
       });

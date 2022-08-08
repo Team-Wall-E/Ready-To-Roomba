@@ -2,13 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
-import { deleteProductThunk } from '../store/products';
+import { fetchProducts, deleteProductThunk } from '../store/products';
 import { addToCartThunk } from '../store/cart';
 import UpdateProduct from './UpdateProduct';
 import NotFoundPage from './NotFoundPage';
 import ProductReviews from './ProductReviews';
 
 class Product extends React.Component {
+  constructor() {
+    super()
+    this.clickHandler = this.clickHandler.bind(this);
+  }
   componentDidMount() {
     const { id } = this.props.match.params;
     this.props.getProduct(id);
@@ -18,6 +22,11 @@ class Product extends React.Component {
     if (prevProps.product.id !== this.props.product.id) {
       this.props.getProduct(this.props.product.id);
     }
+  }
+
+  clickHandler (e) {
+    e.preventDefault();
+    this.props.fetchProducts();
   }
 
   render() {
@@ -55,7 +64,7 @@ class Product extends React.Component {
             </div>
           </div>
           <div>
-            <button onClick={() => deleteProduct(product.id)}>Delete</button>
+            <button onClick={(e) => {this.props.deleteProduct(product.id); this.clickHandler(e)}}>Delete</button>
           </div>
           <div>
             <ProductReviews productId={product.id} />
@@ -73,6 +82,7 @@ const mapState = ({ product }) => ({
 });
 
 const mapDispatch = (dispatch) => ({
+  fetchProducts: () => dispatch(fetchProducts()),
   getProduct: (id) => dispatch(fetchProduct(id)),
   deleteProduct: (id) => dispatch(deleteProductThunk(id, history)),
   addToCart: (product) => dispatch(addToCartThunk(product)),
