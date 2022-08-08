@@ -5,6 +5,7 @@ import { Login, Signup } from './components/AuthForm';
 import Home from './components/Home';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
+import OrderHistory from './components/OrderHistory';
 import { me } from './store';
 
 /**
@@ -51,6 +52,7 @@ class Routes extends Component {
               <Redirect to="/home" />
               <Route exact path="/products" component={AllProducts} />
               <Route exact path="/products/:id" component={SingleProduct} />
+              <Route exact path="/orderhistory" component={OrderHistory} />
             </Switch>
           )}
         </Switch>

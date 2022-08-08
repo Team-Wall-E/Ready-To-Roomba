@@ -8,21 +8,40 @@ import Button from 'react-bootstrap/Button';
  * COMPONENT
  */
 const AuthForm = (props) => {
+  const [showSignup, setShowSignup] = React.useState(false);
   const { name, displayName, handleSubmit, error } = props;
   // TODO: add ternary to not show first and last name on login form
   return (
     <div className="d-flex flex-column w-50 m-auto mt-5 text-center form">
-      <h2>Sign Up</h2>
-      <Form className="form-signin d-flex flex-column needs-validation">
-        <Form.Group className="mb-3" controlId="formFirstName">
-          {/* <Form.Label>First Name</Form.Label> */}
-          <Form.Control name="firstName" type="text" placeholder="First Name" />
-        </Form.Group>
-
-        <Form.Group className="mb-3" controlId="formLastName">
-          {/* <Form.Label>Last Name</Form.Label> */}
-          <Form.Control name="lastName" type="text" placeholder="Last Name" />
-        </Form.Group>
+      <h2>{displayName}</h2>
+      <Form
+        className="form-signin d-flex flex-column needs-validation"
+        onSubmit={handleSubmit}
+        name={name}
+      >
+        {/* <div className="signup-display"> */}
+        {showSignup ? (
+          <div>
+            {' '}
+            <Form.Group className="mb-3" controlId="formFirstName">
+              {/* <Form.Label>First Name</Form.Label> */}
+              <Form.Control
+                name="firstName"
+                type="text"
+                placeholder="First Name"
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formLastName">
+              {/* <Form.Label>Last Name</Form.Label> */}
+              <Form.Control
+                name="lastName"
+                type="text"
+                placeholder="Last Name"
+              />
+            </Form.Group>
+          </div>
+        ) : null}
+        {/* </div> */}
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           {/* <Form.Label>Email address</Form.Label> */}
@@ -42,8 +61,12 @@ const AuthForm = (props) => {
           type="submit"
           className="form-button w-auto m-auto"
         >
-          Submit
+          {displayName}
         </Button>
+        <Button variant="link" onClick={() => setShowSignup(true)}>
+          Create Account
+        </Button>
+        {error && error.response && <div> {error.response.data} </div>}
       </Form>
     </div>
   );

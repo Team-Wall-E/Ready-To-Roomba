@@ -4,15 +4,22 @@ import { Link } from 'react-router-dom';
 import { logout } from '../store';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faUser,
+  faCartShopping,
+  faLg,
+} from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({ handleClick, isLoggedIn }) => (
-  <nav className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 black-bg">
+  <nav className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 black-bg">
     {/* logo */}
-    <Image
-      src="logo.png"
-      href="/home"
-      className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none logo"
-    ></Image>
+    <a href="/home" className="logo">
+      <Image
+        src="logo.png"
+        className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none"
+      ></Image>
+    </a>
     {/* middle links */}
     <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
       <li>
@@ -30,18 +37,36 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 
     <div className="col-md-3 text-end">
       {isLoggedIn ? (
-        <Button variant="light" href="/logout">
-          Logout
-        </Button>
+        // <Button variant="light" href="/logout">
+        //   Logout
+        // </Button>
+        <div>
+          <a href="/orderhistory">
+            <FontAwesomeIcon icon={faUser} className="fa-lg" />
+          </a>
+          <a href="/cart">
+            <FontAwesomeIcon icon={faCartShopping} className="fa-lg" />
+          </a>
+        </div>
       ) : (
         <div>
-          <Button variant="light" href="/login">
-            Login
-          </Button>
-          <Button variant="light" href="/signup">
-            Sign-up
-          </Button>
+          <a href="/login">
+            <FontAwesomeIcon icon={faUser} />
+          </a>
+
+          <a href="/cart">
+            <FontAwesomeIcon icon={faCartShopping} />
+          </a>
         </div>
+
+        // <div>
+        //   <Button variant="light" href="/login">
+        //     Login
+        //   </Button>
+        //   <Button variant="light" href="/signup">
+        //     Sign-up
+        //   </Button>
+        // </div>
       )}
     </div>
   </nav>
