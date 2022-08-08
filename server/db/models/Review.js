@@ -17,8 +17,13 @@ const Review = db.define("review", {
     },
   },
   starRating: {
-    // not sure
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      min: 1,
+      max: 5,
+    }
   },
 });
 

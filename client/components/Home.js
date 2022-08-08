@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { isLoggedIn } from '../../server/api/protection';
 
 /**
  * COMPONENT
@@ -10,13 +9,9 @@ export const Home = (props) => {
 
   return (
     <div>
-      {isLoggedIn && (
-        <div>
-          <h3>Welcome {firstName} {lastName}!</h3>
-        </div>
-      )}
+      <h3>Welcome {firstName} {lastName}</h3>
     </div>
-  )
+  );
 };
 
 /**
@@ -25,8 +20,7 @@ export const Home = (props) => {
 const mapState = (state) => {
   return {
     firstName: state.auth.firstName,
-    lastName: state.auth.lastName,
-    isLoggedIn: !!state.auth.id,
+    lastName: state.auth.lastName
   };
 };
 

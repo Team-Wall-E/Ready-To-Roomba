@@ -9,6 +9,7 @@ import { updateLineItemThunk } from "../store/singleLineItem";
 // import { getLineItems } from '../../server/db/models/Order';
 import UpdateProduct from "./UpdateProduct";
 import NotFoundPage from "./NotFoundPage";
+import ProductReviews from "./ProductReviews";
 
 class Product extends React.Component {
    componentDidMount() {
@@ -76,6 +77,9 @@ class Product extends React.Component {
                         </div>
                      </div>
                   </div>
+               </div>
+               <div>
+                  <ProductReviews productId={product.id} />
                </div>
             </section>
          );

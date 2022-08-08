@@ -1,5 +1,7 @@
 const router = require('express').Router();
 const Product = require('../db/models/Product');
+const Review = require('../db/models/Review');
+const User = require('../db/models/User');
 
 router.get('/', async (req, res, next) => {
   try {
@@ -21,7 +23,11 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:id', async (req, res, next) => {
   try {
-    const product = await Product.findByPk(+req.params.id);
+    const product = await Product.findByPk(+req.params.id, {
+      include: {
+        model: Review, User
+      }
+    });
     res.json(product);
   } catch (err) {
     next(err);
