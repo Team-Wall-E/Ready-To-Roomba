@@ -23,14 +23,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
         src="https://i.imgur.com/c3KHuMF.png"
         className="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-black text-decoration-none imgur-embed-pub"
       ></Image>
-      {/* <blockquote
-        class="imgur-embed-pub"
-        lang="en"
-        data-id="c3KHuMF"
-        data-context="false"
-      >
-        <a href="//imgur.com/c3KHuMF"></a>
-      </blockquote> */}
     </a>
     {/* middle links */}
     <ul className="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -49,9 +41,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
 
     <div className="col-md-3 text-end">
       {isLoggedIn ? (
-        // <Button variant="light" href="/logout">
-        //   Logout
-        // </Button>
         <div>
           <a href="/orderhistory">
             <FontAwesomeIcon icon={faUser} className="fa-lg" />
@@ -70,15 +59,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
             <FontAwesomeIcon icon={faCartShopping} />
           </a>
         </div>
-
-        // <div>
-        //   <Button variant="light" href="/login">
-        //     Login
-        //   </Button>
-        //   <Button variant="light" href="/signup">
-        //     Sign-up
-        //   </Button>
-        // </div>
       )}
     </div>
   </nav>

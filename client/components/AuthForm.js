@@ -19,12 +19,10 @@ const AuthForm = (props) => {
         onSubmit={handleSubmit}
         name={name}
       >
-        {/* <div className="signup-display"> */}
         {showSignup ? (
           <div>
             {' '}
             <Form.Group className="mb-3" controlId="formFirstName">
-              {/* <Form.Label>First Name</Form.Label> */}
               <Form.Control
                 name="firstName"
                 type="text"
@@ -32,7 +30,6 @@ const AuthForm = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formLastName">
-              {/* <Form.Label>Last Name</Form.Label> */}
               <Form.Control
                 name="lastName"
                 type="text"
@@ -41,10 +38,8 @@ const AuthForm = (props) => {
             </Form.Group>
           </div>
         ) : null}
-        {/* </div> */}
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          {/* <Form.Label>Email address</Form.Label> */}
           <Form.Control type="email" placeholder="Enter email" required />
           <Form.Text className="text-muted">
             We'll never share your email with anyone else.
@@ -52,7 +47,6 @@ const AuthForm = (props) => {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          {/* <Form.Label>Password</Form.Label> */}
           <Form.Control type="password" placeholder="Password" required />
         </Form.Group>
 
