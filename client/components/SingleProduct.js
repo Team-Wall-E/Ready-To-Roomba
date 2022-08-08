@@ -68,8 +68,8 @@ class Product extends React.Component {
                      <div id="accordionFlush">
                         <div>
                            <h2 id="flush-headingOne">
-                              <Link to={`/products/${product.id}/update`}>
-                                 <button type="button">Edit product</button>
+                              <Link to={`/products/${product.id}/add`}>
+                                 <button type="button">Add Review</button>
                               </Link>
                            </h2>
                            {/* <div>

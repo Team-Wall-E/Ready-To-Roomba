@@ -1,7 +1,11 @@
+const { where } = require("sequelize");
 const Sequelize = require("sequelize");
 const db = require("../db");
 
 const Review = db.define("review", {
+  owner: {
+    type: Sequelize.STRING
+  },
   title: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -24,7 +28,7 @@ const Review = db.define("review", {
       min: 1,
       max: 5,
     }
-  },
+  }
 });
 
 module.exports = Review;
