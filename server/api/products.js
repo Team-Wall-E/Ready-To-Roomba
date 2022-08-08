@@ -1,7 +1,7 @@
 
 const router = require('express').Router();
 const {
-   models: { User, Product, Review },
+   models: { Product, Review },
 } = require("../db");
 const { isLoggedIn, isAdmin } = require("./protection");
 
