@@ -26,19 +26,13 @@ export const fetchCart = () => {
     try {
       const token = window.localStorage.getItem(TOKEN);
 
-      if (token) {
-        const { data: cart } = await axios.get('/api/cart', {
-          headers: {
-            authorization: token,
-          },
-        });
-        console.log('🍇', cart);
-        dispatch(setCart(cart));
-      } else {
-        const { data: cart } = await axios.get('/api/cart');
-        console.log('🥬', cart);
-        dispatch(setCart(cart));
-      }
+      const { data: cart } = await axios.get('/api/cart', {
+        headers: {
+          authorization: token,
+        },
+      });
+      console.log('🍇', cart);
+      dispatch(setCart(cart));
     } catch (error) {
       console.error(error);
     }
@@ -50,26 +44,17 @@ export const addToCartThunk = (product) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
 
-      if (token) {
-        const { data: addToCart } = await axios.post(
-          '/api/cart/addToCart',
-          product,
-          {
-            headers: {
-              authorization: token,
-            },
-          }
-        );
-        console.log('🍋', addToCart);
-        dispatch(setCart(addToCart));
-      } else {
-        const { data: addToCart } = await axios.post(
-          '/api/cart/addToCart',
-          product
-        );
-        console.log('🧅', addToCart);
-        dispatch(setCart(addToCart));
-      }
+      const { data: addToCart } = await axios.post(
+        '/api/cart/addToCart',
+        product,
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      console.log('🍋', addToCart);
+      dispatch(setCart(addToCart));
     } catch (error) {
       console.error(error);
     }

@@ -50,7 +50,8 @@ class Routes extends Component {
           <Route path='/products/:id/reviews' component={ProductReviews} />
           <Route path='/products/:id/add' component={CreateReview} />
           {isLoggedIn && (
-            <Route exact path='/orderhistory' component={OrderHistory} />
+            // <Route exact path='/orderhistory' component={OrderHistory} />
+            <Route path='/cart' component={Cart} />
           )}
           <Route component={NotFoundPage} />
           <Redirect from='/login' to='/home' />
