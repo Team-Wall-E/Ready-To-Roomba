@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { fetchProduct } from "../store/singleProduct";
 import { deleteProductThunk } from "../store/products";
 import { createOrderThunk } from "../store/orders";
@@ -9,6 +10,7 @@ import { updateLineItemThunk } from "../store/singleLineItem";
 // import { getLineItems } from '../../server/db/models/Order';
 import UpdateProduct from "./UpdateProduct";
 import NotFoundPage from "./NotFoundPage";
+import ProductReviews from "./ProductReviews";
 
 class Product extends React.Component {
    componentDidMount() {
@@ -66,16 +68,21 @@ class Product extends React.Component {
                      <div id="accordionFlush">
                         <div>
                            <h2 id="flush-headingOne">
-                              <button type="button">Edit product</button>
+                              <Link to={`/products/${product.id}/update`}>
+                                 <button type="button">Edit product</button>
+                              </Link>
                            </h2>
-                           <div>
+                           {/* <div>
                               <div>
                                  <UpdateProduct id={product.id} />
                               </div>
-                           </div>
+                           </div> */}
                         </div>
                      </div>
                   </div>
+               </div>
+               <div>
+                  <ProductReviews productId={product.id} />
                </div>
             </section>
          );

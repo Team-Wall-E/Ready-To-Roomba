@@ -38,12 +38,12 @@ function createRandomProduct() {
   };
 }
 
-let rates = ["⭐", "⭐⭐", "⭐⭐⭐", "⭐⭐⭐⭐", "⭐⭐⭐⭐⭐"];
+let rating = ["1", "2", "3", "4", "5"];
 function createRandomReview() {
   return {
     title: faker.word.verb(5),
     customerReview: faker.random.words(10),
-    starRating: rates[Math.floor(Math.random() * rates.length)],
+    starRating: rating[Math.floor(Math.random() * rating.length)],
   };
 }
 
