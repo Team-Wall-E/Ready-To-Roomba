@@ -38,38 +38,46 @@ export class AllProducts extends React.Component {
                 {this.state.loading && loading}All Products
               </h1>
 
-              <Link to="/products/create" className="btn btn-primary my-2">
-                Create a new product
-              </Link>
               <br />
-              <SearchBar
-                placeholder={'Enter product name...'}
-                products={products}
-              />
-
-              <select
-                className="custom-select"
-                value={this.state.selectedProducts}
-                onChange={this.selectProducts}
-              >
-                <option defaultValue="all">Filter by</option>
-                <option value="all">All Products</option>
-                <option value="brand">Brand Name</option>
-              </select>
             </div>
           </div>
         </section>
 
-        <Row xs={1} md={4} className="g-4">
-          {products ? (
-            <MapProducts products={products} />
-          ) : (
-            <h3>No Products</h3>
-          )}
-        </Row>
+        <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-5 mb-4">
+          <SearchBar
+            placeholder={'Enter product name...'}
+            products={products}
+            className="d-flex align-items-center mb-2 mb-md-0"
+          />
 
-        <h2>Add New Product:</h2>
-        <CreateProduct products={products} />
+          <div>
+            <label>Filter:</label>
+            <select
+              className="custom-select text-end"
+              value={this.state.selectedProducts}
+              onChange={this.selectProducts}
+            >
+              <option defaultValue="all">All Products</option>
+              <option value="brand">Brand Name</option>
+            </select>
+          </div>
+        </div>
+
+        <div className="p-5">
+          <Row xs={1} md={4} className="g-4">
+            {products ? (
+              <MapProducts products={products} />
+            ) : (
+              <h3>No Products</h3>
+            )}
+          </Row>
+
+          <h2>Add New Product:</h2>
+          <CreateProduct products={products} />
+          {/* <Link to="/products/create" className="btn btn-primary my-2">
+                Create a new product
+              </Link> */}
+        </div>
       </div>
     );
   }

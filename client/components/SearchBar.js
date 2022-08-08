@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { fetchProducts } from '../store/products';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import Button from 'react-bootstrap/Button';
 
 function SearchBar(props, { placeholder }) {
   let [filteredData, setFilteredData] = useState([]);
@@ -37,18 +40,21 @@ function SearchBar(props, { placeholder }) {
   return (
     <div className="search">
       <div className="searchInputs">
-        <input
-          type="text"
-          placeholder={props.placeholder}
-          value={wordEntered}
-          onChange={handleFilter}
-        />
-        <div className="searchIcon">
-          {filteredData.length === 0 ? (
-            `'hello daddies' - donna`
-          ) : (
-            <button onClick={clearInput}>Clear</button>
-          )}
+        <div className="input-group">
+          <input
+            type="text"
+            placeholder={props.placeholder}
+            value={wordEntered}
+            onChange={handleFilter}
+          />
+          <div className="searchIcon">
+            {filteredData.length === 0 ? (
+              // <FontAwesomeIcon icon={faMagnifyingGlass} />
+              <i className="fas fa-search"></i>
+            ) : (
+              <Button onClick={clearInput}>Clear</Button>
+            )}
+          </div>
         </div>
 
         {filteredData.length != 0 && (
