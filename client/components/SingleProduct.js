@@ -72,11 +72,11 @@ class Product extends React.Component {
                                  <button type="button">Add Review</button>
                               </Link>
                            </h2>
-                           {/* <div>
+                           <div>
                               <div>
                                  <UpdateProduct id={product.id} />
                               </div>
-                           </div> */}
+                           </div>
                         </div>
                      </div>
                   </div>
