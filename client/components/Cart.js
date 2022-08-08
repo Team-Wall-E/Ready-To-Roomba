@@ -6,7 +6,7 @@ import { fetchCart, removeProductFromCartThunk,  } from "../store/cart";
 //means props.cart & .removeFromCart
 
 export const Cart = ({ cart, removeFromCart }) => {
-   const lineItems = cart.lineItem || [];
+   const lineItems = cart.lineItems || [];
    console.log('🫐', lineItems);
    // console.log('🍅', lineItems);
    // const product  = location.state || {}
@@ -28,7 +28,7 @@ export const Cart = ({ cart, removeFromCart }) => {
                return (
                   <li key={lineItem.id}>
                      {lineItem.product.productName}({lineItem.orderQuantity})
-                     <button onClick={removeFromCart(lineItem.product)}>
+                     <button onClick={ () => removeFromCart(lineItem.product)}>
                         x
                      </button>
                   </li>
