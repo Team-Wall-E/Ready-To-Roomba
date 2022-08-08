@@ -31,22 +31,17 @@ export class AllProducts extends React.Component {
 
     return (
       <div className="all-products w-100">
-        <div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light hero-image">
-          <div class="p-lg-5 mx-auto my-5">
-            <h1 class="display-4 fw-normal text-light">
-              {this.state.loading && loading}Shop
-            </h1>
-            {/* <p class="lead fw-normal">
-              And an even wittier subheading to boot. Jumpstart your marketing
-              efforts with this example based on Apple’s marketing pages.
-            </p>
-            <a class="btn btn-outline-secondary" href="#">
-              Coming soon
-            </a> */}
+        <section className="py-5 text-center container">
+          <div className="row py-lg-5">
+            <div className="col-lg-6 col-md-8 mx-auto">
+              <h1 className="fw-light">
+                {this.state.loading && loading}All Products
+              </h1>
+
+              <br />
+            </div>
           </div>
-          {/* <div class="product-device shadow-sm d-none d-md-block"></div>
-          <div class="product-device product-device-2 shadow-sm d-none d-md-block"></div> */}
-        </div>
+        </section>
 
         <div className="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-5 mb-4">
           <SearchBar
