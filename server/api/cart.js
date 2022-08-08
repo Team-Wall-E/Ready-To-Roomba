@@ -15,13 +15,7 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
 router.post("/addToCart", isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
-    const guest = await User.findByToken(!req.headers.authorization);
-    
-    if(user) {
-        res.send(await user.addToCart(req.body));
-    } else if(guest) {
-        res.send(await guest.addToCart(req.body));
-    }
+    res.send(await user.addToCart(req.body));
   } catch (error) {
     next(error);
   }
