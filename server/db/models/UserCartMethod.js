@@ -3,7 +3,7 @@ module.exports = (User, db) => {
   User.prototype.getCart = async function () {
     const where = {
       userId: this.id,
-      status: "processing",
+      status: 'processing',
     };
     const LineItem = db.models.lineItem;
     const Order = db.models.order;
@@ -53,7 +53,7 @@ module.exports = (User, db) => {
    */
   User.prototype.createOrder = async function () {
     const cart = await this.getCart();
-    cart.status = "completed";
+    cart.status = 'completed';
     await cart.save();
     return this.getCart();
   };
