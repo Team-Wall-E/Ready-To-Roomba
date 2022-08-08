@@ -7,8 +7,6 @@ import productsReducer from './products';
 import productReducer from './singleProduct';
 import ordersReducer from './orders';
 import orderReducer from './singleOrder';
-import lineItemReducer from './singleLineItem';
-import lineItemsReducer from './lineItems';
 import reviewsReducer from './reviews';
 import cartReducer from "./cart";
 
@@ -18,8 +16,6 @@ const reducer = combineReducers({
   product: productReducer,
   orders: ordersReducer,
   order: orderReducer,
-  lineItem: lineItemReducer,
-  lineItems: lineItemsReducer,
   reviewReducer: reviewsReducer,
   cart: cartReducer,
 });
