@@ -7,9 +7,6 @@ const { User, Product, Order, Review, LineItem } = require("./models");
 Order.belongsTo(User);
 User.hasMany(Order);
 
-// Order.belongsToMany(Product, { through: LineItem });
-// Product.belongsToMany(Order, { through: LineItem });
-
 LineItem.belongsTo(Product);
 LineItem.belongsTo(Order);
 Order.hasMany(LineItem);

@@ -35,25 +35,28 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     {/* far right icons/buttons */}
 
     <div className='text-end'>
+      {!isLoggedIn ? (
         <div>
           <a href='/cart'>
             <FontAwesomeIcon icon={faCartShopping} />
           </a>
-          <a href='/login'>
-            <FontAwesomeIcon className='logged-in' icon={faUser} />
-          </a>
-          <a href='/signup'>
-            <FontAwesomeIcon className='logged-out' icon={faUser} />
-          </a>
+          <Button variant='light' href='/login'>
+            Login
+          </Button>
+          <Button variant='light' href='/signup'>
+            Signup
+          </Button>
         </div>
-        {isLoggedIn &&  (
+      ) : (
         <div>
-          <a href='/logout'>
-            <FontAwesomeIcon className='logged-out' icon={faUser} />
+          <a href='/cart'>
+            <FontAwesomeIcon icon={faCartShopping} />
           </a>
-          {/* <a href='/orderhistory'>
-            <FontAwesomeIcon className='logged-in' icon={faUser} />
-          </a> */}
+          <div>
+            <Button variant='light' href='/logout' onClick={() => logout()}>
+              Logout
+            </Button>
+          </div>
         </div>
       )}
     </div>

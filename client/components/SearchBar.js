@@ -38,19 +38,18 @@ function SearchBar(props, { placeholder }) {
   };
 
   return (
-    <div className="search">
-      <div className="searchInputs">
-        <div className="input-group">
+    <div className='search'>
+      <div className='searchInputs'>
+        <div className='input-group'>
           <input
-            type="text"
+            type='text'
             placeholder={props.placeholder}
             value={wordEntered}
             onChange={handleFilter}
           />
-          <div className="searchIcon">
+          <div className='searchIcon'>
             {filteredData.length === 0 ? (
-              // <FontAwesomeIcon icon={faMagnifyingGlass} />
-              <i className="fas fa-search"></i>
+              <i className='fas fa-search'></i>
             ) : (
               <Button onClick={clearInput}>Clear</Button>
             )}
@@ -58,14 +57,14 @@ function SearchBar(props, { placeholder }) {
         </div>
 
         {filteredData.length != 0 && (
-          <div className="dataResults">
+          <div className='dataResults'>
             {filteredData.slice(0, 10).map((product) => {
               return (
                 <div key={product.id}>
                   <Link
-                    className="dataItem"
+                    className='dataItem'
                     to={`/products/${product.id}`}
-                    target="blank"
+                    target='blank'
                   >
                     <p>{product.productName}</p>
                   </Link>
