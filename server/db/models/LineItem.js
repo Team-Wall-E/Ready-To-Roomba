@@ -4,7 +4,7 @@ const db = require("../db");
 const LineItem = db.define("lineItem", {
   price: {
     type: Sequelize.DECIMAL(10, 2),
-    allowNull: false,
+    allowNull: true,
     validate: {
       min: 0.01,
     },

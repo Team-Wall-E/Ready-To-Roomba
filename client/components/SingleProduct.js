@@ -64,7 +64,7 @@ class Product extends React.Component {
             </div>
           </div>
           <div>
-            <button onClick={(e) => {this.props.deleteProduct(product.id); this.clickHandler(e)}}>Delete</button>
+            <button onClick={(e) => {deleteProduct(product.id); this.clickHandler(e)}}>Delete</button>
           </div>
           <div>
             <ProductReviews productId={product.id} />

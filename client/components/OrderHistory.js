@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 class OrderHistory extends React.Component {
     componentDidMount() {
-        this.props.loadUserOrdersThunk();
+        // this.props.loadUserOrdersThunk();
     }
 
     render() {

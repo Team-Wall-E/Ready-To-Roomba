@@ -1,8 +1,6 @@
 module.exports = (User, db) => {
-  //db.model.product = another way to create a model
+ 
   User.prototype.getCart = async function () {
-    //a cart exists if matches Order.userId and status complete / 9:38 in video
-    //if yes cart exists: increase quantity by 1; ELSE create a cart
     const where = {
       userId: this.id,
       status: 'processing',
