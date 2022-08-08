@@ -2,9 +2,12 @@ const Sequelize = require("sequelize");
 const db = require("../db");
 
 const LineItem = db.define("lineItem", {
-  orderId: {
-    type: Sequelize.INTEGER,
-    allowNull: false
+  price: {
+    type: Sequelize.DECIMAL(10, 2),
+    allowNull: false,
+    validate: {
+      min: 0.01,
+    },
   },
   orderQuantity: {
     type: Sequelize.INTEGER,
