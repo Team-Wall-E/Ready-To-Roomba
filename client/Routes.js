@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Login, Signup } from './components/AuthForm';
+import { Login, Signup } from './components/AuthForm.js';
 import Home from './components/Home';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
@@ -13,6 +13,8 @@ import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
 import NotFoundPage from './components/NotFoundPage';
 import { me } from './store';
+import { fetchProducts } from "./store/products";
+import { fetchCart } from "./store/cart";
 
 /**
  * COMPONENT
