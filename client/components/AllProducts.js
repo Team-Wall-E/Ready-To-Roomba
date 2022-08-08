@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 import { fetchProducts } from '../store/products';
 import SearchBar from './SearchBar';
 import MapProducts from './MapProducts';
+import Row from 'react-bootstrap/Row';
+import CreateProduct from "./CreateProduct";
+
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -28,26 +31,44 @@ export class AllProducts extends React.Component {
     const { products } = this.props;
 
     return (
-      <div>
-        <div>
-          <div>
-            <SearchBar
-              placeholder={'Enter product name...'}
-              products={products}
-            />
-          </div>
-        </div>
+      <div className="all-products w-100">
+        <section className="py-5 text-center container">
+          <div className="row py-lg-5">
+            <div className="col-lg-6 col-md-8 mx-auto">
+              <h1 className="fw-light">
+                {this.state.loading && loading}All Products
+              </h1>
 
-        <section>
-          <div>
-            <div>
-              <h1>{this.state.loading && loading}All Products</h1>
-              <p>
-                <Link to="/products/create">Create a new product</Link>
-              </p>
+              <Link to="/products/create" className="btn btn-primary my-2">
+                Create a new product
+              </Link>
+              <br />
+              <SearchBar
+                placeholder={'Enter product name...'}
+                products={products}
+              />
+
+              <select
+                className="custom-select"
+                value={this.state.selectedProducts}
+                onChange={this.selectProducts}
+              >
+                <option defaultValue="all">Filter by</option>
+                <option value="all">All Products</option>
+                <option value="brand">Brand Name</option>
+              </select>
             </div>
           </div>
         </section>
+
+        <Row xs={1} md={4} className="g-4">
+          {products ? (
+            <MapProducts products={products} />
+          ) : (
+            <h3>No Products</h3>
+          )}
+        </Row>
+
         <div>
           <div>
             <div>
@@ -59,6 +80,10 @@ export class AllProducts extends React.Component {
             </div>
           </div>
         </div>
+        <div>
+               <h2>Add New Product:</h2>
+               <CreateProduct products={products} />
+            </div>
         <a href="#" id="toTopBtn" />
       </div>
     );
