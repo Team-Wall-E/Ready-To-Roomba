@@ -1,17 +1,19 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { withRouter, Route, Switch, Redirect } from 'react-router-dom';
-import { Login, Signup } from './components/AuthForm';
-import Home from './components/Home';
-import AllProducts from './components/AllProducts';
-import SingleProduct from './components/SingleProduct';
-import Brands from './components/Brands';
-import OrderHistory from './components/OrderHistory';
-import ProductReviews from './components/ProductReviews';
-import CreateReview from './components/CreateReview';
-import UpdateProduct from './components/UpdateProduct';
-import Cart from './components/Cart';
-import { me } from './store';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import { withRouter, Route, Switch, Redirect } from "react-router-dom";
+import { Login, Signup } from "./components/AuthForm";
+import Home from "./components/Home";
+import AllProducts from "./components/AllProducts";
+import SingleProduct from "./components/SingleProduct";
+import Brands from "./components/Brands";
+import OrderHistory from "./components/OrderHistory";
+import ProductReviews from "./components/ProductReviews";
+import CreateReview from "./components/CreateReview";
+import UpdateProduct from "./components/UpdateProduct";
+import Cart from "./components/Cart";
+import { me } from "./store";
+import { fetchProducts } from "./store/products";
+import { fetchCart } from "./store/cart";
 
 /**
  * COMPONENT
@@ -19,6 +21,13 @@ import { me } from './store';
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData();
+    this.props.fetchProducts();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (!prevProps.isLoggedIn && this.props.isLoggedIn) {
+      this.props.fetchCart();
+    }
   }
 
   render() {
@@ -53,8 +62,12 @@ class Routes extends Component {
           <Route exact path="/brands" component={Brands} />
           <Route exact path="/brands/:id" component={SingleProduct} />
           <Route exact path="/products/:id/update" component={UpdateProduct} />
-          <Route exact path="/products/:id/reviews" component={ProductReviews}/>
-          <Route exact path="/products/:id/add" component={CreateReview}/>
+          <Route
+            exact
+            path="/products/:id/reviews"
+            component={ProductReviews}
+          />
+          <Route exact path="/products/:id/add" component={CreateReview} />
 
           {isLoggedIn && (
             // These are the routes available for the users LOGGED IN
@@ -66,7 +79,11 @@ class Routes extends Component {
               <Route exact path="/brands" component={Brands} />
               <Route exact path="/brands/:id" component={SingleProduct} />
               <Route exact path="/orderhistory" component={OrderHistory} />
-              <Route exact path="/products/:id/reviews" component={ProductReviews}/>
+              <Route
+                exact
+                path="/products/:id/reviews"
+                component={ProductReviews}
+              />
             </Switch>
           )}
         </Switch>
@@ -88,6 +105,8 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
+    fetchCart: () => dispatch(fetchCart()),
+    fetchProducts: () => dispatch(fetchProducts()),
     loadInitialData() {
       dispatch(me());
     },
