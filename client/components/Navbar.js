@@ -16,7 +16,6 @@ const Navbar = ({ handleClick, isLoggedIn }) => (
     {/* logo */}
     <a href="/home" className="logo">
       <Image
-        class="imgur-embed-pub"
         lang="en"
         data-id="c3KHuMF"
         data-context="false"
