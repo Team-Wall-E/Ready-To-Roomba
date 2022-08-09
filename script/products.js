@@ -28,7 +28,7 @@ const products = [
   },
   {
     productName: "Samsung Jet Bot",
-    brand: "Samnsung",
+    brand: "Samsung",
     description:
       "CLEAN ANY SURFACE: Cleans carpets and hard floors effectively; The high efficiency brushroll has fine, anti-static fibers, and self-cleaning extractors grind up hairs to avoid tangles around the brush",
     price: 449,
