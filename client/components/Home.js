@@ -28,6 +28,8 @@ const mapState = (state) => {
     firstName: state.auth.firstName,
     lastName: state.auth.lastName,
     isAdmin: state.auth.isAdmin,
+    user: state.user,
+    users: state.users
   };
 };
 

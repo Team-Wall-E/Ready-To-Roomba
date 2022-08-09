@@ -26,7 +26,7 @@ const deleteUser = (user) => {
 
 
 export const fetchUsers = () => async (dispatch) => {
-  const userResponse = await axios.get('/api/user');
+  const userResponse = await axios.get('/api/users');
   dispatch(setUsers(userResponse.data));
 };
 
@@ -36,7 +36,7 @@ export const createUserThunk = (user, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const response = await axios.post(`/api/user`, user, {
+      const response = await axios.post(`/api/users`, user, {
         headers: {
           authorization: token,
         },
@@ -53,7 +53,7 @@ export const deleteUserThunk = (id, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const { data: user } = await axios.delete(`/api/user/${id}`, {
+      const { data: user } = await axios.delete(`/api/users/${id}`, {
         headers: {
           authorization: token,
         },

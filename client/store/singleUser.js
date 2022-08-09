@@ -10,32 +10,36 @@ export const setUser = (user) => ({
 
 const updateUser = (user) => {
   return {
-     type: UPDATE_USER,
-     user,
+    type: UPDATE_USER,
+    user,
   };
 };
-
-export const fetchUser = () => async (dispatch) => {
-  const userResponse = await axios.get('/api/user');
-  dispatch(setUser(userResponse.data));
+export const fetchUser = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await axios.get(`/api/users/${id}`);
+      dispatch(setUser(response.data));
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
 };
 
 const TOKEN = 'token';
 
-
 export const updateUserThunk = (id, user) => {
   const token = window.localStorage.getItem(TOKEN);
   return async (dispatch) => {
-     try {
-        const response = await axios.put(`/api/users/${id}`, user, {
-           headers: {
-              authorization: token,
-           },
-        });
-        dispatch(updateUser(response.data));
-     } catch (err) {
-        console.log(err.response);
-     }
+    try {
+      const response = await axios.put(`/api/users/${id}`, user, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch(updateUser(response.data));
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 };
 
