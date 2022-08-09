@@ -25,20 +25,21 @@ export class Brands extends React.Component {
     const { filter } = this.state;
 
     const allProducts = products.filter((product) => {
-      if (filter === "iRobot") {
-        return product.brand === "iRobot";
-      } else if (filter === "Tesvor") {
-        return product.brand === "Tesvor";
-      } else if (filter === "Samsung") {
-        return product.brand === "Samsung";
-      } else if (filter === "Eufy") {
-        return product.brand === "Eufy";
-      } else if (filter === "Roborock") {
-        return product.brand === "Roborock";
-      } else if (filter === "iLife") {
-        return product.brand === "iLife";    
-      } else {
-        return product;
+      switch (filter) {
+        case 'iRobot':
+          return product.brand === 'iRobot';
+        case 'Tesvor':
+          return product.brand === 'Tesvor';
+        case 'Samsung':
+          return product.brand === 'Samsung';
+        case 'Eufy':
+          return product.brand === 'Eufy';
+        case 'Roborock':
+          return product.brand === 'Roborock';
+        case 'iLife':
+          return product.brand === 'iLife';
+        default:
+          return product;
       }
     });
 
