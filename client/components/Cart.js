@@ -30,7 +30,7 @@ export const Cart = ({ cart, removeFromCart }) => {
         <div>Subtotal: </div>
       </ul>
     </div>
-  );
+  )
 };
 
 const mapState = (state) => ({
