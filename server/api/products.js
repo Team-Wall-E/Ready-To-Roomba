@@ -4,10 +4,6 @@ const {
 } = require('../db');
 const { isLoggedIn, isAdmin } = require('./protection');
 
-/* Reminder: 
-isAdmin depends on isLoggedin
-req.user is accessible through isLoggedin
-*/
 
 router.get('/', async (req, res, next) => {
   try {
@@ -18,7 +14,7 @@ router.get('/', async (req, res, next) => {
   }
 });
 
-//admin only
+
 router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     if (req.user.isAdmin) {
@@ -45,10 +41,8 @@ router.get('/:id', async (req, res, next) => {
   }
 });
 
-//admin only
 router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
-    //TODO: unsure check if (paramsId === req.product.id) - do we need to make sure product ID matches?
     if (req.user.isAdmin) {
       let paramsId = +req.params.id;
       let changeProduct = await Product.findByPk(paramsId);
@@ -61,7 +55,6 @@ router.put('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-//admin only
 router.delete('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     if (req.user.isAdmin) {

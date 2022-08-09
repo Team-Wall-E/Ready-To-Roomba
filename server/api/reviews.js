@@ -3,6 +3,8 @@ const Review = require('../db/models/Review');
 const User = require('../db/models/User');
 const { isLoggedIn } = require('./protection');
 
+//TODO: add extra security - unsure if the URL will be /product/id/review or what
+
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {
     const { userId, productId, title, customerReview, starRating } = req.body;

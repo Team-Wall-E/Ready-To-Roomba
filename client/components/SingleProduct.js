@@ -10,7 +10,7 @@ import ProductReviews from './ProductReviews';
 
 class Product extends React.Component {
   constructor() {
-    super()
+    super();
     this.clickHandler = this.clickHandler.bind(this);
   }
   componentDidMount() {
@@ -24,14 +24,14 @@ class Product extends React.Component {
     }
   }
 
-  clickHandler (e) {
+  clickHandler(e) {
     e.preventDefault();
-    this.props.fetchProducts();
+    const { fetchProducts } = this.props;
+    fetchProducts();
   }
 
   render() {
-    const { product, addToCart, deleteProduct} = this.props;
-    console.log('🫖', product);
+    const { product, addToCart, deleteProduct, isAdmin } = this.props;
 
     if (product) {
       return (
@@ -49,11 +49,29 @@ class Product extends React.Component {
               <div id='accordionFlush'>
                 <div>
                   <div>
-                    <div>
-                      <UpdateProduct id={product.id} />
-                    </div>
+                    {/*  start of admin */}
+                    {isAdmin ? (
+                      <div>
+                        <UpdateProduct id={product.id} />
+                        <br></br>
+                        {/* TODO: add redirect to allproducts */}
+                        <button
+                          onClick={(e) => {
+                            deleteProduct(product.id);
+                            this.clickHandler(e);
+                          }}
+                        >
+                          Delete
+                        </button>
+                      </div>
+                    ) : (
+                      <div> </div>
+                    )}
                   </div>
                   <br />
+                  {/* end admin ___ intentionally left empty div above */}
+                  <br />
+
                   <h2 id='flush-headingOne'>
                     <Link to={`/products/${product.id}/add`}>
                       <button type='button'>Add Review</button>
@@ -63,9 +81,7 @@ class Product extends React.Component {
               </div>
             </div>
           </div>
-          <div>
-            <button onClick={(e) => {deleteProduct(product.id); this.clickHandler(e)}}>Delete</button>
-          </div>
+
           <div>
             <ProductReviews productId={product.id} />
           </div>
@@ -77,8 +93,9 @@ class Product extends React.Component {
   }
 }
 
-const mapState = ({ product }) => ({
-  product,
+const mapState = (state) => ({
+  product: state.product,
+  isAdmin: state.auth.isAdmin,
 });
 
 const mapDispatch = (dispatch) => ({

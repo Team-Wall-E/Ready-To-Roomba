@@ -25,7 +25,9 @@ router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    //TODO: doublecheck this {isAdmin: false}
+    const newUser = {...req.body, isAdmin:false}
+    const user = await User.create(newUser);
     res.send(user);
   } catch (err) {
     next(err);

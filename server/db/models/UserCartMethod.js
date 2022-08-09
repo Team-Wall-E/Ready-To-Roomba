@@ -48,9 +48,7 @@ module.exports = (User, db) => {
     return this.getCart();
   };
 
-  //#assuming cart exists && check status accuracy
-  /* create router post for create order 35:00
-   */
+
   User.prototype.createOrder = async function () {
     const cart = await this.getCart();
     cart.status = 'completed';

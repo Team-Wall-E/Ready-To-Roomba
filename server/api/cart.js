@@ -3,6 +3,8 @@ const { isLoggedIn, isAdmin } = require("./protection");
 const User = require("../db/models/User");
 module.exports = router;
 
+
+//TODO: add extra security - unsure if the URL will be /api/cart or what
 router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);

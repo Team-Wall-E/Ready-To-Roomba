@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchCart, removeProductFromCartThunk } from '../store/cart';
 
-//#where does cart come from? single product
-//means props.cart & .removeFromCart
 
 export const Cart = ({ cart, removeFromCart }) => {
   const lineItems = cart.lineItems || [];
@@ -36,13 +34,8 @@ const mapState = (state) => ({
 
 const mapDispatch = (dispatch) => ({
   // getCart: () => dispatch(fetchCart()),
-
   removeFromCart: (product) => dispatch(removeProductFromCartThunk(product)),
 
-  /* unnecssary because of User.getCart() prototype
-- getlineItems: () => dispatch(fetchlineItems()),
-- getOrder: () => dispatch(fetchOrder()),
-  */
 });
 
 export default connect(mapState, mapDispatch)(Cart);
