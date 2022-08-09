@@ -1,14 +1,15 @@
 import React from 'react';
-import { fetchOrders } from '../store/orders';
+import { getUserOrders } from '../store/user';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class OrderHistory extends React.Component {
-  componentDidMount() {
-    // this.props.loadUserOrdersThunk();
+  constructor(props) {
+    super(props);
   }
 
   render() {
+    console.log('ORDERS: ', this.props.orders);
     return (
       <div>
         <div>
@@ -39,7 +40,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchOrders: () => dispatch(fetchOrders()),
+    getOrders: () => dispatch(getUserOrders()),
   };
 };
 

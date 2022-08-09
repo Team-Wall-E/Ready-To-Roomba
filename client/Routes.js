@@ -31,14 +31,14 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-   
+
     return (
       <div>
         <Switch>
           {/* This is the ROUTES for ALL visitors */}
+          <Route exact path='/' component={AllProducts} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/home' component={AllProducts} />
           <Route path='/cart' component={Cart} />
           <Route exact path='/products' component={AllProducts} />
           <Route path='/products/:id' component={SingleProduct} />
@@ -52,8 +52,8 @@ class Routes extends Component {
             <Route path='/cart' component={Cart} />
           )}
           <Route component={NotFoundPage} />
-          <Redirect from='/login' to='/home' />
-          <Redirect to='/home' />
+          <Redirect from='/login' to='/' />
+          <Redirect exact to='/' component={AllProducts} />
         </Switch>
       </div>
     );

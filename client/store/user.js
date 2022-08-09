@@ -3,6 +3,8 @@ import axios from 'axios';
 const SET_USER = 'SET_USER';
 const CREATE_USER = 'CREATE_USER';
 const DELETE_USER = 'DELETE_USER';
+const UPDATE_USER = 'UPDATE_USER';
+const SET_ORDERS = 'SET_ORDERS';
 
 export const setUser = (user) => ({
   type: SET_USER,
@@ -25,8 +27,15 @@ const deleteUser = (user) => {
 
 const updateUser = (user) => {
   return {
-     type: UPDATE_USER,
-     user,
+    type: UPDATE_USER,
+    user,
+  };
+};
+
+const setOrders = (user) => {
+  return {
+    type: SET_ORDERS,
+    user,
   };
 };
 
@@ -54,6 +63,31 @@ export const createUserThunk = (user, history) => {
   };
 };
 
+export const getUserOrders = () => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem('token');
+      if (token) {
+        const { data: auth } = await axios.get('/api/auth', {
+          headers: {
+            authorization: token,
+          },
+        });
+        //use the user id that's returned in the token to make a request for user's orders
+        const { id } = auth;
+        const { data: orders } = await axios.get(`/api/users/${id}/orders`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch(setOrders(orders));
+      }
+    } catch (err) {
+      console.log(err.response);
+    }
+  };
+};
+
 export const deleteUserThunk = (id, history) => {
   return async (dispatch) => {
     try {
@@ -74,16 +108,16 @@ export const deleteUserThunk = (id, history) => {
 export const updateUserThunk = (id, user) => {
   const token = window.localStorage.getItem(TOKEN);
   return async (dispatch) => {
-     try {
-        const response = await axios.put(`/api/users/${id}`, user, {
-           headers: {
-              authorization: token,
-           },
-        });
-        dispatch(updateUser(response.data));
-     } catch (err) {
-        console.log(err.response);
-     }
+    try {
+      const response = await axios.put(`/api/users/${id}`, user, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch(updateUser(response.data));
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 };
 

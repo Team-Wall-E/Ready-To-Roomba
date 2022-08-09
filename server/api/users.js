@@ -25,7 +25,7 @@ router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   try {
-    const newUser = {...req.body, isAdmin:false}
+    const newUser = { ...req.body, isAdmin: false };
     const user = await User.create(newUser);
     res.send(user);
   } catch (err) {
@@ -38,7 +38,12 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
     let paramsId = +req.params.id;
     let returningUser;
     if (paramsId === req.user.id || req.user.isAdmin) {
-      returningUser = await User.findByPk(paramsId);
+      returningUser = await User.findByPk({
+        where: {
+          id: paramsId,
+        },
+        include: Order,
+      });
       res.json(returningUser);
     } else {
       res.sendStatus(401);
@@ -47,6 +52,54 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+//TODO:
+// router.get('/:id', isLoggedIn, async (req, res, next) => {
+//   try {
+//     let paramsId = +req.params.id;
+//     let returningUser;
+//     if (paramsId === req.user.id || req.user.isAdmin) {
+//       returningUser = await User.findByPk(paramsId);
+//       res.json(returningUser);
+//     } else {
+//       res.sendStatus(401);
+//     }
+//   } catch (err) {
+//     next(err);
+//   }
+// });
+
+// as long as we can grab all orders for user,
+// we should be able to then click on order
+// pass it through the store and get lineItems
+// from that order, check how the cart is setup
+router.get('/:id/orders', isLoggedIn, async (req, res, next) => {
+  console.log('EXPRESS ROUTE ORDERS: ');
+  console.log('USER: ' + req.user.id);
+
+  try {
+    const orders = await Order.findAll({
+      where: { userId: req.user.id }, //or req.user.id?
+    });
+    console.log('ORDERS: ' + orders);
+    res.json(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+// TODO:
+// router.get('/:userId/order', async (req, res, next) => {
+//   try {
+//     const order = await Order.findOne({
+//       where: { userId: req.params.userId },
+//     });
+//     const lineItems = await Order.findAll({
+//       where: { orderId: order.id },
+//     });
+//     res.json(lineItems);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 router.put('/:id', isLoggedIn, async (req, res, next) => {
   try {
@@ -80,6 +133,5 @@ router.delete('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
 });
 
 //***CART***/  api/user/id/cart*/
-
 
 module.exports = router;
