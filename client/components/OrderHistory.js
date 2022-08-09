@@ -1,48 +1,46 @@
-import React from "react";
-import { fetchOrders } from "../store/orders";
+import React from 'react';
+import { fetchOrders } from '../store/orders';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 class OrderHistory extends React.Component {
-    componentDidMount() {
-        // this.props.loadUserOrdersThunk();
-    }
+  componentDidMount() {
+    // this.props.loadUserOrdersThunk();
+  }
 
-    render() {
-        return (
-            <div>
-                <div>
-                    <h1>Order History</h1>
-                    <div>
-                        {
-                            this.props.orders.map(order => {
-                                let date = order.updatedAt.slice(0, 10)
-                                return (
-                                    <div key={order.id}>
-                                        <p>Order ID: {order.id}</p>
-                                        <p>Order Date: {date[0]}</p>
-                                         {/* maybe add more */}
-                                    </div>
-                                )
-                            })
-                        }
-                    </div>
+  render() {
+    return (
+      <div>
+        <div>
+          <h1>Order History</h1>
+          <div>
+            {this.props.orders.map((order) => {
+              let date = order.updatedAt.slice(0, 10);
+              return (
+                <div key={order.id}>
+                  <p>Order ID: {order.id}</p>
+                  <p>Order Date: {date[0]}</p>
+                  {/* maybe add more */}
                 </div>
-            </div>
-        )
-    }
-};
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
 const mapState = (state) => {
-    return {
-        orders: state.orders
-    }
+  return {
+    orders: state.orders,
+  };
 };
 
 const mapDispatch = (dispatch) => {
-    return {
-        thunk: () => dispatch(fetchOrders())
-    }
+  return {
+    fetchOrders: () => dispatch(fetchOrders()),
+  };
 };
 
 export default connect(mapState, mapDispatch)(OrderHistory);

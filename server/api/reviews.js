@@ -3,25 +3,7 @@ const Review = require('../db/models/Review');
 const User = require('../db/models/User');
 const { isLoggedIn } = require('./protection');
 
-// TODO:
-// router.get("/", async (req, res, next) => {
-//   try {
-//     const reviews = await Review.findAll();
-//     res.status(200).json(reviews);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
-
-// router.get("/:id", async (req, res, next) => {
-//   try {
-//     const { id } = +req.params;
-//     const review = await Review.findByPk(id);
-//     res.status(200).json(review);
-//   } catch (e) {
-//     next(e);
-//   }
-// });
+//TODO: add extra security - unsure if the URL will be /product/id/review or what
 
 router.post('/', isLoggedIn, async (req, res, next) => {
   try {
@@ -44,10 +26,8 @@ router.put('/:id', async (req, res, next) => {
   try {
     const updateData = req.body;
     const { id } = +req.params;
-
     const review = await Review.findByPk(id);
     const updatedReview = await review.update(updateData);
-
     res.status(204).json(updatedReview);
   } catch (e) {
     next(e);

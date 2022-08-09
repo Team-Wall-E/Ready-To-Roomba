@@ -25,7 +25,6 @@ export const fetchCart = () => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-
       const { data: cart } = await axios.get('/api/cart', {
         headers: {
           authorization: token,
@@ -42,7 +41,6 @@ export const addToCartThunk = (product) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-
       const { data: addToCart } = await axios.post(
         '/api/cart/addToCart',
         product,
