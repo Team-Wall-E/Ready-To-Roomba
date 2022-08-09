@@ -28,10 +28,17 @@ export const fetchProducts = () => async (dispatch) => {
   dispatch(setProducts(productsResponse.data));
 };
 
+const TOKEN = 'token';
+
 export const createProductThunk = (product, history) => {
   return async (dispatch) => {
     try {
-      const response = await axios.post(`/api/products`, product);
+      const token = window.localStorage.getItem(TOKEN);
+      const response = await axios.post(`/api/products`, product, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch(createProduct(response.data));
       history.push('/products');
     } catch (err) {
@@ -40,15 +47,14 @@ export const createProductThunk = (product, history) => {
   };
 };
 
-const TOKEN = "token";
 export const deleteProductThunk = (id, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       const { data: product } = await axios.delete(`/api/products/${id}`, {
         headers: {
-          authorization: token
-        }
+          authorization: token,
+        },
       });
       dispatch(deleteProduct(product));
       history.push('/products');

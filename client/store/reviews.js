@@ -1,9 +1,9 @@
-import axios from "axios";
+import axios from 'axios';
 
 // ACTION TYPES
-const CREATE_REVIEW = "CREATE_REVIEW";
-const EDIT_REVIEW = "EDIT_REVIEW";
-const DELETE_REVIEW = "DELETE_REVIEW";
+const CREATE_REVIEW = 'CREATE_REVIEW';
+const EDIT_REVIEW = 'EDIT_REVIEW';
+const DELETE_REVIEW = 'DELETE_REVIEW';
 
 // Action Creators
 const createReview = (review) => {
@@ -27,51 +27,62 @@ const deleteReview = (review) => {
   };
 };
 
-const TOKEN = "token";
+const TOKEN = 'token';
 
 export const addReviewThunk = (newReview) => {
   return async (dispatch) => {
-      try {
-        const token = {
-          headers: {
-            authorization: window.localStorage.getItem(TOKEN),
-          },
-        };
-        const { data: review } = await axios.post(
-          `/api/reviews`,
-          newReview,
-          token
-        );
-        dispatch(createReview(review));
-      } catch (e) {
-        console.error(e);
-      }
-  }
+    try {
+      const token = {
+        headers: {
+          authorization: window.localStorage.getItem(TOKEN),
+        },
+      };
+      const { data: review } = await axios.post(
+        `/api/reviews`,
+        newReview,
+        token
+      );
+      dispatch(createReview(review));
+    } catch (e) {
+      console.error(e);
+    }
+  };
 };
 
 export const updateReviewThunk = (review) => {
   return async (dispatch) => {
     try {
+      const token = {
+        headers: {
+          authorization: window.localStorage.getItem(TOKEN),
+        },
+      };
       const { data: updatedReview } = await axios.put(
         `/api/reviews/${review.id}`,
-        review
+        review,
+        token
       );
       dispatch(editReview(updatedReview));
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 };
 
 export const deleteReviewThunk = (review) => {
   return async (dispatch) => {
     try {
-      await axios.delete(`/api/reviews/${review.id}`);
+      const token = {
+        headers: {
+          authorization: window.localStorage.getItem(TOKEN),
+        },
+      };
+      await axios.delete(`/api/reviews/${review.id}`, token);
       dispatch(deleteReview(review));
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 };
 
 const initialState = {

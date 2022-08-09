@@ -33,7 +33,7 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-
+   
     return (
       <div>
         <Switch>
@@ -70,6 +70,7 @@ const mapState = (state) => ({
   // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
   isLoggedIn: !!state.auth.id,
   isAdmin: !!state.auth.isAdmin,
+  logOut: state.logout,
 });
 
 const mapDispatch = (dispatch) => {
@@ -79,6 +80,7 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me());
     },
+    // logOut: () => dispatch(logout())
   };
 };
 

@@ -26,13 +26,13 @@ export class AllProducts extends React.Component {
       </div>
     );
 
-    const { products } = this.props;
+    const { products, isAdmin } = this.props;
 
     return (
-      <div className="all-products w-100">
-        <div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light hero-image">
-          <div className="p-lg-5 mx-auto my-5">
-            <h1 className="display-4 fw-normal text-light">
+      <div className='all-products w-100'>
+        <div className='position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light hero-image'>
+          <div className='p-lg-5 mx-auto my-5'>
+            <h1 className='display-4 fw-normal text-light'>
               {this.state.loading && loading}Shop
             </h1>
           </div>
@@ -66,17 +66,23 @@ export class AllProducts extends React.Component {
               <h3>No Products</h3>
             )}
           </Row>
-
-          <h2>Add New Product:</h2>
-          <CreateProduct products={products} />
+          {isAdmin ? (
+            <div>
+              <h2>Add New Product:</h2>
+              <CreateProduct products={products} />
+            </div>
+          ) : (
+            <div> </div>
+          )}
         </div>
       </div>
     );
   }
 }
 
-const mapState = ({ products }) => ({
-  products,
+const mapState = (state) => ({
+  products: state.products,
+  isAdmin: state.auth.isAdmin,
 });
 
 const mapDispatch = (dispatch) => ({

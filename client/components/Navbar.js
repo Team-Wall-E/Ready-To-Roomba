@@ -63,9 +63,7 @@ const Navbar = ({ isLoggedIn }) => (
   </nav>
 );
 
-/**
- * CONTAINER
- */
+/*** CONTAINER***/
 const mapState = (state) => ({
   isLoggedIn: !!state.auth.id,
   isAdmin: !!state.auth.isAdmin,
