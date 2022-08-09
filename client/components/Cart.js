@@ -46,7 +46,7 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
         💳
       </button>
     </div>
-  );
+  )
 };
 
 const mapState = (state) => ({
