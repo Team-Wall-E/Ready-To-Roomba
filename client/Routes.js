@@ -36,6 +36,7 @@ class Routes extends Component {
       <div>
         <Switch>
           {/* This is the ROUTES for ALL visitors */}
+          
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/home' component={AllProducts} />

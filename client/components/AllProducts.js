@@ -5,6 +5,7 @@ import SearchBar from './SearchBar';
 import MapProducts from './MapProducts';
 import Row from 'react-bootstrap/Row';
 import CreateProduct from './CreateProduct';
+import Brands from './Brands';
 
 export class AllProducts extends React.Component {
   constructor(props) {
@@ -47,14 +48,15 @@ export class AllProducts extends React.Component {
 
           <div>
             <label>Filter:</label>
-            <select
+            <Brands />
+            {/* <select
               className='custom-select text-end'
               value={this.state.selectedProducts}
               onChange={this.selectProducts}
             >
               <option defaultValue='all'>All Products</option>
               <option value='brand'>Brand Name</option>
-            </select>
+            </select> */}
           </div>
         </div>
 
