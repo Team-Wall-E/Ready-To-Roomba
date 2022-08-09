@@ -39,7 +39,7 @@ class Product extends React.Component {
           <div key={product.id}>
             <div>
               <h2>{product.productName}</h2>
-              <address>{product.price}</address>
+              <p>{product.price}</p>
 
               <p>{product.description}</p>
             </div>
@@ -64,9 +64,7 @@ class Product extends React.Component {
                           Delete
                         </button>
                       </div>
-                    ) : (
-                      null
-                    )}
+                    ) : null}
                   </div>
                   <br />
                   {/* end admin */}
