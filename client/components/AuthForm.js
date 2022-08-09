@@ -6,7 +6,7 @@ import { authenticate } from '../store';
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error } = props;
+  const { name, displayName, handleSubmit, error, address } = props;
   // TODO: add ternary to not show first and last name on login form
   return (
     <div>
@@ -34,6 +34,12 @@ const AuthForm = (props) => {
             <small>Password</small>
           </label>
           <input name='password' type='password' />
+        </div>
+        <div>
+          <label htmlFor='address'>
+            <small>Address</small>
+          </label>
+          <input name='address' type='text' />
         </div>
         <div>
           <button type='submit'>{displayName}</button>
@@ -76,7 +82,10 @@ const mapDispatch = (dispatch) => {
       const lastName = evt.target.lastName.value;
       const email = evt.target.email.value;
       const password = evt.target.password.value;
-      dispatch(authenticate(firstName, lastName, email, password, formName));
+      const address = evt.target.address.value;
+      dispatch(
+        authenticate(firstName, lastName, email, password, formName, address)
+      );
     },
   };
 };

@@ -37,6 +37,7 @@ const User = db.define("user", {
   },
   password: {
     type: Sequelize.STRING,
+    allowNull: false,
   },
   imageUrl: {
     type: Sequelize.TEXT,

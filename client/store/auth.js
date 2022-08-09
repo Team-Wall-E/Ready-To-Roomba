@@ -23,13 +23,15 @@ export const me = () => async (dispatch) => {
 };
 
 export const authenticate =
-  (firstName, lastName, email, password, method) => async (dispatch) => {
+  (firstName, lastName, email, password, method, address) =>
+  async (dispatch) => {
     try {
       const res = await axios.post(`/auth/${method}`, {
         firstName,
         lastName,
         email,
         password,
+        address,
       });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
