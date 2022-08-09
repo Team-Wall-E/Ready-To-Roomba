@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
 import { addReviewThunk } from '../store/reviews';
 
 class CreateReview extends React.Component {
@@ -41,7 +40,10 @@ class CreateReview extends React.Component {
 
       return (
         <div>
-          <form onSubmit={this.createReviewHandler}>
+          <form
+            onSubmit={this.createReviewHandler}
+            className='needs-validation'
+          >
             <h3>How satisfied were you with our product?😁</h3>
             <div>
               <div>
