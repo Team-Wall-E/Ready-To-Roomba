@@ -19,6 +19,7 @@ function createRandomUser() {
   return {
     firstName: faker.name.firstName(),
     lastName: faker.name.lastName(),
+    address: faker.address.streetAddress(true),
     isAdmin: booleanArr[Math.floor(Math.random() * booleanArr.length)],
     email: faker.internet.email(),
     password: faker.random.alpha(8),
@@ -33,7 +34,7 @@ function createRandomProduct() {
     brand: brandNames[Math.floor(Math.random() * brandNames.length)],
     description: faker.commerce.productDescription(),
     price: faker.commerce.price(200, 2000),
-    inventoryQty: Math.ceil(Math.random() * 20),
+    inventoryQty: 1,
     imageUrl:
       "https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif",
   };
@@ -53,15 +54,13 @@ function createRandomOrder() {
   return {
     isAuthenticated: booleanArr[Math.floor(Math.random() * booleanArr.length)],
     items: [],
-    orderTotal: null,
-    quantity: Math.ceil(Math.random() * 20),
     status: statusList[Math.floor(Math.random() * statusList.length)],
   };
 }
 
 function createLineItem() {
   return {
-    orderQuantity: null,
+    orderQuantity: 1,
   };
 }
 
@@ -111,11 +110,8 @@ const seed = async () => {
               id: createdProducts[i].id,
               product: createdProducts[i].productName,
               price: +createdProducts[i].price,
-              inventoryQty: createdProducts[i].inventoryQty,
             },
           ];
-          orders[i].orderTotal =
-            createdProducts[i].inventoryQty * createdProducts[i].price;
         }
         return Promise.all(orders.map((order) => Order.create(order)));
       })
@@ -127,7 +123,7 @@ const seed = async () => {
           lineItems[k].orderId = createdOrders[k].id;
           lineItems[k].productId = createdProducts[k].id;
           lineItems[k].orderQuantity = createdProducts[k].inventoryQty;
-          lineItems[k].price = createdProducts[k].inventoryQty * createdProducts[k].price
+          lineItems[k].orderTotal = createdProducts[k].inventoryQty * createdProducts[k].price
         }
         return Promise.all(lineItems.map((item) => LineItem.create(item)));
       });

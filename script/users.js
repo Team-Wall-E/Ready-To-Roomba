@@ -2,6 +2,7 @@ const users = [
   {
     firstName: "DonnaCabona",
     lastName: "Banana",
+    address: "581 Selina's House",
     isAdmin: true,
     email: "donnaAYO@readytoroomba.com",
     password: "boberty",
@@ -10,6 +11,7 @@ const users = [
   {
     firstName: "Lisarules",
     lastName: "TheWorld",
+    address: "125 San Castillo Street",
     isAdmin: true,
     email: "pisalisa@readytoroomba.com",
     password: "pisalisa",
@@ -19,6 +21,7 @@ const users = [
   {
     firstName: "Selina",
     lastName: "Banana",
+    address: "404 Not Found Street",
     isAdmin: true,
     email: "qqselina@readytoroomba.com",
     password: "selinaistired",
@@ -28,6 +31,7 @@ const users = [
   {
     firstName: "Valerie",
     lastName: "Celery",
+    address: "222 Rondevu La Casa",
     isAdmin: true,
     email: "valerie2022@readytoroomba.com",
     password: "caffeine4life",

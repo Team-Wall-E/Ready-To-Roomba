@@ -65,11 +65,11 @@ class Product extends React.Component {
                         </button>
                       </div>
                     ) : (
-                      <div> </div>
+                      null
                     )}
                   </div>
                   <br />
-                  {/* end admin ___ intentionally left empty div above */}
+                  {/* end admin */}
                   <br />
 
                   <h2 id='flush-headingOne'>

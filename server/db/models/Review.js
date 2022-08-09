@@ -4,7 +4,8 @@ const db = require("../db");
 
 const Review = db.define("review", {
   owner: {
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    allowNull: true,
   },
   title: {
     type: Sequelize.STRING,
