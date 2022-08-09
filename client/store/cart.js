@@ -78,17 +78,16 @@ export const removeProductFromCartThunk = (product) => {
   };
 };
 
-// TODO:
-// export const checkoutCart = () => {
-//   const token = window.localStorage.getItem('token');
-//   return async (dispatch) => {
-//     await axios.get('/api/cart/checkout', {
-//       headers: {
-//         authorization: token,
-//       },
-//     });
-//   };
-// };
+export const checkoutCart = () => {
+  const token = window.localStorage.getItem('token');
+  return async (dispatch) => {
+    await axios.get('/api/cart/checkout', {
+      headers: {
+        authorization: token,
+      },
+    });
+  };
+};
 
 //REDUCER
 const cartReducer = (state = {}, action) => {
