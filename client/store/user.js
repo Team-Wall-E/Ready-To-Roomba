@@ -95,8 +95,8 @@ export default function userReducer(user = [], action) {
       return [...user, action.user];
     case DELETE_USER:
       return user.filter((user) => user.id !== action.user.id);
-    case UPDATE_USER:
-      return { ...user, ...action.user };
+    // case UPDATE_USER:
+    //   return { ...user, ...action.user };
     default:
       return user;
   }
