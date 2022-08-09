@@ -18,7 +18,7 @@ const AuthForm = (props) => {
           <input name='firstName' type='text' required />
         </div>
         <div>
-          <label htmlFor='laststName'>
+          <label htmlFor='lastName'>
             <small>Last Name</small>
           </label>
           <input name='lastName' type='text' required />
@@ -30,7 +30,7 @@ const AuthForm = (props) => {
           <input name='email' type='text' required />
         </div>
         <div>
-          <label htmlFor='password'>
+          <label htmlFor='password' required>
             <small>Password</small>
           </label>
           <input name='password' type='password' />
