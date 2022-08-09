@@ -10,27 +10,27 @@ const AuthForm = (props) => {
   // TODO: add ternary to not show first and last name on login form
   return (
     <div>
-      <form onSubmit={handleSubmit} name={name}>
+      <form onSubmit={handleSubmit} name={name} className='needs-validation'>
         <div>
           <label htmlFor='firstName'>
             <small>First Name</small>
           </label>
-          <input name='firstName' type='text' />
+          <input name='firstName' type='text' required />
         </div>
         <div>
-          <label htmlFor='laststName'>
+          <label htmlFor='lastName'>
             <small>Last Name</small>
           </label>
-          <input name='lastName' type='text' />
+          <input name='lastName' type='text' required />
         </div>
         <div>
-          <label htmlFor='email'>
+          <label htmlFor='email' required>
             <small>Email</small>
           </label>
-          <input name='email' type='text' />
+          <input name='email' type='text' required />
         </div>
         <div>
-          <label htmlFor='password'>
+          <label htmlFor='password' required>
             <small>Password</small>
           </label>
           <input name='password' type='password' />
