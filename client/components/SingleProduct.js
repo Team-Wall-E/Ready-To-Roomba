@@ -31,7 +31,7 @@ class Product extends React.Component {
 
   render() {
     const { product, addToCart, deleteProduct} = this.props;
-    console.log('🫖', product);
+    console.log('🫖', this.props);
 
     if (product) {
       return (

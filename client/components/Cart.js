@@ -1,13 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchCart, removeProductFromCartThunk } from '../store/cart';
-
-//#where does cart come from? single product
-//means props.cart & .removeFromCart
+import { removeProductFromCartThunk } from '../store/cart';
 
 export const Cart = ({ cart, removeFromCart }) => {
   const lineItems = cart.lineItems || [];
-  console.log('🫐', lineItems);
+  const tax = 0.08875;
+  let subtotal = [];
+  console.log('🫐', cart);
 
   return (
     <div>
@@ -15,14 +14,20 @@ export const Cart = ({ cart, removeFromCart }) => {
       <ul>
         {lineItems.map((lineItem) => {
           return (
-            <li key={lineItem.id}>
-              {lineItem.product.productName}({lineItem.orderQuantity})
-              <button onClick={() => removeFromCart(lineItem.product)}>
-                x
-              </button>
-            </li>
+            <div key={lineItem.id}>
+              <li >
+                {lineItem.product.productName}({lineItem.orderQuantity})
+                <div>Item Total:</div>
+                <div>$ {lineItem.orderQuantity * lineItem.product.price}</div>
+                <button onClick={() => removeFromCart(lineItem.product)}>
+                  x
+                </button>
+              </li>
+            </div>
           );
         })}
+        <br />
+        <div>Subtotal: </div>
       </ul>
     </div>
   );
@@ -30,19 +35,11 @@ export const Cart = ({ cart, removeFromCart }) => {
 
 const mapState = (state) => ({
   cart: state.cart,
-  //#try no line items unless prof says so
-  // lineItems:  state.lineItems,
+  product: state.product
 });
 
 const mapDispatch = (dispatch) => ({
-  // getCart: () => dispatch(fetchCart()),
-
-  removeFromCart: (product) => dispatch(removeProductFromCartThunk(product)),
-
-  /* unnecssary because of User.getCart() prototype
-- getlineItems: () => dispatch(fetchlineItems()),
-- getOrder: () => dispatch(fetchOrder()),
-  */
+  removeFromCart: (product) => dispatch(removeProductFromCartThunk(product))
 });
 
 export default connect(mapState, mapDispatch)(Cart);
