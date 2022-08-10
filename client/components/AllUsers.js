@@ -1,8 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchUsers } from '../store/users';
-// import MapUsers from './MapUsers';
-import Row from 'react-bootstrap/Row';
+import UpdateUser from './UpdateUser';
 
 export class AllUsers extends React.Component {
   constructor() {
@@ -17,27 +16,27 @@ export class AllUsers extends React.Component {
     const { users } = this.props;
     return (
       <div>
+        <h4>Name:</h4>
         {users.map((user) => {
           return (
-            <Col key={user.id}>
-              <Card>
-                <Card.Img
-                  variant='top'
-                  className='card-img-top'
-                  src={user.imageUrl}
-                  alt='image of user'
-                />
-                <Card.Body>
-                  <Card.Title>
-                    <Link to={`/products/${user.id}`}>
-                      {user.firstName} {user.lastName}
-                    </Link>
-                  </Card.Title>
-                  <Card.Text>{user.email}</Card.Text>
-                </Card.Body>
-              </Card>
-            </Col>
+            <div key={user.id}>
+              <div>
+                <h6>
+                  {' '}
+                  {user.firstName} {user.lastName}
+                </h6>
+              </div>
+              <div> {user.email} </div>
+              <UpdateUser />
+              <br />
+              <br />
+            </div>
           );
+        })}
+        <br></br>
+        <h6>Email:</h6>
+        {users.map((user) => {
+          return <div key={user.id}>{user.email}</div>;
         })}
       </div>
     );
@@ -46,7 +45,6 @@ export class AllUsers extends React.Component {
 
 const mapState = (state) => ({
   users: state.users,
-  isAdmin: state.auth.isAdmin,
 });
 
 const mapDispatch = (dispatch) => ({

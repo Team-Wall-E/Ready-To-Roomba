@@ -15,6 +15,7 @@ import { me } from './store';
 import { fetchProducts } from './store/products';
 import { fetchCart } from './store/cart';
 import UserProfile from './components/UserProfile.js';
+import AllUsers from './components/AllUsers.js';
 
 /**
  * COMPONENT
@@ -32,7 +33,7 @@ class Routes extends Component {
   }
 
   render() {
-    const { isLoggedIn } = this.props;
+    const { isLoggedIn, isAdmin } = this.props;
 
     return (
       <div>
@@ -57,6 +58,10 @@ class Routes extends Component {
               <Route path='/cart' component={Cart} />
               <Route path='/users/:id/orders' component={OrderHistory} />
             </Switch>
+          )}
+          {/* <Route path='/users' component={AllUsers} /> */}
+          {isLoggedIn && isAdmin && (
+            <Route path='/users' component={AllUsers} />
           )}
           <Route component={NotFoundPage} />
           <Redirect from='/login' to='/' />

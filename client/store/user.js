@@ -32,7 +32,12 @@ const updateUser = (user) => {
 };
 
 export const fetchUser = () => async (dispatch) => {
-  const userResponse = await axios.get('/api/user');
+  const token = window.localStorage.getItem(TOKEN);
+  const userResponse = await axios.get('/api/user', {
+    headers: {
+      authorization: token,
+    },
+  });
   dispatch(setUser(userResponse.data));
 };
 
