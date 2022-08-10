@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React from 'react';
+import { connect } from 'react-redux';
 
 class ProductReviews extends React.Component {
   constructor(props) {
@@ -9,15 +9,15 @@ class ProductReviews extends React.Component {
 
   rating(rating) {
     if (rating === 5) {
-      return <h2>⭐⭐⭐⭐⭐</h2>;
+      return <span className='review-stars'>★★★★★</span>;
     } else if (rating === 4) {
-      return <h2>⭐⭐⭐⭐</h2>;
+      return <span className='review-stars'>★★★★</span>;
     } else if (rating === 3) {
-      return <h2>⭐⭐⭐</h2>;
+      return <span className='review-stars'>★★★</span>;
     } else if (rating === 2) {
-      return <h2>⭐⭐</h2>;
+      return <span className='review-stars'>★★</span>;
     } else if (rating === 1) {
-      return <h2>⭐</h2>;
+      return <span className='review-stars'>★</span>;
     }
   }
 
@@ -25,24 +25,22 @@ class ProductReviews extends React.Component {
     if (!this.props.reviews) {
       return (
         <div>
-          <h1>🫠</h1>
           <h2>This product has no reviews.</h2>
         </div>
       );
     } else {
       return (
         <div>
-          <h1>Reviews</h1>
+          <h2>Reviews</h2>
           <div>
             {this.props.reviews.map((review) => (
               <div key={review.id}>
                 <div>
-                  {this.rating(review.starRating)}
-                  <h3>Review from {review.owner}</h3>
-                  <h4>
-                    Title:
-                    <span>{review.title}</span>
-                  </h4>
+                  <div>
+                    {this.rating(review.starRating)}
+                    <h3 style={{ display: 'inline-block' }}>{review.title}</h3>
+                  </div>
+                  <p>By {review.owner}</p>
                   <p>{review.customerReview}</p>
                 </div>
               </div>
