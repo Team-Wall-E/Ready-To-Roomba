@@ -3,7 +3,8 @@ import axios from 'axios';
 const SET_USER = 'SET_USER';
 const CREATE_USER = 'CREATE_USER';
 const DELETE_USER = 'DELETE_USER';
-const UPDATE_USER = "UPDATE_USER";
+const UPDATE_USER = 'UPDATE_USER';
+
 
 export const setUser = (user) => ({
   type: SET_USER,
@@ -26,8 +27,8 @@ const deleteUser = (user) => {
 
 const updateUser = (user) => {
   return {
-     type: UPDATE_USER,
-     user,
+    type: UPDATE_USER,
+    user,
   };
 };
 
@@ -75,16 +76,16 @@ export const deleteUserThunk = (id, history) => {
 export const updateUserThunk = (id, user) => {
   const token = window.localStorage.getItem(TOKEN);
   return async (dispatch) => {
-     try {
-        const response = await axios.put(`/api/users/${id}`, user, {
-           headers: {
-              authorization: token,
-           },
-        });
-        dispatch(updateUser(response.data));
-     } catch (err) {
-        console.log(err.response);
-     }
+    try {
+      const response = await axios.put(`/api/users/${id}`, user, {
+        headers: {
+          authorization: token,
+        },
+      });
+      dispatch(updateUser(response.data));
+    } catch (err) {
+      console.log(err.response);
+    }
   };
 };
 

@@ -11,6 +11,7 @@ import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
 import Checkout from './components/Checkout';
 import NotFoundPage from './components/NotFoundPage';
+import OrderHistory from './components/OrderHistory';
 import { me } from './store';
 import { fetchProducts } from './store/products';
 import { fetchCart } from './store/cart';
@@ -32,12 +33,12 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-   
+
     return (
       <div>
         <Switch>
           {/* This is the ROUTES for ALL visitors */}
-          
+          <Route exact path='/' component={AllProducts} />
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/home' component={AllProducts} />
@@ -58,8 +59,8 @@ class Routes extends Component {
             </Switch>
           )}
           <Route component={NotFoundPage} />
-          <Redirect from='/login' to='/home' />
-          <Redirect to='/home' />
+          <Redirect from='/login' to='/' />
+          <Redirect exact to='/' component={AllProducts} />
         </Switch>
       </div>
     );

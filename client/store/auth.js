@@ -52,7 +52,7 @@ export const authenticate =
       });
       window.localStorage.setItem(TOKEN, res.data.token);
       dispatch(me());
-      history.push('/orderHistory');
+      history.push(`/users/${id}/orders`);
     } catch (authError) {
       return dispatch(setAuth({ error: authError }));
     }

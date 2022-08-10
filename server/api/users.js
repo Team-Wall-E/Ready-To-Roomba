@@ -34,17 +34,42 @@ router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
 });
 
 router.get('/:id', isLoggedIn, async (req, res, next) => {
+  console.log('EXPRESS USERS/ID: ', id);
   try {
     let paramsId = +req.params.id;
     let returningUser;
     if (paramsId === req.user.id || req.user.isAdmin) {
-      returningUser = await User.findByPk(paramsId);
+      returningUser = await User.findByPk({
+        where: {
+          id: paramsId,
+        },
+        include: Order,
+      });
       res.json(returningUser);
     } else {
       res.sendStatus(401);
     }
   } catch (err) {
     next(err);
+  }
+});
+
+// as long as we can grab all orders for user,
+// we should be able to then click on order
+// pass it through the store and get lineItems
+// from that order, check how the cart is setup
+router.get('/:id/orders', isLoggedIn, async (req, res, next) => {
+  console.log('EXPRESS ROUTE ORDERS: ');
+  console.log('USER: ' + req.user.id);
+
+  try {
+    const orders = await Order.findAll({
+      where: { userId: req.user.id },
+    });
+    console.log('ORDERS: ' + orders);
+    res.json(orders);
+  } catch (error) {
+    next(error);
   }
 });
 
@@ -80,6 +105,5 @@ router.delete('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
 });
 
 //***CART***/  api/user/id/cart*/
-
 
 module.exports = router;

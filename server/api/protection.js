@@ -1,6 +1,6 @@
 const {
   models: { User },
-} = require("../db");
+} = require('../db');
 
 /***Our Protection Middleware: 
 - chaining middleware through return next()
@@ -26,7 +26,6 @@ function isAdmin(req, res, next) {
     return next();
   } else {
     res.sendStatus(403);
-    res.redirect("/");
   }
 }
 
