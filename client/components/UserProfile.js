@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUsers, deleteUserThunk } from '../store/users';
+import { fetchUsers} from '../store/users';
 import { fetchUser } from '../store/singleUser';
 import UpdateUser from './UpdateUser';
 import AllUsers from './AllUsers';
 import CreateProduct from './CreateProduct';
 
 //TODO: whenever orderHistory is finished
-// import OrderHistory from './OrderHistory';
-// react hooks
+
 
 /*
 User - updates
@@ -44,7 +43,6 @@ export const UserProfile = (props) => {
         {showUpdateUser && <UpdateUser>show/hide typography</UpdateUser>}
       </h6>
       {/* TODO: possibly order history? */}
-      {/* <OrderHistory/> */}
       <br></br>
       {isAdmin ? (
         <div>
