@@ -33,11 +33,11 @@ export const fetchUser = (id) => {
   };
 };
 
-export const updateUserThunk = (id, user) => {
+export const updateUserThunk = (user) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const response = await axios.put(`/api/users/${id}`, user, {
+      const response = await axios.put(`/api/users/${user.id}`, user, {
         headers: {
           authorization: token,
         },

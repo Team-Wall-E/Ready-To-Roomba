@@ -139,6 +139,12 @@ h6,
 }
 
 /* Links */
+/* button.btn.btn-link {
+  color: black;
+  letter-spacing: 0.06rem;
+  text-transform: uppercase;
+  padding: 1rem;
+} */
 
 button.btn-link.btn.btn-primary {
   background-color: transparent !important;

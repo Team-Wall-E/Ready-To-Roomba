@@ -32,7 +32,7 @@ export const fetchCart = () => {
       });
       dispatch(setCart(cart));
     } catch (error) {
-      console.error(error);
+      console.error(`fetchCartThunk not working`, error);
     }
   };
 };
@@ -53,18 +53,18 @@ export const addToCartThunk = (product) => {
       console.log('🍋', addToCart);
       dispatch(setCart(addToCart));
     } catch (error) {
-      console.error(error);
+      console.error(`addCartThunk not workinh`, error);
     }
   };
 };
 
-export const removeProductFromCartThunk = (product) => {
+export const removeProductFromCartThunk = (productId) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
       const { data: removedFromCart } = await axios.post(
         '/api/cart/removeFromCart',
-        product,
+        productId,
         {
           headers: {
             authorization: token,
@@ -73,21 +73,21 @@ export const removeProductFromCartThunk = (product) => {
       );
       dispatch(setCart(removedFromCart));
     } catch (error) {
-      console.error(error);
+      console.error(`removeProductFromCartThunk not working`, error);
     }
   };
 };
 
-export const checkoutCart = () => {
-  const token = window.localStorage.getItem('token');
-  return async (dispatch) => {
-    await axios.get('/api/cart/checkout', {
-      headers: {
-        authorization: token,
-      },
-    });
-  };
-};
+// export const checkoutCart = () => {
+//   const token = window.localStorage.getItem('token');
+//   return async (dispatch) => {
+//     await axios.get('/api/cart/checkout', {
+//       headers: {
+//         authorization: token,
+//       },
+//     });
+//   };
+// };
 
 //REDUCER
 const cartReducer = (state = {}, action) => {
