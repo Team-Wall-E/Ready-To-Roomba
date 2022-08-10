@@ -8,7 +8,7 @@ import Table from 'react-bootstrap/Table';
 
 export const Cart = ({ cart, removeFromCart, addToCart }) => {
   const lineItems = cart.lineItems || [];
-
+  let totalQuantity = 0;
   const tax = 1.08875;
   const tax2 = 0.08875;
 
@@ -16,8 +16,12 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
   console.log('🫐', cart);
 
   return (
+
     <div className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-5 mb-5'>
-      <h2>Cart</h2>
+   {lineItems.length === 0 ? <div>Your cart is empty</div>
+        : ( <div>
+     
+     <h2>Cart</h2>
       <Table className='mt-5'>
         <thead>
           <tr>
@@ -63,6 +67,7 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
             );
           })}
         </tbody>
+         </div>)
       </Table>
       <div className='w-100 text-end p-5'>
         <div>
