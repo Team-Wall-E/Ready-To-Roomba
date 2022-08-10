@@ -35,11 +35,13 @@ const Navbar = ({ isLoggedIn }) => (
     {/* far right icons/buttons */}
 
     <div className='text-end'>
+      <div>
+        <Link to='/cart'>
+          <FontAwesomeIcon icon={faCartShopping} />
+        </Link>
+      </div>
       {!isLoggedIn ? (
         <div>
-          <Link to='/cart'>
-            <FontAwesomeIcon icon={faCartShopping} />
-          </Link>
           <Button variant='light' href='/login'>
             Login
           </Button>
@@ -49,14 +51,9 @@ const Navbar = ({ isLoggedIn }) => (
         </div>
       ) : (
         <div>
-          <Link to='/cart'>
-            <FontAwesomeIcon icon={faCartShopping} />
-          </Link>
-          <div>
-            <Button variant='light' href='/logout' onClick={() => logout()}>
-              Logout
-            </Button>
-          </div>
+          <Button variant='light' href='/logout' onClick={() => logout()}>
+            Logout
+          </Button>
         </div>
       )}
     </div>
