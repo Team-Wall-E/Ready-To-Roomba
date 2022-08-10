@@ -10,6 +10,7 @@ import CreateReview from './components/CreateReview';
 import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
 import NotFoundPage from './components/NotFoundPage';
+import OrderHistory from './components/OrderHistory';
 import { me } from './store';
 import { fetchProducts } from './store/products';
 import { fetchCart } from './store/cart';
@@ -31,15 +32,15 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-   
+
     return (
       <div>
         <Switch>
           {/* This is the ROUTES for ALL visitors */}
-          
+          <Route exact path='/' component={AllProducts} />
+
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/home' component={AllProducts} />
           <Route path='/cart' component={Cart} />
           <Route exact path='/products' component={AllProducts} />
           <Route path='/products/:id' component={SingleProduct} />
@@ -50,11 +51,14 @@ class Routes extends Component {
           <Route path='/products/:id/add' component={CreateReview} />
           {isLoggedIn && (
             // <Route exact path='/orderhistory' component={OrderHistory} />
-            <Route path='/cart' component={Cart} />
+            <Switch>
+              <Route path='/cart' component={Cart} />
+              <Route path='/users/:id/orders' component={OrderHistory} />
+            </Switch>
           )}
           <Route component={NotFoundPage} />
-          <Redirect from='/login' to='/home' />
-          <Redirect to='/home' />
+          <Redirect from='/login' to='/' />
+          <Redirect exact to='/' component={AllProducts} />
         </Switch>
       </div>
     );
