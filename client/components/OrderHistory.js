@@ -1,34 +1,43 @@
 import React from 'react';
-import { getUserOrders } from '../store/user';
+import { getUserOrders } from '../store/orders';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import auth from '../store/auth';
+import { Login } from './AuthForm';
 
 class OrderHistory extends React.Component {
   constructor(props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.getUserOrders();
+  }
+
   render() {
-    console.log('ORDERS: ', this.props.orders);
-    return (
-      <div>
+    console.log('ORDERS: ', this.props.getUserOrders);
+    if (!auth.id) {
+      return <Login />;
+    } else {
+      return (
         <div>
-          <h1>Order History</h1>
           <div>
-            {this.props.orders.map((order) => {
-              let date = order.updatedAt.slice(0, 10);
-              return (
-                <div key={order.id}>
-                  <p>Order ID: {order.id}</p>
-                  <p>Order Date: {date[0]}</p>
-                  {/* maybe add more */}
-                </div>
-              );
-            })}
+            <h1>Order History</h1>
+            <div>
+              {this.props.orders.map((order) => {
+                let date = order.updatedAt.slice(0, 10);
+                return (
+                  <div key={order.id}>
+                    <p>Order ID: {order.id}</p>
+                    <p>Order Date: {date[0]}</p>
+                    {/* maybe add more */}
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
-    );
+      );
+    }
   }
 }
 
@@ -40,7 +49,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    getOrders: () => dispatch(getUserOrders()),
+    getUserOrders: () => dispatch(getUserOrders()),
   };
 };
 

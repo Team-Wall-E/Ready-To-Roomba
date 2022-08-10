@@ -1,8 +1,10 @@
 import axios from 'axios';
+import state from './auth';
 
 const SET_ORDERS = 'SET_ORDERS';
 const CREATE_ORDER = 'CREATE_ORDER';
 const DELETE_ORDER = 'DELETE_ORDER';
+export const SET_USER_ORDERS = 'SET_USER_ORDERS';
 
 export const setOrders = (orders) => ({
   type: SET_ORDERS,
@@ -22,6 +24,13 @@ const deleteOrder = (order) => {
     order,
   };
 };
+
+// const setUserOrders = (orders) => {
+//   return {
+//     type: SET_USER_ORDERS,
+//     orders,
+//   };
+// };
 
 const TOKEN = 'token';
 
@@ -74,6 +83,36 @@ export const deleteOrderThunk = (id, history) => {
   };
 };
 
+// TODO: if not passing in user here, do we pass it into action?
+export const getUserOrders = () => {
+  return async (dispatch) => {
+    try {
+      const token = window.localStorage.getItem(TOKEN);
+      console.log('TOKEN', token);
+      if (token) {
+        const { data: auth } = await axios.get('/auth/me', {
+          headers: {
+            authorization: token,
+          },
+        });
+
+        // use the user id that's returned in the token to make a request for user's orders
+        console.log('AUTH', state);
+        // console.log('STATE AUTH', state.auth);
+        const { id } = auth;
+        const { data: orders } = await axios.get(`/api/users/${id}/orders`, {
+          headers: {
+            authorization: token,
+          },
+        });
+        dispatch(setOrders(orders));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
 export default function ordersReducer(orders = [], action) {
   switch (action.type) {
     case SET_ORDERS:
@@ -82,6 +121,8 @@ export default function ordersReducer(orders = [], action) {
       return [...orders, action.order];
     case DELETE_ORDER:
       return orders.filter((order) => order.id !== action.order.id);
+    // case SET_USER_ORDERS:
+    //   return action.orders;
     default:
       return orders;
   }

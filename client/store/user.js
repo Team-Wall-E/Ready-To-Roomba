@@ -4,7 +4,6 @@ const SET_USER = 'SET_USER';
 const CREATE_USER = 'CREATE_USER';
 const DELETE_USER = 'DELETE_USER';
 const UPDATE_USER = 'UPDATE_USER';
-const SET_ORDERS = 'SET_ORDERS';
 
 export const setUser = (user) => ({
   type: SET_USER,
@@ -32,13 +31,6 @@ const updateUser = (user) => {
   };
 };
 
-const setOrders = (user) => {
-  return {
-    type: SET_ORDERS,
-    user,
-  };
-};
-
 export const fetchUser = () => async (dispatch) => {
   const userResponse = await axios.get('/api/user');
   dispatch(setUser(userResponse.data));
@@ -57,31 +49,6 @@ export const createUserThunk = (user, history) => {
       });
       dispatch(createUser(response.data));
       history.push('/user');
-    } catch (err) {
-      console.log(err.response);
-    }
-  };
-};
-
-export const getUserOrders = () => {
-  return async (dispatch) => {
-    try {
-      const token = window.localStorage.getItem('token');
-      if (token) {
-        const { data: auth } = await axios.get('/api/auth', {
-          headers: {
-            authorization: token,
-          },
-        });
-        //use the user id that's returned in the token to make a request for user's orders
-        const { id } = auth;
-        const { data: orders } = await axios.get(`/api/users/${id}/orders`, {
-          headers: {
-            authorization: token,
-          },
-        });
-        dispatch(setOrders(orders));
-      }
     } catch (err) {
       console.log(err.response);
     }
