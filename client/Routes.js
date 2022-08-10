@@ -15,7 +15,6 @@ import { me } from './store';
 import { fetchProducts } from './store/products';
 import { fetchCart } from './store/cart';
 import UserProfile from './components/UserProfile.js';
-import OrderHistory from './components/OrderHistory.js';
 
 /**
  * COMPONENT
