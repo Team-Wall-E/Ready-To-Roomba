@@ -41,11 +41,14 @@ nav a.logo img {
   background-color: black !important;
 }
 
-a.btn.btn-light {
+a.btn.btn-light,
+a.btn.btn-secondary {
   text-transform: uppercase;
   letter-spacing: 3px;
-  font-size: 0.85em;
-  border-radius: 0;
+  text-transform: uppercase;
+  font-size: 0.85em !important;
+  border-radius: 0 !important;
+  padding: 0.8em 1em !important;
 }
 
 nav .text-end {
@@ -130,11 +133,17 @@ h6,
 }
 
 /* Links */
-button.btn.btn-link {
+/* button.btn.btn-link {
   color: black;
   letter-spacing: 0.06rem;
   text-transform: uppercase;
   padding: 1rem;
+} */
+
+button.btn-link.btn.btn-primary {
+  background-color: transparent !important;
+  border: none;
+  color: black;
 }
 
 button.btn.btn-link:hover {
@@ -217,4 +226,16 @@ label {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   font-size: 15px;
+}
+
+/* Cart */
+
+.cart-img {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+.back-2-shopping {
+  margin-right: 15px;
+  color: white !important;
 }

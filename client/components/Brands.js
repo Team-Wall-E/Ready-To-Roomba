@@ -47,7 +47,7 @@ export class Brands extends React.Component {
     });
 
     return (
-      <div className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-5 mb-4'>
+      <div className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-5 mb-5'>
         <SearchBar
           placeholder={'Enter product name...'}
           products={products}
@@ -73,7 +73,7 @@ export class Brands extends React.Component {
           </select>
         </div>
 
-        <div className='p-5'>
+        <div className='mt-5'>
           <Row xs={1} md={4} className='g-4'>
             {filteredProducts.map((product) => {
               return (
