@@ -39,6 +39,7 @@ class Product extends React.Component {
           <div key={product.id}>
             <div>
               <h2>{product.productName}</h2>
+              <h3>{product.brand}</h3>
               <address>{product.price}</address>
 
               <p>{product.description}</p>
