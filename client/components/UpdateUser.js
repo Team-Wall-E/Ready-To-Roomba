@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { fetchUser, updateUserThunk, setUser } from '../store/singleUser';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 class UpdateUser extends Component {
   constructor(props) {
@@ -89,9 +90,11 @@ class UpdateUser extends Component {
             value={password || ''}
           />
           <br />
-          <button type='submit'>Submit</button>
+          <Button type='submit'>Submit</Button>
           <Link to='/home'>
-            <button type='button'>Cancel</button>
+            <Button type='button' variant='secondary'>
+              Cancel
+            </Button>
           </Link>
         </form>
       </div>

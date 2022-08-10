@@ -6,6 +6,8 @@ import { fetchUser } from '../store/singleUser';
 import UpdateUser from './UpdateUser';
 import AllUsers from './AllUsers';
 import CreateProduct from './CreateProduct';
+import Sidebar from './Sidebar';
+import Button from 'react-bootstrap/Button';
 
 //TODO: whenever orderHistory is finished
 
@@ -22,8 +24,9 @@ export const UserProfile = (props) => {
   const [showAllUsers, setshowAllUsers] = useState(false);
 
   return (
-    <div>
-      <div>
+    <div className='row'>
+      <Sidebar className='col-4' />
+      <section className='col-8 mt-5'>
         <div>
           {id ? (
             <h3>
@@ -48,35 +51,59 @@ export const UserProfile = (props) => {
         <div>
           <h1>Hello, Admin!</h1>
           <div>
-            <h6>Edit a Product</h6>{' '}
-            <Link to={`/products/`}>
-              {' '}
-              <button>To Product</button>
-            </Link>{' '}
+            {id ? (
+              <h3>
+                Welcome {firstName} {lastName}
+              </h3>
+            ) : (
+              <h3> Welcome lurking stranger!</h3>
+            )}
           </div>
-          <br></br>
-          <div>
-            <h6>
-              Add A New Product <br></br>
-              <button onClick={() => setShowAddProduct(!showAddProduct)}>
-                Add
-              </button>
-              {showAddProduct && (
-                <CreateProduct>show/hide typography</CreateProduct>
-              )}
-            </h6>
-          </div>
-          <br></br>
-          <h6>
-            Users List:<br></br>
-            <button onClick={() => setshowAllUsers(!showAllUsers)}>
-              Update Users List
-            </button>
-            {showAllUsers && <AllUsers>show/hide typography</AllUsers>}
-          </h6>
-          <br></br>
         </div>
-      ) : null}
+        <h6>
+          <br></br>
+          <Button onClick={() => setShowUpdateUser(!showUpdateUser)}>
+            Update Your Information
+          </Button>
+          {showUpdateUser && <UpdateUser>show/hide typography</UpdateUser>}
+        </h6>
+        {/* TODO: possibly order history? */}
+        {/* <OrderHistory/> */}
+        <br></br>
+        {isAdmin ? (
+          <div>
+            <h1>Hello, Admin!</h1>
+            <div>
+              <h6>Edit a Product</h6>{' '}
+              <Link to={`/products/`}>
+                {' '}
+                <Button>To Product</Button>
+              </Link>{' '}
+            </div>
+            <br></br>
+            <div>
+              <h6>
+                Add A New Product <br></br>
+                <Button onClick={() => setShowAddProduct(!showAddProduct)}>
+                  Add
+                </Button>
+                {showAddProduct && (
+                  <CreateProduct>show/hide typography</CreateProduct>
+                )}
+              </h6>
+            </div>
+            <br></br>
+            <h6>
+              Users List:<br></br>
+              <Button onClick={() => setshowAllUsers(!showAllUsers)}>
+                Update Users List
+              </Button>
+              {showAllUsers && <AllUsers>show/hide typography</AllUsers>}
+            </h6>
+            <br></br>
+          </div>
+        ) : null}
+      </section>
     </div>
   );
 };

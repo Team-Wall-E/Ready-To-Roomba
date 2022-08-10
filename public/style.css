@@ -100,12 +100,18 @@ nav .text-end {
 }
 
 form .form-button,
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 0.85em !important;
   border-radius: 0 !important;
   padding: 0.8em 1em !important;
+  margin: 1em;
+}
+
+form .form-button,
+.btn-primary {
   background-color: #000 !important;
   border-color: #000 !important;
 }

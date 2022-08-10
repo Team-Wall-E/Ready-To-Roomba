@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { createProductThunk } from '../store/products';
+import Button from 'react-bootstrap/Button';
 
 class CreateProduct extends Component {
   constructor() {
@@ -99,9 +100,9 @@ class CreateProduct extends Component {
           />
         </div>
         <br />
-        <button type='submit'>Submit</button>
+        <Button type='submit'>Submit</Button>
         <Link to='/products'>
-          <button type='button'>Cancel</button>
+          <Button type='button'>Cancel</Button>
         </Link>
       </form>
     );

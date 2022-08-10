@@ -14,7 +14,15 @@ const Order = db.define('order', {
   items: {
     type: Sequelize.ARRAY(Sequelize.JSON),
   },
-
 });
+
+Order.prototype.getTotal = () => {
+  const sum = 0;
+  this.lineItems.forEach((lineItem) => {
+    sum += lineItem.orderTotal;
+  });
+  console.log(sum);
+  return sum;
+};
 
 module.exports = Order;

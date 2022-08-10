@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = ({ isLoggedIn, id }) => (
-  <nav className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 black-bg'>
+  <nav className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 black-bg'>
     {/* logo */}
     <Link to='/' className='logo'>
       <Image
@@ -24,11 +24,6 @@ const Navbar = ({ isLoggedIn, id }) => (
       <li>
         <Link to='/' className='nav-link px-2 link-secondary'>
           Home
-        </Link>
-      </li>
-      <li>
-        <Link to='/' className='nav-link px-2 link-light'>
-          Products
         </Link>
       </li>
       <li>

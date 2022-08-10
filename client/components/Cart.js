@@ -8,7 +8,9 @@ import Table from 'react-bootstrap/Table';
 
 export const Cart = ({ cart, removeFromCart, addToCart }) => {
   const lineItems = cart.lineItems || [];
+
   let totalQuantity = 0;
+  
   const tax = 1.08875;
   const tax2 = 0.08875;
 

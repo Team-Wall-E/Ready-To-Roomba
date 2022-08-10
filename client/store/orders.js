@@ -25,13 +25,6 @@ const deleteOrder = (order) => {
   };
 };
 
-// const setUserOrders = (orders) => {
-//   return {
-//     type: SET_USER_ORDERS,
-//     orders,
-//   };
-// };
-
 const TOKEN = 'token';
 
 export const fetchOrders = () => async (dispatch) => {
@@ -83,7 +76,6 @@ export const deleteOrderThunk = (id, history) => {
   };
 };
 
-// TODO: if not passing in user here, do we pass it into action?
 export const getUserOrders = () => {
   return async (dispatch) => {
     try {
@@ -97,8 +89,6 @@ export const getUserOrders = () => {
         });
 
         // use the user id that's returned in the token to make a request for user's orders
-        console.log('AUTH', state);
-        // console.log('STATE AUTH', state.auth);
         const { id } = auth;
         const { data: orders } = await axios.get(`/api/users/${id}/orders`, {
           headers: {
@@ -121,8 +111,6 @@ export default function ordersReducer(orders = [], action) {
       return [...orders, action.order];
     case DELETE_ORDER:
       return orders.filter((order) => order.id !== action.order.id);
-    // case SET_USER_ORDERS:
-    //   return action.orders;
     default:
       return orders;
   }
