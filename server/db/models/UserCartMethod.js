@@ -1,4 +1,5 @@
 module.exports = (User, db) => {
+ 
   User.prototype.getCart = async function () {
     const where = {
       userId: this.id,
@@ -46,6 +47,7 @@ module.exports = (User, db) => {
     }
     return this.getCart();
   };
+
 
   User.prototype.createOrder = async function () {
     const cart = await this.getCart();

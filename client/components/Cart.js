@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { removeProductFromCartThunk, addToCartThunk } from '../store/cart';
+import { removeProductFromCartThunk } from '../store/cart';
 
-export const Cart = ({ cart, removeFromCart, addToCart }) => {
+export const Cart = ({ cart, removeFromCart }) => {
   const lineItems = cart.lineItems || [];
-  
-  const tax = 1.08875;
-  const tax2 = 0.08875;
-
-  let cartSubtotal = 0;
+  const tax = 0.08875;
+  let subtotal = [];
   console.log('🫐', cart);
 
   return (
@@ -19,34 +16,21 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
           return (
             <div key={lineItem.id}>
               <li >
-                {lineItem.product.productName}
-                <div>Quantity: {lineItem.orderQuantity}</div>
-                <div>Item price:</div>
-                <div>$ {lineItem.product.price}</div>
+                {lineItem.product.productName}({lineItem.orderQuantity})
+                <div>Item Total:</div>
+                <div>$ {lineItem.orderQuantity * lineItem.product.price}</div>
                 <button onClick={() => removeFromCart(lineItem.product)}>
-                  ⬇️
-                </button>
-        
-                <button onClick={() => addToCart(lineItem.product)}>
-                  ⬆️
+                  x
                 </button>
               </li>
-              <br />
-              <div hidden>{cartSubtotal += (lineItem.product.price * lineItem.orderQuantity)}</div>
             </div>
           );
         })}
+        <br />
+        <div>Subtotal: </div>
       </ul>
-      <div>Subtotal: $ {(cartSubtotal).toFixed(2)}</div>
-      <div>Tax: $ {(cartSubtotal*tax2).toFixed(2)}</div>
-      <div>Total: $ {((cartSubtotal*tax)).toFixed(2)}</div>
-      <br />
-      <h1>Checkout: </h1>
-      <button>
-        💳
-      </button>
     </div>
-  )
+  );
 };
 
 const mapState = (state) => ({
@@ -55,8 +39,7 @@ const mapState = (state) => ({
 });
 
 const mapDispatch = (dispatch) => ({
-  removeFromCart: (product) => dispatch(removeProductFromCartThunk(product)),
-  addToCart: (product) => dispatch(addToCartThunk(product))
+  removeFromCart: (product) => dispatch(removeProductFromCartThunk(product))
 });
 
 export default connect(mapState, mapDispatch)(Cart);

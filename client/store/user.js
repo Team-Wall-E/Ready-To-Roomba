@@ -77,11 +77,11 @@ export const deleteUserThunk = (id, history) => {
   };
 };
 
-export const updateUserThunk = (id, user) => {
+export const updateUserThunk = (user) => {
   const token = window.localStorage.getItem(TOKEN);
   return async (dispatch) => {
     try {
-      const response = await axios.put(`/api/users/${id}`, user, {
+      const response = await axios.put(`/api/users/${user.id}`, user, {
         headers: {
           authorization: token,
         },
@@ -101,8 +101,8 @@ export default function userReducer(user = [], action) {
       return [...user, action.user];
     case DELETE_USER:
       return user.filter((user) => user.id !== action.user.id);
-    // case UPDATE_USER:
-    //   return { ...user, ...action.user };
+    case UPDATE_USER:
+      return { ...user, ...action.user };
     default:
       return user;
   }
