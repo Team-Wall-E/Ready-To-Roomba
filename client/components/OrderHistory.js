@@ -1,14 +1,20 @@
 import React from 'react';
-import { fetchOrders } from '../store/orders';
+import { getUserOrders } from '../store/orders';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import auth from '../store/auth';
+import { Login } from './AuthForm';
 
 class OrderHistory extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+
   componentDidMount() {
-    // this.props.loadUserOrdersThunk();
+    this.props.getUserOrders();
   }
 
   render() {
+    console.log('ORDERS: ', this.props.getUserOrders);
     return (
       <div>
         <div>
@@ -39,7 +45,7 @@ const mapState = (state) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    fetchOrders: () => dispatch(fetchOrders()),
+    getUserOrders: () => dispatch(getUserOrders()),
   };
 };
 

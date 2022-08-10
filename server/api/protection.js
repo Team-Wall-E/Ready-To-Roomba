@@ -1,6 +1,6 @@
 const {
   models: { User },
-} = require("../db");
+} = require('../db');
 
 /***Our Protection Middleware: 
 - chaining middleware through return next()
@@ -9,24 +9,23 @@ const {
 
 async function isLoggedIn(req, res, next) {
   try {
-     let user = await User.findByToken(req.headers.authorization);
-     if (user) {
-        req.user = user;
-        return next(); 
-     } else {
-        res.sendStatus(404);
-     }
+    let user = await User.findByToken(req.headers.authorization);
+    if (user) {
+      req.user = user;
+      return next();
+    } else {
+      res.sendStatus(404);
+    }
   } catch (e) {
-     next(e);
+    next(e);
   }
 }
 
 function isAdmin(req, res, next) {
   if (req.user.isAdmin) {
-     return next(); 
+    return next();
   } else {
-     res.sendStatus(403);
-     res.redirect("/"); 
+    res.sendStatus(403);
   }
 }
 

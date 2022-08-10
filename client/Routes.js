@@ -10,6 +10,7 @@ import CreateReview from './components/CreateReview';
 import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
 import NotFoundPage from './components/NotFoundPage';
+import OrderHistory from './components/OrderHistory';
 import { me } from './store';
 import { fetchProducts } from './store/products';
 import { fetchCart } from './store/cart';
@@ -53,7 +54,6 @@ class Routes extends Component {
           <Route path='/products/:id/reviews' component={ProductReviews} />
           <Route path='/products/:id/add' component={CreateReview} />
           {isLoggedIn && (
-            // <Route exact path='/orderhistory' component={OrderHistory} />
             <Switch>
               <Route path='/cart' component={Cart} />
               <Route path='/users/:id/orders' component={OrderHistory} />
