@@ -1,7 +1,7 @@
 import axios from 'axios';
 import history from '../history';
 
-const TOKEN = 'token';
+const TOKEN = 'token'
 
 /**ACTION TYPES**/
 const SET_AUTH = 'SET_AUTH';
@@ -19,12 +19,29 @@ export const me = () => async (dispatch) => {
       },
     });
     return dispatch(setAuth(res.data));
+  } else if (!token) {
+    let guest = await axios.post("/auth/me", {
+      firstName: "guest",
+      lastName: "guest",
+      email: "guest@guest.com",
+      password: "guest_pwd"
+    });
+    const accessToken = guest.data;
+    window.localStorage.setItem(TOKEN, accessToken.token);
+    
+    const { data: guestUser } = await axios.get("/auth/me", {
+      headers: {
+        authorization: token,
+      }
+    });
+
+    return dispatch(setAuth(guestUser));
   }
 };
 
 export const authenticate =
   (firstName, lastName, email, password, method, address) =>
-  async (dispatch) => {
+  async (dispatch) => { //conditional,  if token in localstorage, attach as header
     try {
       const res = await axios.post(`/auth/${method}`, {
         firstName,

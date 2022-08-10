@@ -1,9 +1,8 @@
 module.exports = (User, db) => {
- 
   User.prototype.getCart = async function () {
     const where = {
       userId: this.id,
-      status: 'processing',
+      status: "processing",
     };
     const LineItem = db.models.lineItem;
     const Order = db.models.order;
@@ -48,10 +47,12 @@ module.exports = (User, db) => {
     return this.getCart();
   };
 
-
+  //#assuming cart exists && check status accuracy
+  /* create router post for create order 35:00
+   */
   User.prototype.createOrder = async function () {
     const cart = await this.getCart();
-    cart.status = 'completed';
+    cart.status = "completed";
     await cart.save();
     return this.getCart();
   };

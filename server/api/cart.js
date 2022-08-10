@@ -1,6 +1,10 @@
 const router = require("express").Router();
 const { isLoggedIn, isAdmin } = require("./protection");
 const User = require("../db/models/User");
+
+// const { v4: uuidv4 } = require("uuid");
+// const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
+
 module.exports = router;
 
 
@@ -32,7 +36,7 @@ router.post("/removeFromCart", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/createOrder", isLoggedIn, async (req, res, next) => {
+router.post("/checkout", isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.createOrder());

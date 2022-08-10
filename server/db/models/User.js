@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 
-const SALT_ROUNDS = 10;
+const SALT_ROUNDS = 5;
 
 const User = db.define("user", {
   firstName: {
@@ -17,7 +17,7 @@ const User = db.define("user", {
   },
   address: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
     validate: {
       notEmpty: true,
     }
@@ -31,13 +31,12 @@ const User = db.define("user", {
     allowNull: false,
     unique: true,
     validate: {
-      notEmpty: true,
       isEmail: true,
     },
   },
   password: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   imageUrl: {
     type: Sequelize.TEXT,

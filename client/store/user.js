@@ -3,6 +3,7 @@ import axios from 'axios';
 const SET_USER = 'SET_USER';
 const CREATE_USER = 'CREATE_USER';
 const DELETE_USER = 'DELETE_USER';
+const UPDATE_USER = "UPDATE_USER";
 
 export const setUser = (user) => ({
   type: SET_USER,

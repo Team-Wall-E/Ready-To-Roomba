@@ -58,17 +58,17 @@ function createRandomOrder() {
   };
 }
 
-function createLineItem() {
-  return {
-    orderQuantity: 1,
-  };
-}
+// function createLineItem() {
+//   return {
+//     orderQuantity: 0,
+//   };
+// }
 
 Array.from({ length: 106 }).forEach(() => users.push(createRandomUser()));
 Array.from({ length: 100 }).forEach(() => products.push(createRandomProduct()));
 Array.from({ length: 106 }).forEach(() => reviews.push(createRandomReview()));
 Array.from({ length: 107 }).forEach(() => orders.push(createRandomOrder()));
-Array.from({ length: 109 }).forEach(() => lineItems.push(createLineItem()));
+// Array.from({ length: 109 }).forEach(() => lineItems.push(createLineItem()));
 
 /*
  We've separated the `seed` function from the `runSeed` function.
@@ -76,7 +76,7 @@ Array.from({ length: 109 }).forEach(() => lineItems.push(createLineItem()));
  The `seed` function is concerned only with modifying the database.
 */
 const seed = async () => {
-  let createdUsers, createdProducts, createdReviews, createdOrders;
+  let createdUsers, createdProducts, createdOrders;
 
   try {
     await db.sync({ force: true });
@@ -100,7 +100,6 @@ const seed = async () => {
         return Promise.all(reviews.map((review) => Review.create(review)));
       })
       .then((result) => {
-        createdReviews = result;
         
         //create the orders
         for (let i = 0; i < orders.length; i++) {
@@ -122,8 +121,8 @@ const seed = async () => {
         for (let k = 0; k < lineItems.length; k++) {
           lineItems[k].orderId = createdOrders[k].id;
           lineItems[k].productId = createdProducts[k].id;
-          lineItems[k].orderQuantity = createdProducts[k].inventoryQty;
-          lineItems[k].orderTotal = createdProducts[k].inventoryQty * createdProducts[k].price
+          lineItems[k].orderQuantity += createdProducts[k].inventoryQty;
+          lineItems[k].orderTotal = lineItems[k].orderQuantity * createdProducts[k].price;
         }
         return Promise.all(lineItems.map((item) => LineItem.create(item)));
       });

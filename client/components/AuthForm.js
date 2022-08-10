@@ -6,7 +6,7 @@ import { authenticate } from '../store';
  * COMPONENT
  */
 const AuthForm = (props) => {
-  const { name, displayName, handleSubmit, error, address } = props;
+  const { name, displayName, handleSubmit, error } = props;
   // TODO: add ternary to not show first and last name on login form
   return (
     <div>

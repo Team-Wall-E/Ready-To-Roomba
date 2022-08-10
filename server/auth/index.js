@@ -10,7 +10,7 @@ router.post('/login', async (req, res, next) => {
   }
 })
 
-
+// if token, login/signup- make sure is guest, GUEST(after user is created, destroy guest user and move things over)
 router.post('/signup', async (req, res, next) => {
   try {
     const user = await User.create(req.body)

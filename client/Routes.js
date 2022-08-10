@@ -9,6 +9,7 @@ import ProductReviews from './components/ProductReviews';
 import CreateReview from './components/CreateReview';
 import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 import NotFoundPage from './components/NotFoundPage';
 import { me } from './store';
 import { fetchProducts } from './store/products';
@@ -40,7 +41,8 @@ class Routes extends Component {
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/home' component={AllProducts} />
-          <Route path='/cart' component={Cart} />
+          <Route exact path='/cart' component={Cart} />
+          <Route exact path='/cart/checkout' component={Checkout} />
           <Route exact path='/products' component={AllProducts} />
           <Route path='/products/:id' component={SingleProduct} />
           <Route exact path='/brands' component={Brands} />
@@ -49,8 +51,11 @@ class Routes extends Component {
           <Route path='/products/:id/reviews' component={ProductReviews} />
           <Route path='/products/:id/add' component={CreateReview} />
           {isLoggedIn && (
-            // <Route exact path='/orderhistory' component={OrderHistory} />
-            <Route path='/cart' component={Cart} />
+            <Switch>
+              {/* <Route exact path='/orderhistory' component={OrderHistory} /> */}
+              <Route exact path='/cart' component={Cart} />
+              <Route exact path='/cart/checkout' component={Checkout} />
+            </Switch>
           )}
           <Route component={NotFoundPage} />
           <Redirect from='/login' to='/home' />

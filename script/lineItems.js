@@ -1,6 +1,6 @@
 const lineItems = [
   {
-    orderQuantity: null,
+    orderQuantity: 0,
   }
 ];
 

@@ -11,8 +11,9 @@ const LineItem = db.define("lineItem", {
   orderTotal: {
     type: Sequelize.DECIMAL(10, 2),
     validate: {
-      min: 0.01,
-    }
+      min: 0,
+    },
+    defaultValue: 1
   }
 });
 

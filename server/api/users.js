@@ -23,9 +23,9 @@ router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-router.post('/', async (req, res, next) => {
+router.post('/', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
-    const newUser = {...req.body, isAdmin:false}
+    const newUser = {...req.body, isAdmin:false} // sign up
     const user = await User.create(newUser);
     res.send(user);
   } catch (err) {
@@ -54,7 +54,7 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
     let returningUser;
     if (paramsId === req.user.id || req.user.isAdmin) {
       returningUser = await User.findByPk(paramsId);
-      res.send(await returningUser.update(req.body));
+      res.send(await returningUser.update(req.body)); // ternary, only user can update
     } else {
       res.sendStatus(401);
     }
