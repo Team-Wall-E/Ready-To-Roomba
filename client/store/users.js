@@ -39,13 +39,13 @@ export const createUserThunk = (user, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const response = await axios.post(`/api/users`, user, {
+      const response = await axios.post(`/api/users/signup`, user, {
         headers: {
           authorization: token,
         },
       });
       dispatch(createUser(response.data));
-      history.push('/user');
+      history.push('/users');
     } catch (err) {
       console.log(err.response);
     }
@@ -62,7 +62,7 @@ export const deleteUserThunk = (id, history) => {
         },
       });
       dispatch(deleteUser(user));
-      history.push('/user');
+      history.push('/users');
     } catch (err) {
       console.log(err.response);
     }
@@ -77,7 +77,6 @@ export default function usersReducer(users = [], action) {
       return [...users, action.user];
     case DELETE_USER:
       return users.filter((user) => user.id !== action.user.id);
-
     default:
       return users;
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {  fetchUser, updateUserThunk, setUser } from '../store/singleUser';
+import { fetchUser, updateUserThunk, setUser } from '../store/singleUser';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -7,14 +7,24 @@ class UpdateUser extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
-      lastName: '',
-      address: '',
-      email: '',
-      password: '',
+      firstName: props.user.firstName,
+      lastName: props.user.lastName,
+      address: props.user.address,
+      email: props.user.email,
+      password: props.user.password,
     };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.user.id !== this.props.user.id) {
+      this.setState({
+        firstName: this.props.user.firstName || '',
+        lastName: this.props.user.lastName || '',
+        address: this.props.user.address || '',
+        password: this.props.user.password || '',
+        s,
+      });
+    }
   }
 
   handleChange = (evt) => {
@@ -25,30 +35,27 @@ class UpdateUser extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    const { updateUser, fetchUser, id } = this.props;
-    const { firstName, lastName, address, email, password } = this.state;
-    const improvedUser = {
-      firstName: firstName,
-      lastName: lastName,
-      address: address,
-      email: email,
-      password: password,
-    };
-    updateUser(id, improvedUser);
-    fetchUser(id);
+    // const { firstName, lastName, address, email, password } = this.state;
+    // const improvedUser = {
+    //   firstName: firstName,
+    //   lastName: lastName,
+    //   address: address,
+    //   email: email,
+    //   password: password,
+    // };
+
+    this.props.updateUser({ ...this.props.user, ...this.state });
+
+    // this.props.fetchUser(this.props.user.id);
   };
 
   render() {
-    const { firstName, lastName, address, email, password } = this.state;
+    const { firstName, lastName, address, password } = this.state;
     const { handleSubmit, handleChange } = this;
 
     return (
       <div>
-        <form
-          id='edit-form'
-          onSubmit={handleSubmit}
-          className='needs-validation'
-        >
+        <form className='edit-form needs-validation' onSubmit={handleSubmit}>
           <label htmlFor='firstName'>First Name:</label>
           <input
             name='firstName'
@@ -76,7 +83,7 @@ class UpdateUser extends Component {
           <label htmlFor='password'>Password:</label>
           <input
             name='password'
-            type = 'password'
+            type='password'
             className='form-change'
             onChange={handleChange}
             value={password || ''}
@@ -91,13 +98,15 @@ class UpdateUser extends Component {
     );
   }
 }
-
-const mapDispatch = (dispatch) => {
+const mapState = ({ user }) => ({
+  user,
+});
+const mapDispatch = (dispatch, { history }) => {
   return {
-    updateUser: (id, user) => dispatch(updateUserThunk(id, user)),
+    updateUser: (user) => dispatch(updateUserThunk(user, history)),
     fetchUser: (id) => dispatch(fetchUser(id)),
-    clearUser: () => dispatch(s({})),
+    clearUser: () => dispatch(setUser({})),
   };
 };
 
-export default connect(null, mapDispatch)(UpdateUser);
+export default connect(mapState, mapDispatch)(UpdateUser);
