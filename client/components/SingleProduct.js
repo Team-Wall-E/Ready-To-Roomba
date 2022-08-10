@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter} from 'react-router-dom';
 import { fetchProduct } from '../store/singleProduct';
 import { fetchProducts, deleteProductThunk } from '../store/products';
 import { addToCartThunk } from '../store/cart';
@@ -33,6 +33,8 @@ class Product extends React.Component {
 
   render() {
     const { product, addToCart, deleteProduct, isAdmin } = this.props;
+
+
 
     if (product) {
       return (

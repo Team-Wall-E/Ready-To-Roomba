@@ -1,13 +1,12 @@
 import axios from 'axios';
 
-const SET_USER = 'SET_USER';
+const SET_USERS = 'SET_USERS';
 const CREATE_USER = 'CREATE_USER';
 const DELETE_USER = 'DELETE_USER';
-const UPDATE_USER = 'UPDATE_USER';
 
-export const setUser = (user) => ({
-  type: SET_USER,
-  user,
+export const setUsers = (users) => ({
+  type: SET_USERS,
+  users,
 });
 
 const createUser = (user) => {
@@ -24,21 +23,14 @@ const deleteUser = (user) => {
   };
 };
 
-const updateUser = (user) => {
-  return {
-    type: UPDATE_USER,
-    user,
-  };
-};
-
-export const fetchUser = () => async (dispatch) => {
+export const fetchUsers = () => async (dispatch) => {
   const token = window.localStorage.getItem(TOKEN);
-  const userResponse = await axios.get('/api/user', {
+  const userResponse = await axios.get('/api/users', {
     headers: {
       authorization: token,
     },
   });
-  dispatch(setUser(userResponse.data));
+  dispatch(setUsers(userResponse.data));
 };
 
 const TOKEN = 'token';
@@ -47,7 +39,7 @@ export const createUserThunk = (user, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const response = await axios.post(`/api/user`, user, {
+      const response = await axios.post(`/api/users`, user, {
         headers: {
           authorization: token,
         },
@@ -64,7 +56,7 @@ export const deleteUserThunk = (id, history) => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      const { data: user } = await axios.delete(`/api/user/${id}`, {
+      const { data: user } = await axios.delete(`/api/users/${id}`, {
         headers: {
           authorization: token,
         },
@@ -77,33 +69,16 @@ export const deleteUserThunk = (id, history) => {
   };
 };
 
-export const updateUserThunk = (id, user) => {
-  const token = window.localStorage.getItem(TOKEN);
-  return async (dispatch) => {
-    try {
-      const response = await axios.put(`/api/users/${id}`, user, {
-        headers: {
-          authorization: token,
-        },
-      });
-      dispatch(updateUser(response.data));
-    } catch (err) {
-      console.log(err.response);
-    }
-  };
-};
-
-export default function userReducer(user = [], action) {
+export default function usersReducer(users = [], action) {
   switch (action.type) {
-    case SET_USER:
-      return action.user;
+    case SET_USERS:
+      return action.users;
     case CREATE_USER:
-      return [...user, action.user];
+      return [...users, action.user];
     case DELETE_USER:
-      return user.filter((user) => user.id !== action.user.id);
-    // case UPDATE_USER:
-    //   return { ...user, ...action.user };
+      return users.filter((user) => user.id !== action.user.id);
+
     default:
-      return user;
+      return users;
   }
 }

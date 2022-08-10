@@ -7,7 +7,7 @@ import Image from 'react-bootstrap/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = ({ isLoggedIn }) => (
+const Navbar = ({ isLoggedIn, id }) => (
   <nav className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 black-bg'>
     {/* logo */}
     <Link to='/' className='logo'>
@@ -29,6 +29,11 @@ const Navbar = ({ isLoggedIn }) => (
       <li>
         <Link to='/' className='nav-link px-2 link-light'>
           Products
+        </Link>
+      </li>
+      <li>
+        <Link to={`/users/${id}/`} className='nav-link px-2 link-light'>
+          My Profile
         </Link>
       </li>
     </ul>
@@ -60,6 +65,7 @@ const Navbar = ({ isLoggedIn }) => (
 const mapState = (state) => ({
   isLoggedIn: !!state.auth.id,
   isAdmin: !!state.auth.isAdmin,
+  id: state.auth.id,
 });
 
 const mapDispatch = (dispatch) => {
