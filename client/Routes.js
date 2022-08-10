@@ -13,6 +13,8 @@ import NotFoundPage from './components/NotFoundPage';
 import { me } from './store';
 import { fetchProducts } from './store/products';
 import { fetchCart } from './store/cart';
+import UserProfile from './components/UserProfile.js';
+import OrderHistory from './components/OrderHistory.js';
 
 /**
  * COMPONENT
@@ -31,17 +33,19 @@ class Routes extends Component {
 
   render() {
     const { isLoggedIn } = this.props;
-   
+
     return (
       <div>
         <Switch>
           {/* This is the ROUTES for ALL visitors */}
-          
+          <Route exact path='/' component={AllProducts} />
+
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/home' component={AllProducts} />
           <Route path='/cart' component={Cart} />
           <Route exact path='/products' component={AllProducts} />
+          {/* TODO: may have to fix users id route */}
+          <Route path='/users/:id' component={UserProfile} />
           <Route path='/products/:id' component={SingleProduct} />
           <Route exact path='/brands' component={Brands} />
           <Route path='/brands/:id' component={SingleProduct} />
@@ -50,20 +54,21 @@ class Routes extends Component {
           <Route path='/products/:id/add' component={CreateReview} />
           {isLoggedIn && (
             // <Route exact path='/orderhistory' component={OrderHistory} />
-            <Route path='/cart' component={Cart} />
+            <Switch>
+              <Route path='/cart' component={Cart} />
+              <Route path='/users/:id/orders' component={OrderHistory} />
+            </Switch>
           )}
           <Route component={NotFoundPage} />
-          <Redirect from='/login' to='/home' />
-          <Redirect to='/home' />
+          <Redirect from='/login' to='/' />
+          <Redirect exact to='/' component={AllProducts} />
         </Switch>
       </div>
     );
   }
 }
 
-/**
- * CONTAINER
- */
+/*** CONTAINER****/
 const mapState = (state) => ({
   // Being 'logged in' for our purposes will be defined has having a state.auth that has a truthy id.
   // Otherwise, state.auth will be an empty object, and state.auth.id will be falsey
@@ -79,7 +84,6 @@ const mapDispatch = (dispatch) => {
     loadInitialData() {
       dispatch(me());
     },
-    // logOut: () => dispatch(logout())
   };
 };
 
