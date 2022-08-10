@@ -7,7 +7,7 @@ import Image from 'react-bootstrap/Image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
-const Navbar = ({ isLoggedIn }) => (
+const Navbar = ({ isLoggedIn, id }) => (
   <nav className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-3 mb-4 black-bg'>
     {/* logo */}
     <Link to='/' className='logo'>
@@ -31,33 +31,31 @@ const Navbar = ({ isLoggedIn }) => (
           Products
         </Link>
       </li>
+      <li>
+        <Link to={`/users/${id}/`} className='nav-link px-2 link-light'>
+          My Profile
+        </Link>
+      </li>
     </ul>
     {/* far right icons/buttons */}
 
     <div className='text-end'>
+      <Link to='/cart'>
+        <FontAwesomeIcon icon={faCartShopping} />
+      </Link>
       {!isLoggedIn ? (
-        <div>
-          <Link to='/cart'>
-            <FontAwesomeIcon icon={faCartShopping} />
-          </Link>
+        <span>
           <Button variant='light' href='/login'>
             Login
           </Button>
           <Button variant='light' href='/signup'>
             Signup
           </Button>
-        </div>
+        </span>
       ) : (
-        <div>
-          <Link to='/cart'>
-            <FontAwesomeIcon icon={faCartShopping} />
-          </Link>
-          <div>
-            <Button variant='light' href='/logout' onClick={() => logout()}>
-              Logout
-            </Button>
-          </div>
-        </div>
+        <Button variant='light' href='/logout' onClick={() => logout()}>
+          Logout
+        </Button>
       )}
     </div>
   </nav>
@@ -67,6 +65,7 @@ const Navbar = ({ isLoggedIn }) => (
 const mapState = (state) => ({
   isLoggedIn: !!state.auth.id,
   isAdmin: !!state.auth.isAdmin,
+  id: state.auth.id,
 });
 
 const mapDispatch = (dispatch) => {
