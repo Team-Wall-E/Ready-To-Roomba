@@ -1,11 +1,10 @@
-const router = require("express").Router();
-const { isLoggedIn, isAdmin } = require("./protection");
-const User = require("../db/models/User");
+const router = require('express').Router();
+const { isLoggedIn, isAdmin } = require('./protection');
+const User = require('../db/models/User');
 module.exports = router;
 
-
 //TODO: add extra security - unsure if the URL will be /api/user/id/cart or what
-router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
+router.get('/', isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.getCart());
@@ -14,7 +13,7 @@ router.get("/", isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-router.post("/addToCart", isLoggedIn, async (req, res, next) => {
+router.post('/addToCart', isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.addToCart(req.body));
@@ -23,7 +22,7 @@ router.post("/addToCart", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/removeFromCart", isLoggedIn, async (req, res, next) => {
+router.post('/removeFromCart', isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.removeFromCart(req.body));
@@ -32,7 +31,7 @@ router.post("/removeFromCart", isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post("/createOrder", isLoggedIn, async (req, res, next) => {
+router.post('/createOrder', isLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.createOrder());

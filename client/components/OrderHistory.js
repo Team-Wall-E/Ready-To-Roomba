@@ -15,29 +15,25 @@ class OrderHistory extends React.Component {
 
   render() {
     console.log('ORDERS: ', this.props.getUserOrders);
-    if (!auth.id) {
-      return <Login />;
-    } else {
-      return (
+    return (
+      <div>
         <div>
+          <h1>Order History</h1>
           <div>
-            <h1>Order History</h1>
-            <div>
-              {this.props.orders.map((order) => {
-                let date = order.updatedAt.slice(0, 10);
-                return (
-                  <div key={order.id}>
-                    <p>Order ID: {order.id}</p>
-                    <p>Order Date: {date[0]}</p>
-                    {/* maybe add more */}
-                  </div>
-                );
-              })}
-            </div>
+            {this.props.orders.map((order) => {
+              let date = order.updatedAt.slice(0, 10);
+              return (
+                <div key={order.id}>
+                  <p>Order ID: {order.id}</p>
+                  <p>Order Date: {date[0]}</p>
+                  {/* maybe add more */}
+                </div>
+              );
+            })}
           </div>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 
