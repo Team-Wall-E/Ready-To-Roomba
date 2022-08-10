@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
-import { fetchProducts } from '../store/products'
+import { fetchProducts } from '../store/products';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import Button from 'react-bootstrap/Button';
 
 function SearchBar(props, { placeholder }) {
   let [filteredData, setFilteredData] = useState([]);
@@ -18,7 +20,9 @@ function SearchBar(props, { placeholder }) {
     const searchWord = e.target.value;
     setWordEntered(searchWord);
     const newFilter = props.products.filter((product) => {
-      return product.productName.toLowerCase().includes(searchWord.toLowerCase());
+      return product.productName
+        .toLowerCase()
+        .includes(searchWord.toLowerCase());
     });
 
     if (searchWord === '') {
@@ -34,34 +38,33 @@ function SearchBar(props, { placeholder }) {
   };
 
   return (
-    <div className="search">
-      <div className="searchInputs">
-        <input
-          type="text"
-          placeholder={props.placeholder}
-          value={wordEntered}
-          onChange={handleFilter}
-        />
-        <div className="searchIcon">
-          {filteredData.length === 0 ? (
-          `'hello daddies' - donna`
-          ) : (
-            <button onClick={clearInput}> 
-            Clear
-            </button>
-          )}
+    <div className='search'>
+      <div className='searchInputs'>
+        <div className='input-group'>
+          <input
+            type='text'
+            placeholder={props.placeholder}
+            value={wordEntered}
+            onChange={handleFilter}
+          />
+          <div className='searchIcon'>
+            {filteredData.length === 0 ? (
+              <i className='fas fa-search'></i>
+            ) : (
+              <Button onClick={clearInput}>Clear</Button>
+            )}
+          </div>
         </div>
 
         {filteredData.length != 0 && (
-          <div className="dataResults">
+          <div className='dataResults'>
             {filteredData.slice(0, 10).map((product) => {
               return (
-                <div>
+                <div key={product.id}>
                   <Link
-                    key={product.id}
-                    className="dataItem"
+                    className='dataItem'
                     to={`/products/${product.id}`}
-                    target="blank"
+                    target='blank'
                   >
                     <p>{product.productName}</p>
                   </Link>

@@ -1,26 +1,33 @@
-// To make sure a user is logged in
+const {
+  models: { User },
+} = require('../db');
+
+/***Our Protection Middleware: 
+- chaining middleware through return next()
+- allows us to access req.user
+*/
+
 async function isLoggedIn(req, res, next) {
   try {
-    let user = await User.findByToken(req.headers.authorization)
+    let user = await User.findByToken(req.headers.authorization);
     if (user) {
-      req.user = user
-      return next(); // if user is authenticated in the session, carry on
+      req.user = user;
+      return next();
     } else {
-      res.sendStatus(404); 
+      res.sendStatus(404);
     }
-  } catch(e) {
-    next(e)
+  } catch (e) {
+    next(e);
   }
-};
+}
 
-// to check if a user is an admin
 function isAdmin(req, res, next) {
   if (req.user.isAdmin) {
-    return next(); // if user is authenticated in the session, carry on
+    return next();
   } else {
-    res.redirect('/'); // if they aren't redirect them to the home page
+    res.sendStatus(403);
   }
-};
+}
 
 module.exports = {
   isLoggedIn,

@@ -1,24 +1,32 @@
-const router = require('express').Router()
-const { models: { User, Order, LineItem }} = require('../db')
-const { isLoggedIn, isAdmin } = require('./protection')
+const router = require('express').Router();
+const {
+  models: { User, Order, LineItem, Product },
+} = require('../db');
+const { isLoggedIn, isAdmin } = require('./protection');
+
+/* Reminder: 
+isAdmin depends on isLoggedin
+req.user is accessible through isLoggedin
+*/
 
 router.get('/', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const users = await User.findAll({
-      // explicitly select only the id and username fields - even though
+      // explicitly select only the id and email fields - even though
       // users' passwords are encrypted, it won't help if we just
       // send everything to anyone who asks!
-      attributes: ['id', 'email', 'isAdmin']
-    })
-    res.json(users)
+      attributes: ['id', 'email', 'isAdmin', 'firstName', 'lastName'],
+    });
+    res.json(users);
   } catch (err) {
-    next(err)
+    next(err);
   }
-})
+});
 
 router.post('/', async (req, res, next) => {
   try {
-    const user = await User.create(req.body);
+    const newUser = { ...req.body, isAdmin: false };
+    const user = await User.create(newUser);
     res.send(user);
   } catch (err) {
     next(err);
@@ -26,18 +34,55 @@ router.post('/', async (req, res, next) => {
 });
 
 router.get('/:id', isLoggedIn, async (req, res, next) => {
-  try { // add conditional; second conditional req.user.isAdmin
-    const user = await User.findByPk(+req.params.id);
-    res.json(user);
+  console.log('EXPRESS USERS/ID: ', id);
+  try {
+    let paramsId = +req.params.id;
+    let returningUser;
+    if (paramsId === req.user.id || req.user.isAdmin) {
+      returningUser = await User.findByPk({
+        where: {
+          id: paramsId,
+        },
+        include: Order,
+      });
+      res.json(returningUser);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (err) {
     next(err);
   }
 });
 
+// as long as we can grab all orders for user,
+// we should be able to then click on order
+// pass it through the store and get lineItems
+// from that order, check how the cart is setup
+router.get('/:id/orders', isLoggedIn, async (req, res, next) => {
+  console.log('EXPRESS ROUTE ORDERS: ');
+  console.log('USER: ' + req.user.id);
+
+  try {
+    const orders = await Order.findAll({
+      where: { userId: req.user.id },
+    });
+    console.log('ORDERS: ' + orders);
+    res.json(orders);
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.put('/:id', isLoggedIn, async (req, res, next) => {
-  try { // conditional req.user.id || req.user.isAdmin
-    const user = await User.findByPk(+req.params.id);
-    res.send(await user.update(req.body));
+  try {
+    let paramsId = +req.params.id;
+    let returningUser;
+    if (paramsId === req.user.id || req.user.isAdmin) {
+      returningUser = await User.findByPk(paramsId);
+      res.send(await returningUser.update(req.body));
+    } else {
+      res.sendStatus(401);
+    }
   } catch (err) {
     next(err);
   }
@@ -45,12 +90,20 @@ router.put('/:id', isLoggedIn, async (req, res, next) => {
 
 router.delete('/:id', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
-    const user = await User.findByPk(+req.params.id);
-    await user.destroy();
-    res.send(user);
+    let paramsId = +req.params.id;
+    let returningUser;
+    if (paramsId === req.user.id || req.user.isAdmin) {
+      returningUser = await User.findByPk(paramsId);
+      await returningUser.destroy();
+      res.send(returningUser);
+    } else {
+      res.sendStatus(401);
+    }
   } catch (err) {
     next(err);
   }
 });
+
+//***CART***/  api/user/id/cart*/
 
 module.exports = router;
