@@ -14,10 +14,18 @@ const updateUser = (user) => {
     user,
   };
 };
+
+const TOKEN = 'token';
+
 export const fetchUser = (id) => {
   return async (dispatch) => {
     try {
-      const response = await axios.get(`/api/users/${id}`);
+      const token = window.localStorage.getItem(TOKEN);
+      const response = await axios.get(`/api/users/${id}`, {
+        headers: {
+          authorization: token,
+        },
+      });
       dispatch(setUser(response.data));
     } catch (err) {
       console.log(err.response);
@@ -25,12 +33,10 @@ export const fetchUser = (id) => {
   };
 };
 
-const TOKEN = 'token';
-
 export const updateUserThunk = (id, user) => {
-  const token = window.localStorage.getItem(TOKEN);
   return async (dispatch) => {
     try {
+      const token = window.localStorage.getItem(TOKEN);
       const response = await axios.put(`/api/users/${id}`, user, {
         headers: {
           authorization: token,

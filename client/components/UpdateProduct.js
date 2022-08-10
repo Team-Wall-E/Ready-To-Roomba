@@ -90,7 +90,7 @@ class UpdateProduct extends Component {
           />
           <br />
           <button type='submit'>Submit</button>
-          <Link to='/'>
+          <Link to='/home'>
             <button type='button'>Cancel</button>
           </Link>
         </form>

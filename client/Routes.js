@@ -13,6 +13,7 @@ import NotFoundPage from './components/NotFoundPage';
 import { me } from './store';
 import { fetchProducts } from './store/products';
 import { fetchCart } from './store/cart';
+import Home from './components/Home'
 
 /**
  * COMPONENT
@@ -38,7 +39,7 @@ class Routes extends Component {
           {/* This is the ROUTES for ALL visitors */}
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
-          <Route path='/home' component={AllProducts} />
+          <Route path='/home' component={Home} />
           <Route path='/cart' component={Cart} />
           <Route exact path='/products' component={AllProducts} />
           <Route path='/products/:id' component={SingleProduct} />
