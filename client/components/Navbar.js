@@ -32,7 +32,7 @@ const Navbar = ({ isLoggedIn, id }) => (
         </Link>
       </li>
       <li>
-        <Link to={`/users/${id}`} className='nav-link px-2 link-light'>
+        <Link to={`/users/${id}/`} className='nav-link px-2 link-light'>
           My Profile
         </Link>
       </li>

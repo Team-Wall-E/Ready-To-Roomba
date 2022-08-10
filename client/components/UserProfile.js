@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUsers, createUserThunk, deleteUserThunk } from '../store/users';
-import { fetchUser, updateUserThunk } from '../store/singleUser';
+import { fetchUsers, deleteUserThunk } from '../store/users';
+import { fetchUser } from '../store/singleUser';
 import UpdateUser from './UpdateUser';
 import AllUsers from './AllUsers';
 import CreateProduct from './CreateProduct';
@@ -77,7 +77,6 @@ export const UserProfile = (props) => {
             {showAllUsers && <AllUsers>show/hide typography</AllUsers>}
           </h6>
           <br></br>
-          {/* TODO: add redirect to allproducts */}
         </div>
       ) : null}
     </div>
@@ -98,8 +97,6 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => ({
   fetchUsers: () => dispatch(fetchUsers()),
   getUser: (id) => dispatch(fetchUser(id)),
-  deleteUser: (id) => dispatch(deleteUserThunk(id, history)),
-  addToCart: (product) => dispatch(addToCartThunk(product)),
 });
 
 export default connect(mapState, mapDispatch)(UserProfile);

@@ -4,7 +4,6 @@ const SET_USERS = 'SET_USERS';
 const CREATE_USER = 'CREATE_USER';
 const DELETE_USER = 'DELETE_USER';
 
-
 export const setUsers = (users) => ({
   type: SET_USERS,
   users,
@@ -24,9 +23,13 @@ const deleteUser = (user) => {
   };
 };
 
-
 export const fetchUsers = () => async (dispatch) => {
-  const userResponse = await axios.get('/api/users');
+  const token = window.localStorage.getItem(TOKEN);
+  const userResponse = await axios.get('/api/users', {
+    headers: {
+      authorization: token,
+    },
+  });
   dispatch(setUsers(userResponse.data));
 };
 
@@ -74,7 +77,7 @@ export default function usersReducer(users = [], action) {
       return [...users, action.user];
     case DELETE_USER:
       return users.filter((user) => user.id !== action.user.id);
- 
+
     default:
       return users;
   }
