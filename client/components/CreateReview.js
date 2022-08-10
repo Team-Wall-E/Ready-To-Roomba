@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { addReviewThunk } from '../store/reviews';
+import Button from 'react-bootstrap/Button';
 
 class CreateReview extends React.Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class CreateReview extends React.Component {
                     <option key={rating}>{starRating}</option>;
                   })}
                 </select>
-                <button type='submit'>Submit Review</button>
+                <Button type='submit'>Submit Review</Button>
               </div>
             </div>
           </form>

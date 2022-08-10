@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import {  fetchUser, updateUserThunk, setUser } from '../store/singleUser';
+import { fetchUser, updateUserThunk, setUser } from '../store/singleUser';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 class UpdateUser extends Component {
   constructor(props) {
@@ -76,15 +77,17 @@ class UpdateUser extends Component {
           <label htmlFor='password'>Password:</label>
           <input
             name='password'
-            type = 'password'
+            type='password'
             className='form-change'
             onChange={handleChange}
             value={password || ''}
           />
           <br />
-          <button type='submit'>Submit</button>
+          <Button type='submit'>Submit</Button>
           <Link to='/home'>
-            <button type='button'>Cancel</button>
+            <Button type='button' variant='secondary'>
+              Cancel
+            </Button>
           </Link>
         </form>
       </div>

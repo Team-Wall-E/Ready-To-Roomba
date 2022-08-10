@@ -1,8 +1,7 @@
 import React from 'react';
 import { getUserOrders } from '../store/orders';
 import { connect } from 'react-redux';
-import auth from '../store/auth';
-import { Login } from './AuthForm';
+import Table from 'react-bootstrap/Table';
 
 class OrderHistory extends React.Component {
   constructor(props) {
@@ -15,23 +14,33 @@ class OrderHistory extends React.Component {
 
   render() {
     console.log('ORDERS: ', this.props.getUserOrders);
+    const orders = this.props.orders;
     return (
-      <div>
-        <div>
-          <h1>Order History</h1>
-          <div>
-            {this.props.orders.map((order) => {
-              let date = order.updatedAt.slice(0, 10);
+      <div className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-5 mb-5'>
+        <h2>Order History</h2>
+        <Table className='mt-5'>
+          <thead>
+            <tr>
+              <th>Order Id</th>
+              <th>Status</th>
+              <th>Date</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {orders.map((order) => {
               return (
-                <div key={order.id}>
-                  <p>Order ID: {order.id}</p>
-                  <p>Order Date: {date[0]}</p>
-                  {/* maybe add more */}
-                </div>
+                <tr key={order.id}>
+                  <td>{order.id}</td>
+                  <td>{order.status}</td>
+
+                  <td>{order.updatedAt}</td>
+                  <td>TODO</td>
+                </tr>
               );
             })}
-          </div>
-        </div>
+          </tbody>
+        </Table>
       </div>
     );
   }

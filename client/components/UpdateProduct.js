@@ -6,6 +6,7 @@ import {
 } from '../store/singleProduct';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 class UpdateProduct extends Component {
   constructor(props) {
@@ -89,9 +90,9 @@ class UpdateProduct extends Component {
             required
           />
           <br />
-          <button type='submit'>Submit</button>
+          <Button type='submit'>Submit</Button>
           <Link to='/'>
-            <button type='button'>Cancel</button>
+            <Button type='button'>Cancel</Button>
           </Link>
         </form>
       </div>

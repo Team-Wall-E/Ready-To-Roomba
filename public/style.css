@@ -100,12 +100,18 @@ nav .text-end {
 }
 
 form .form-button,
-.btn-primary {
+.btn-primary,
+.btn-secondary {
   text-transform: uppercase;
   letter-spacing: 3px;
   font-size: 0.85em !important;
   border-radius: 0 !important;
   padding: 0.8em 1em !important;
+  margin: 1em;
+}
+
+form .form-button,
+.btn-primary {
   background-color: #000 !important;
   border-color: #000 !important;
 }
@@ -133,12 +139,6 @@ h6,
 }
 
 /* Links */
-/* button.btn.btn-link {
-  color: black;
-  letter-spacing: 0.06rem;
-  text-transform: uppercase;
-  padding: 1rem;
-} */
 
 button.btn-link.btn.btn-primary {
   background-color: transparent !important;

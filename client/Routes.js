@@ -46,22 +46,21 @@ class Routes extends Component {
           <Route path='/cart' component={Cart} />
           <Route exact path='/products' component={AllProducts} />
           {/* TODO: may have to fix users id route */}
-          <Route path='/users/:id' component={UserProfile} />
+          <Route exact path='/users/:id' component={UserProfile} />
           <Route path='/products/:id' component={SingleProduct} />
           <Route exact path='/brands' component={Brands} />
-          <Route path='/brands/:id' component={SingleProduct} />
           <Route path='/products/:id/update' component={UpdateProduct} />
           <Route path='/products/:id/reviews' component={ProductReviews} />
           <Route path='/products/:id/add' component={CreateReview} />
           {isLoggedIn && (
             <Switch>
               <Route path='/cart' component={Cart} />
-              <Route path='/users/:id/orders' component={OrderHistory} />
+              <Route exact path='/users/:id/orders' component={OrderHistory} />
             </Switch>
           )}
           {/* <Route path='/users' component={AllUsers} /> */}
           {isLoggedIn && isAdmin && (
-            <Route path='/users' component={AllUsers} />
+            <Route exact path='/users' component={AllUsers} />
           )}
           <Route component={NotFoundPage} />
           <Redirect from='/login' to='/' />
