@@ -31,7 +31,7 @@ router.post('/removeFromCart', isLoggedIn, async (req, res, next) => {
   }
 });
 
-router.post('/createOrder', isLoggedIn, async (req, res, next) => {
+router.delete('/deleteCart', isLoggedIn, isAdmin, async (req, res, next) => {
   try {
     const user = await User.findByToken(req.headers.authorization);
     res.send(await user.createOrder());

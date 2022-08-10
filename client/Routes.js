@@ -9,6 +9,7 @@ import ProductReviews from './components/ProductReviews';
 import CreateReview from './components/CreateReview';
 import UpdateProduct from './components/UpdateProduct';
 import Cart from './components/Cart';
+import Checkout from './components/Checkout.js';
 import NotFoundPage from './components/NotFoundPage';
 import OrderHistory from './components/OrderHistory';
 import { me } from './store';
@@ -42,6 +43,7 @@ class Routes extends Component {
           <Route path='/login' component={Login} />
           <Route path='/signup' component={Signup} />
           <Route path='/cart' component={Cart} />
+          <Route path='/checkout' component={Checkout} />
           <Route exact path='/products' component={AllProducts} />
           <Route path='/products/:id' component={SingleProduct} />
           <Route exact path='/brands' component={Brands} />
@@ -53,6 +55,7 @@ class Routes extends Component {
             // <Route exact path='/orderhistory' component={OrderHistory} />
             <Switch>
               <Route path='/cart' component={Cart} />
+              <Route path='/checkout' component={Checkout} />
               <Route path='/users/:id/orders' component={OrderHistory} />
             </Switch>
           )}
