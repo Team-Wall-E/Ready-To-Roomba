@@ -40,14 +40,6 @@ router.delete("/deleteCart", isLoggedIn, isAdmin, async (req, res, next) => {
   }
 });
 
-const stripeChargeCallback = (res) => (stripeErr, stripeRes) => {
-  if (stripeErr) {
-    res.status(500).send({ error: stripeErr });
-  } else {
-    res.status(200).send({ success: stripeRes });
-  }
-};
-
 router.get("/stripe", (req, res) => {
   res.send({
     message: "Hello Stripe checkout server!",
@@ -55,14 +47,18 @@ router.get("/stripe", (req, res) => {
   });
 });
 
-router.post("/stripe", (req, res) => {
-  console.log('yurr')
-  const body = {
-    source: req.body.token.id,
-    amount: req.body.amount,
-    currency: "usd",
-  };
-  stripe.charges.create(body, stripeChargeCallback(res));
+router.post("/stripe", async (req, res, next) => {
+  try {
+    const body = {
+      source: req.body.token.id,
+      amount: req.body.amount,
+      currency: "usd",
+    };
+    const stripeCharge = await stripe.charges.create(body);
+    res.send({ success: stripeCharge });
+  } catch(e) {
+    next(e);
+  }
 });
 
 module.exports = router;
