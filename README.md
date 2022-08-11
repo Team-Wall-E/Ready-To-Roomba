@@ -2,7 +2,7 @@ README.md
 
 # Ready-To-Roomba
 
-A Grace Shopper Team Project
+Are you ready to Roomba? Are you ready to change your life? Your life will be dust-free and crust-free. Pick up a Roomba today!
 
 ## Get Started
 
