@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUsers} from '../store/users';
+import { fetchUsers } from '../store/users';
 import { fetchUser } from '../store/singleUser';
 import UpdateUser from './UpdateUser';
 import AllUsers from './AllUsers';
@@ -9,14 +9,13 @@ import CreateProduct from './CreateProduct';
 
 //TODO: whenever orderHistory is finished
 
-
 /*
 User - updates
 isAdmin - extra functionality
 */
 
 export const UserProfile = (props) => {
-  const { firstName, lastName, isAdmin, id } = props;
+  const { firstName, lastName, isAdmin, id, imageUrl } = props;
   const [showUpdateUser, setShowUpdateUser] = useState(false);
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [showAllUsers, setshowAllUsers] = useState(false);
@@ -29,6 +28,7 @@ export const UserProfile = (props) => {
             <h3>
               {' '}
               Welcome {firstName} {lastName}
+              <img className='display-image' src={imageUrl} />
             </h3>
           ) : (
             <h3> Welcome lurking stranger!</h3>
@@ -87,6 +87,7 @@ const mapState = (state) => {
     firstName: state.auth.firstName,
     lastName: state.auth.lastName,
     isAdmin: state.auth.isAdmin,
+    imageUrl: state.auth.imageUrl,
     user: state.user,
     users: state.users,
   };
