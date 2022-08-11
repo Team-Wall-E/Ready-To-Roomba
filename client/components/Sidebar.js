@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
+// TODO: change a to Link
 export default function Sidebar(props) {
   return (
     <div
@@ -42,9 +43,9 @@ export default function Sidebar(props) {
         </li>
         <li className='border-top my-3 text-white'></li>
         <li className='mb-1 text-white'>
-          <button className='btn d-inline-flex align-items-center rounded border-0 text-white'>
+          <Button className='btn d-inline-flex align-items-center rounded border-0 text-white'>
             Account
-          </button>
+          </Button>
           <div>
             <ul className='list-unstyled fw-normal pb-1 small'>
               <li>

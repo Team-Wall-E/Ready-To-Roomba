@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { fetchUsers} from '../store/users';
+import { fetchUsers } from '../store/users';
 import { fetchUser } from '../store/singleUser';
 import UpdateUser from './UpdateUser';
 import AllUsers from './AllUsers';
@@ -10,7 +10,6 @@ import Sidebar from './Sidebar';
 import Button from 'react-bootstrap/Button';
 
 //TODO: whenever orderHistory is finished
-
 
 /*
 User - updates
@@ -28,28 +27,6 @@ export const UserProfile = (props) => {
       <Sidebar className='col-4' />
       <section className='col-8 mt-5'>
         <div>
-          {id ? (
-            <h3>
-              {' '}
-              Welcome {firstName} {lastName}
-            </h3>
-          ) : (
-            <h3> Welcome lurking stranger!</h3>
-          )}
-        </div>
-      </div>
-      <h6>
-        <br></br>
-        <button onClick={() => setShowUpdateUser(!showUpdateUser)}>
-          Update Your Information
-        </button>
-        {showUpdateUser && <UpdateUser>show/hide typography</UpdateUser>}
-      </h6>
-      {/* TODO: possibly order history? */}
-      <br></br>
-      {isAdmin ? (
-        <div>
-          <h1>Hello, Admin!</h1>
           <div>
             {id ? (
               <h3>
@@ -68,17 +45,16 @@ export const UserProfile = (props) => {
           {showUpdateUser && <UpdateUser>show/hide typography</UpdateUser>}
         </h6>
         {/* TODO: possibly order history? */}
-        {/* <OrderHistory/> */}
         <br></br>
         {isAdmin ? (
           <div>
             <h1>Hello, Admin!</h1>
             <div>
-              <h6>Edit a Product</h6>{' '}
+              <h6>Edit a Product</h6>
               <Link to={`/products/`}>
                 {' '}
                 <Button>To Product</Button>
-              </Link>{' '}
+              </Link>
             </div>
             <br></br>
             <div>
