@@ -23,11 +23,11 @@ const StripeBtn = () => {
   };
   return (
     <StripeCheckout
-      label="Go Premium" //Component button text
+      label="Payment" //Component button text
       name="Ready To Roomba" //Modal Header
-      description="Upgrade to a premium account today."
-      panelLabel="Go Premium" //Submit button in modal
-      amount={999} //Amount in cents $9.99
+      description="Let us take your money daddy 😏"
+      panelLabel="Pay us" //Submit button in modal
+    //   amount={999} //Amount in cents $9.99
       token={onToken}
       stripeKey={publishableKey}
       image="https://scalebranding.com/wp-content/uploads/2021/07/Star-game-robot-logo.jpg" //Pop-in header image

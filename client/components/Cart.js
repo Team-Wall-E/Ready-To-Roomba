@@ -5,7 +5,7 @@ import { removeProductFromCartThunk, addToCartThunk } from '../store/cart';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
-import StripeBtn from "./Stripe";
+// import StripeBtn from "./Stripe";
 
 export const Cart = ({ cart, removeFromCart, addToCart }) => {
   const lineItems = cart.lineItems || [];
@@ -97,9 +97,9 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
                 href='/checkout'
                 variant='secondary'
               >Checkout</Button>
-              <StripeBtn>
+              {/* <StripeBtn>
                 Payment
-              </StripeBtn>
+              </StripeBtn> */}
             </div>
           </div>
         )}
