@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import StripeCheckout from "react-stripe-checkout";
 import axios from "axios";
+
 const StripeBtn = () => {
     console.log(StripeCheckout)
   const publishableKey = "pk_test_51LUbVTEXNlVtLEphjQMCFjrln5Vt91r2BE6koJHyUaDp1qTSnaC8LP8OJ4UnpJBCGPTYTqP5ZtHnzOEYC54JhT0600c3UdcJCe";
