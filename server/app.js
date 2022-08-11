@@ -1,7 +1,11 @@
 const path = require("path");
 const express = require("express");
 const morgan = require("morgan");
+const dotenv = require('dotenv');
+dotenv.config();
 const app = express();
+const cors = require("cors");
+
 module.exports = app;
 
 // logging middleware
@@ -9,6 +13,7 @@ app.use(morgan("dev"));
 
 // body parsing middleware
 app.use(express.json());
+app.use(cors());
 
 // auth and api routes
 app.use("/auth", require("./auth"));
@@ -31,6 +36,7 @@ app.use((req, res, next) => {
     next();
   }
 });
+
 
 // sends index.html
 app.use("*", (req, res) => {
