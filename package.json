@@ -20,15 +20,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Donna-Sayos/Boiler-maker.git"
+    "url": "git+https://github.com/Team-Wall-E/Ready-To-Roomba.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Donna-Sayos/Boiler-maker/issues"
+    "url": "https://github.com/Team-Wall-E/Ready-To-Roomba/issues"
   },
-  "homepage": "https://github.com/Donna-Sayos/Boiler-maker#readme",
+  "homepage": "https://github.com/Team-Wall-E/Ready-To-Roomba",
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
@@ -38,6 +38,8 @@
     "bcrypt": "^5.0.0",
     "bootstrap": "^5.2.0",
     "compression": "^1.7.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
     "express": "^4.16.4",
     "@faker-js/faker": "^7.3.0",
     "history": "^4.9.0",
@@ -46,7 +48,9 @@
     "mui": "^0.0.1",
     "pg": "^8.5.1",
     "react-bootstrap": "^2.5.0",
-    "sequelize": "^6.3.5"
+    "react-stripe-checkout": "^2.6.3",
+    "sequelize": "^6.3.5",
+    "stripe": "^10.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",

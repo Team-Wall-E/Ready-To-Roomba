@@ -12,10 +12,10 @@ const setCart = (cart) => {
   };
 };
 
-const _updateCart = (updatedCart) => {
+const _updateCart = (cart) => {
   return {
     type: UPDATE_CART,
-    updatedCart,
+    cart,
   };
 };
 
@@ -78,24 +78,13 @@ export const removeProductFromCartThunk = (productId) => {
   };
 };
 
-// export const checkoutCart = () => {
-//   const token = window.localStorage.getItem('token');
-//   return async (dispatch) => {
-//     await axios.get('/api/cart/checkout', {
-//       headers: {
-//         authorization: token,
-//       },
-//     });
-//   };
-// };
-
 //REDUCER
 const cartReducer = (state = {}, action) => {
   switch (action.type) {
     case SET_CART:
       return action.cart;
     case UPDATE_CART:
-      return action.updatedCart;
+      return action.cart;
     default:
       return state;
   }
