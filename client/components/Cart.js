@@ -1,8 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { removeProductFromCartThunk, addToCartThunk } from '../store/cart';
-import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
@@ -18,10 +16,10 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
   console.log('🫐', cart);
 
   return (
-    <div className='d-flex flex-wrap p-5 mb-5'>
+    <div className='p-5 mb-5'>
       <h2>Cart</h2>
       {lineItems.length === 0 ? (
-        <div>Your cart is empty</div>
+        <p>Your cart is empty</p>
       ) : (
         <div className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between'>
           <Table className='mt-5'>
