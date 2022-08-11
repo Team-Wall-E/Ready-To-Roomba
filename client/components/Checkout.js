@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import BillingInfo from "./BillingInfo";
 
 import { fetchCart } from '../store/cart';
 
@@ -53,6 +54,8 @@ export const Checkout = (props) => {
                 <div>Tax: $ {(itemSubtotal*tax2).toFixed(2)}</div>
                 <div>Grand Total: $ {(itemSubtotal*tax).toFixed(2)}</div>
             </div>
+            <br />
+            <BillingInfo />
         </div>
     )
 };

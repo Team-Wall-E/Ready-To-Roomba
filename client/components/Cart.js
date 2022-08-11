@@ -80,18 +80,20 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
             </div>
             <div>
               <label>Total:</label> $ {(cartSubtotal * tax).toFixed(2)}
+              </div>
+            <div className='w-100 text-end '>
+              <Button
+                href='/products/'
+                variant='secondary'
+                className='back-2-shopping'
+              >
+                Back to Shopping
+              </Button>
+              <Button
+                href='/checkout'
+                variant='secondary'
+              >Checkout</Button>
             </div>
-          </div>
-          <div className='w-100 text-end '>
-            <Button
-              href='/products/'
-              variant='secondary'
-              className='back-2-shopping'
-            >
-              Back to Shopping
-            </Button>
-            <Button>Checkout</Button>
-            <StripeBtn>Payment</StripeBtn>
           </div>
         </div>
       )}

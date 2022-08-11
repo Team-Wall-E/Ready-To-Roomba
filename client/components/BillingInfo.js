@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import Button from 'react-bootstrap/Button';
-// import StripeBtn from "./Stripe";
+import StripeBtn from "./Stripe";
 
 // import { loadStripe } from '@stripe/stripe-js';
 // import { Elements } from "@stripe/react-stripe-js";
@@ -40,9 +40,9 @@ export const BillingInfo = (props) => {
                         <h4>Address: </h4>
                         <h5>{address}</h5>
                         <br />
-                        {/* <StripeBtn>
+                        <StripeBtn>
                             Payment
-                        </StripeBtn> */}
+                        </StripeBtn>
                     
                     </div>
                 )}
