@@ -12,7 +12,7 @@ const StripeBtn = () => {
       token: token
   };
   axios
-      .post("/cart/stripe", body)
+      .post("/api/cart/stripe", body)
       .then(response => {
         console.log(response);
         alert("Payment Success");
