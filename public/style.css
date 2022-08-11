@@ -138,14 +138,6 @@ h6,
   font-family: 'Josefin Sans', sans-serif;
 }
 
-/* Links */
-/* button.btn.btn-link {
-  color: black;
-  letter-spacing: 0.06rem;
-  text-transform: uppercase;
-  padding: 1rem;
-} */
-
 button.btn-link.btn.btn-primary {
   background-color: transparent !important;
   border: none;
@@ -244,4 +236,20 @@ label {
 .back-2-shopping {
   margin-right: 15px;
   color: white !important;
+}
+
+/* Stripe */
+
+button.stripe-button-el,
+button.stripe-button-el > span {
+  background-color: #000 !important;
+  border-color: #000 !important;
+  border-radius: 0px;
+}
+
+/* Sidebar */
+
+a.nav-link.active {
+  background-color: #999 !important;
+  border-radius: 0;
 }
