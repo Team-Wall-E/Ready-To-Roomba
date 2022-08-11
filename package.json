@@ -19,15 +19,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Donna-Sayos/Boiler-maker.git"
+    "url": "git+https://github.com/Team-Wall-E/Ready-To-Roomba.git"
+    
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Donna-Sayos/Boiler-maker/issues"
+    "url": "https://github.com/Team-Wall-E/Ready-To-Roomba/issues"
   },
-  "homepage": "https://github.com/Donna-Sayos/Boiler-maker#readme",
+  "homepage": "https://github.com/Team-Wall-E/Ready-To-Roomba",
   "dependencies": {
     "@faker-js/faker": "^7.3.0",
     "@fortawesome/fontawesome-svg-core": "^6.1.2",
