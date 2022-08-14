@@ -21,7 +21,6 @@ Order.prototype.getTotal = () => {
   this.lineItems.forEach((lineItem) => {
     sum += lineItem.orderTotal;
   });
-  console.log(sum);
   return sum;
 };
 

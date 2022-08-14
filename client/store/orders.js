@@ -28,7 +28,6 @@ const deleteOrder = (order) => {
 const TOKEN = 'token';
 
 export const fetchOrders = () => async (dispatch) => {
-  console.log('FETCH ORDERS THUNK');
   try {
     const token = window.localStorage.getItem(TOKEN);
     const ordersResponse = await axios.get('/api/:id/orders', {
@@ -80,7 +79,6 @@ export const getUserOrders = () => {
   return async (dispatch) => {
     try {
       const token = window.localStorage.getItem(TOKEN);
-      console.log('TOKEN', token);
       if (token) {
         const { data: auth } = await axios.get('/auth/me', {
           headers: {

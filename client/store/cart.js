@@ -50,7 +50,6 @@ export const addToCartThunk = (product) => {
           },
         }
       );
-      console.log('🍋', addToCart);
       dispatch(setCart(addToCart));
     } catch (error) {
       console.error(`addCartThunk not workinh`, error);

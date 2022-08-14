@@ -3,7 +3,6 @@ import StripeCheckout from 'react-stripe-checkout';
 import axios from 'axios';
 
 const StripeBtn = () => {
-  console.log(StripeCheckout);
   const publishableKey =
     'pk_test_51LUbVTEXNlVtLEphjQMCFjrln5Vt91r2BE6koJHyUaDp1qTSnaC8LP8OJ4UnpJBCGPTYTqP5ZtHnzOEYC54JhT0600c3UdcJCe';
 
@@ -15,11 +14,9 @@ const StripeBtn = () => {
     axios
       .post('/api/cart/stripe', body)
       .then((response) => {
-        console.log(response);
         alert('Payment successful');
       })
       .catch((error) => {
-        console.log('Payment Error: ', error);
         alert('Payment declined');
       });
   };
