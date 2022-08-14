@@ -14,7 +14,6 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
   const tax2 = 0.08875;
 
   let cartSubtotal = 0;
-  console.log('🫐', cart);
 
   return (
     <div className='p-5 mb-5'>

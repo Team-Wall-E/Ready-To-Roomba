@@ -34,7 +34,6 @@ router.post('/', async (req, res, next) => {
 });
 
 router.get('/:id', isLoggedIn, async (req, res, next) => {
-  console.log('EXPRESS USERS/ID: ', id);
   try {
     let paramsId = +req.params.id;
     let returningUser;
@@ -59,14 +58,10 @@ router.get('/:id', isLoggedIn, async (req, res, next) => {
 // pass it through the store and get lineItems
 // from that order, check how the cart is setup
 router.get('/:id/orders', isLoggedIn, async (req, res, next) => {
-  console.log('EXPRESS ROUTE ORDERS: ');
-  console.log('USER: ' + req.user.id);
-
   try {
     const orders = await Order.findAll({
       where: { userId: req.user.id },
     });
-    console.log('ORDERS: ' + orders);
     res.json(orders);
   } catch (error) {
     next(error);

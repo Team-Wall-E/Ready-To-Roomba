@@ -1,20 +1,20 @@
-"use strict";
+'use strict';
 
-const { db } = require("../server/db");
+const { db } = require('../server/db');
 const {
   User,
   Product,
   Order,
   Review,
   LineItem,
-} = require("../server/db/models");
-const { faker } = require("@faker-js/faker");
+} = require('../server/db/models');
+const { faker } = require('@faker-js/faker');
 
-const { users, products, orders, reviews, lineItems } = require("../script");
+const { users, products, orders, reviews, lineItems } = require('../script');
 
 // pagination -- FAKER
 
-let booleanArr = ["true", "false"];
+let booleanArr = ['true', 'false'];
 function createRandomUser() {
   return {
     firstName: faker.name.firstName(),
@@ -27,7 +27,7 @@ function createRandomUser() {
   };
 }
 
-let brandNames = ["iRobot", "Tesvor", "Samsung", "Eufy", "Roborock", "iLife"];
+let brandNames = ['iRobot', 'Tesvor', 'Samsung', 'Eufy', 'Roborock', 'iLife'];
 function createRandomProduct() {
   return {
     productName: faker.commerce.productName(),
@@ -36,11 +36,11 @@ function createRandomProduct() {
     price: faker.commerce.price(200, 2000),
     inventoryQty: 1,
     imageUrl:
-      "https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif",
+      'https://i.pinimg.com/originals/0c/67/5a/0c675a8e1061478d2b7b21b330093444.gif',
   };
 }
 
-let rating = ["1", "2", "3", "4", "5"];
+let rating = ['1', '2', '3', '4', '5'];
 function createRandomReview() {
   return {
     title: faker.word.verb(5),
@@ -49,7 +49,7 @@ function createRandomReview() {
   };
 }
 
-let statusList = ["processing", "completed"];
+let statusList = ['processing', 'completed'];
 function createRandomOrder() {
   return {
     isAuthenticated: booleanArr[Math.floor(Math.random() * booleanArr.length)],
@@ -90,18 +90,19 @@ const seed = async () => {
       })
       .then((result) => {
         createdUsers = result;
-        
+
         //create the reviews
         for (let i = 0; i < reviews.length; i++) {
           reviews[i].userId = createdUsers[i].id;
-          reviews[i].owner = createdUsers[i].firstName + ' ' + createdUsers[i].lastName
+          reviews[i].owner =
+            createdUsers[i].firstName + ' ' + createdUsers[i].lastName;
           reviews[i].productId = createdProducts[i].id;
         }
         return Promise.all(reviews.map((review) => Review.create(review)));
       })
       .then((result) => {
         createdReviews = result;
-        
+
         //create the orders
         for (let i = 0; i < orders.length; i++) {
           orders[i].userId = createdUsers[i].id;
@@ -117,13 +118,14 @@ const seed = async () => {
       })
       .then((result) => {
         createdOrders = result;
-  
+
         // create lineItems
         for (let k = 0; k < lineItems.length; k++) {
           lineItems[k].orderId = createdOrders[k].id;
           lineItems[k].productId = createdProducts[k].id;
           lineItems[k].orderQuantity = createdProducts[k].inventoryQty;
-          lineItems[k].orderTotal = createdProducts[k].inventoryQty * createdProducts[k].price
+          lineItems[k].orderTotal =
+            createdProducts[k].inventoryQty * createdProducts[k].price;
         }
         return Promise.all(lineItems.map((item) => LineItem.create(item)));
       });
@@ -144,11 +146,11 @@ module.exports = seed;
 if (module === require.main) {
   seed()
     .then(() => {
-      console.log("Seeding success!🤓🤓");
+      console.log('Seeding success!🤓🤓');
       db.close();
     })
     .catch((err) => {
-      console.error("Oh noes😱! Something went wrong!");
+      console.error('Oh noes😱! Something went wrong!');
       console.error(err);
       db.close();
     });

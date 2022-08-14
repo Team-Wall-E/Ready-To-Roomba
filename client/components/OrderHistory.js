@@ -13,7 +13,6 @@ class OrderHistory extends React.Component {
   }
 
   render() {
-    console.log('ORDERS: ', this.props.getUserOrders);
     const orders = this.props.orders;
     return (
       <div className='d-flex flex-wrap align-items-center justify-content-center justify-content-md-between p-5 mb-5'>
