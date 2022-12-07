@@ -15,8 +15,8 @@ Download into your local drive:
 - `npm run seed`
 - `npm run start:dev`
 
-## Heroku
+## Render
 
-Deployed on Heroku:
+Deployed on Render:
 
-<a href='https://ready-to-roomba.herokuapp.com/'>Ready-To-Roomba on Heroku</a>
+<a href='https://ready-to-roomba.onrender.com/'>Ready-To-Roomba on Heroku</a>
