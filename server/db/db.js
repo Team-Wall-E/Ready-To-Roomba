@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const pkg = require('../../package.json');
 
-// const dbName = pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
+const dbName = pkg.name + (process.env.NODE_ENV === 'test' ? '-test' : '');
 
 const config = {
   logging: false,
@@ -23,7 +23,7 @@ if (process.env.DATABASE_URL) {
 
 const db = new Sequelize(
   process.env.DATABASE_URL ||
-    `postgresql://vljones133:v2_3wWAu_xSTKRtqxjWrzK9dGpYbmkfR@db.bit.io/vljones133/grace-shopper?ssl=true`,
+    `postgresql://vljones133:v2_3wWAu_xSTKRtqxjWrzK9dGpYbmkfR@db.bit.io/vljones133/${dbName}?ssl=true`,
   // process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`,
   config
 );
