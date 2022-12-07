@@ -1,13 +1,13 @@
-const Sequelize = require("sequelize");
-const pkg = require("../../package.json");
+const Sequelize = require('sequelize');
+const pkg = require('../../package.json');
 
-const dbName = pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
+// const dbName = pkg.name + (process.env.NODE_ENV === "test" ? "-test" : "");
 
 const config = {
   logging: false,
 };
 
-if (process.env.LOGGING === "true") {
+if (process.env.LOGGING === 'true') {
   delete config.logging;
 }
 //https://stackoverflow.com/questions/61254851/heroku-postgres-sequelize-no-pg-hba-conf-entry-for-host
@@ -22,7 +22,9 @@ if (process.env.DATABASE_URL) {
 }
 
 const db = new Sequelize(
-  process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`,
+  process.env.DATABASE_URL ||
+    `postgresql://vljones133:v2_3wWAu_xSTKRtqxjWrzK9dGpYbmkfR@db.bit.io/vljones133/grace-shopper?ssl=true`,
+  // process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`,
   config
 );
 
