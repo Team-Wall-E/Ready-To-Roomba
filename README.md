@@ -19,4 +19,4 @@ Download into your local drive:
 
 Deployed on Render:
 
-<a href='https://ready-to-roomba.onrender.com/'>Ready-To-Roomba on Heroku</a>
+<a href='https://ready-to-roomba.onrender.com/'>Ready-To-Roomba on Render</a>
