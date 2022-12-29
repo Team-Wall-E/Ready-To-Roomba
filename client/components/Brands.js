@@ -12,9 +12,14 @@ export class Brands extends React.Component {
     super();
     this.state = {
       filter: 'All',
+      numOfVisibleProducts: 8,
     };
     this.handleChange = this.handleChange.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+
+    window.addEventListener('scroll', this.handleScroll);
   }
+
   componentDidMount() {
     this.props.getProducts();
   }
@@ -23,9 +28,22 @@ export class Brands extends React.Component {
     this.setState({ filter: evt.target.value });
   }
 
+  handleScroll() {
+    const isAtBottom =
+      document.documentElement.scrollHeight -
+        document.documentElement.scrollTop <=
+      document.documentElement.clientHeight;
+
+    if (isAtBottom) {
+      this.setState({
+        numOfVisibleProducts: this.state.numOfVisibleProducts + 8,
+      });
+    }
+  }
+
   render() {
     const { products } = this.props;
-    const { filter } = this.state;
+    const { filter, numOfVisibleProducts } = this.state;
 
     const filteredProducts = products.filter((product) => {
       switch (filter) {
@@ -55,7 +73,6 @@ export class Brands extends React.Component {
         />
 
         <div className='text-end'>
-          {/* Find by Brand: */}
           <label>Find By Brand:</label>
           <select
             id='brand'
@@ -75,7 +92,7 @@ export class Brands extends React.Component {
 
         <div className='mt-5'>
           <Row xs={1} md={4} className='g-4'>
-            {filteredProducts.map((product) => {
+            {filteredProducts.slice(0, numOfVisibleProducts).map((product) => {
               return (
                 <Col key={product.id}>
                   <Card>
