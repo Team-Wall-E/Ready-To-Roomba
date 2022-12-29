@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { fetchProducts } from '../store/products';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import Button from 'react-bootstrap/Button';
 
 function SearchBar(props, { placeholder }) {
