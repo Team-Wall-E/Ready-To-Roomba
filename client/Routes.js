@@ -47,7 +47,7 @@ class Routes extends Component {
           <Route path='/signup' component={Signup} />
           <Route path='/cart' component={Cart} />
           <Route path='/checkout' component={Checkout} />
-          <Route path='billing' component={BillingInfo} />
+          <Route path="billing" component={BillingInfo} />
           <Route exact path='/products' component={AllProducts} />
           {/* TODO: may have to fix users id route */}
           <Route exact path='/users/:id' component={UserProfile} />
@@ -60,7 +60,7 @@ class Routes extends Component {
             <Switch>
               <Route path='/cart' component={Cart} />
               <Route path='/checkout' component={Checkout} />
-              <Route path='billing' component={BillingInfo} />
+              <Route path="billing" component={BillingInfo} />
               <Route exact path='/users/:id/orders' component={OrderHistory} />
             </Switch>
           )}
