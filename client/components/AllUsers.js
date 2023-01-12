@@ -22,7 +22,6 @@ export class AllUsers extends React.Component {
             <div key={user.id}>
               <div>
                 <h6>
-                  {' '}
                   {user.firstName} {user.lastName}
                 </h6>
               </div>

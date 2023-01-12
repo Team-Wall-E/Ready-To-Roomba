@@ -3,5 +3,7 @@
     "editorWarning.foreground": "#ec0"
   },
   "prettier.jsxSingleQuote": true,
-  "prettier.singleQuote": true
+  "prettier.singleQuote": true,
+  "editor.tabCompletion": "on",
+  "diffEditor.codeLens": true
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+// TODO: Loop through list and refactor
 export default function Sidebar(props) {
   return (
     <div

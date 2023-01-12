@@ -32,7 +32,6 @@ class OrderHistory extends React.Component {
                 <tr key={order.id}>
                   <td>{order.id}</td>
                   <td>{order.status}</td>
-
                   <td>{order.updatedAt}</td>
                   <td>TODO</td>
                 </tr>

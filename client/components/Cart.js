@@ -3,12 +3,9 @@ import { connect } from 'react-redux';
 import { removeProductFromCartThunk, addToCartThunk } from '../store/cart';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
-import StripeBtn from './Stripe';
 
 export const Cart = ({ cart, removeFromCart, addToCart }) => {
   const lineItems = cart.lineItems || [];
-
-  let totalQuantity = 0;
 
   const tax = 1.08875;
   const tax2 = 0.08875;
@@ -79,7 +76,7 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
             </div>
             <div>
               <label>Total:</label> $ {(cartSubtotal * tax).toFixed(2)}
-              </div>
+            </div>
             <div className='w-100 text-end '>
               <Button
                 href='/products/'
@@ -88,10 +85,9 @@ export const Cart = ({ cart, removeFromCart, addToCart }) => {
               >
                 Back to Shopping
               </Button>
-              <Button
-                href='/checkout'
-                variant='secondary'
-              >Checkout</Button>
+              <Button href='/checkout' variant='secondary'>
+                Checkout
+              </Button>
             </div>
           </div>
         </div>
