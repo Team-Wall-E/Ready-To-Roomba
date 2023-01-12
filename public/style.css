@@ -194,8 +194,12 @@ p.card-text {
 }
 
 /* Search */
-.searchIcon {
-  padding: 7px 10px;
+.searchIcon i {
+  padding: 11px 10px;
+}
+
+.searchIcon button {
+  margin: 0 0 0 5px;
 }
 
 .search input {

@@ -36,18 +36,7 @@ class UpdateUser extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    // const { firstName, lastName, address, email, password } = this.state;
-    // const improvedUser = {
-    //   firstName: firstName,
-    //   lastName: lastName,
-    //   address: address,
-    //   email: email,
-    //   password: password,
-    // };
-
     this.props.updateUser({ ...this.props.user, ...this.state });
-
-    // this.props.fetchUser(this.props.user.id);
   };
 
   render() {
